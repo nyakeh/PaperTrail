@@ -20,6 +20,11 @@
             android:label="@string/track_new_book"
             android:parentActivityName=".BookListActivity">
         </activity>
+        <activity
+            android:name=".BookActivity"
+            android:label="Book tings"
+            android:parentActivityName=".BookListActivity">
+        </activity>
     </application>
 
 </manifest>
