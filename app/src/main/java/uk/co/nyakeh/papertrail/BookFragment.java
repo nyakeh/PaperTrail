@@ -23,13 +23,18 @@ import java.util.UUID;
 public class BookFragment extends Fragment {
     private static final String ARG_BOOK_ID = "book_id";
     private static final String DIALOG_DATE = "DialogDate";
-    private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_DATE_STARTED = 0;
+    private static final int REQUEST_DATE_FINISHED = 1;
 
     private Book mBook;
     private EditText mTitleField;
     private EditText mAuthorField;
     private EditText mBlurbField;
-    private Button mDateButton;
+    private EditText mLengthField;
+    private Button mDateStartedButton;
+    private Button mDateFinishedButton;
+    private EditText mISBNField;
+    private EditText mImageUrlField;
 
     public static BookFragment newInstance(UUID bookId) {
         Bundle arguments = new Bundle();
@@ -87,16 +92,16 @@ public class BookFragment extends Fragment {
             }
         });
 
-        mAuthorField = (EditText) view.findViewById(R.id.book_author);
-        mAuthorField.setText(mBook.getAuthor());
-        mAuthorField.addTextChangedListener(new TextWatcher() {
+        mBlurbField = (EditText) view.findViewById(R.id.book_blurb);
+        mBlurbField.setText(mBook.getBlurb());
+        mBlurbField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
             public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-                mBook.setAuthor(inputChar.toString());
+                mBook.setBlurb(inputChar.toString());
             }
 
             @Override
@@ -104,24 +109,92 @@ public class BookFragment extends Fragment {
             }
         });
 
-        mDateButton = (Button) view.findViewById(R.id.book_started_date);
-        updateDate();
-        mDateButton.setOnClickListener(new View.OnClickListener() {
+        mLengthField = (EditText) view.findViewById(R.id.book_length);
+        mLengthField.setText(mBook.getLength());
+        mLengthField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
+                mBook.setLength(inputChar.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        mDateStartedButton = (Button) view.findViewById(R.id.book_started_date);
+        mDateStartedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mBook.getDateStarted());
-                dialog.setTargetFragment(BookFragment.this, REQUEST_DATE);
+                dialog.setTargetFragment(BookFragment.this, REQUEST_DATE_STARTED);
                 dialog.show(manager, DIALOG_DATE);
             }
         });
 
+        mDateFinishedButton = (Button) view.findViewById(R.id.book_finished_date);
+        mDateFinishedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                DatePickerFragment dialog = DatePickerFragment.newInstance(new Date());
+                dialog.setTargetFragment(BookFragment.this, REQUEST_DATE_FINISHED);
+                dialog.show(manager, DIALOG_DATE);
+            }
+        });
+
+        mISBNField = (EditText) view.findViewById(R.id.book_isbn);
+        mISBNField.setText(mBook.getISBN());
+        mISBNField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
+                mBook.setISBN(inputChar.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        mImageUrlField = (EditText) view.findViewById(R.id.book_image_url);
+        mImageUrlField.setText(mBook.getImageUrl());
+        mImageUrlField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
+                mBook.setImageUrl(inputChar.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        updateDate();
         return view;
     }
 
     private void updateDate() {
-        String formattedDate = DateFormat.format("EEEE, MMM dd, yyyy", mBook.getDateStarted()).toString();
-        mDateButton.setText(formattedDate);
+        String formattedStartDate = DateFormat.format("EEEE, MMM dd, yyyy", mBook.getDateStarted()).toString();
+        mDateStartedButton.setText(formattedStartDate);
+
+        Date dateFinished = mBook.getDateFinished();
+        if (!dateFinished.equals(new Date(Long.MAX_VALUE))) {
+            String formattedFinishedDate = DateFormat.format("EEEE, MMM dd, yyyy", dateFinished).toString();
+            mDateFinishedButton.setText(formattedFinishedDate);
+        }
     }
 
     @Override
@@ -148,9 +221,15 @@ public class BookFragment extends Fragment {
             return;
         }
 
-        if (requestCode == REQUEST_DATE) {
+        if (requestCode == REQUEST_DATE_STARTED) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mBook.setDateStarted(date);
+            updateDate();
+        }
+
+        if (requestCode == REQUEST_DATE_FINISHED) {
+            Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            mBook.setDateFinished(date);
             updateDate();
         }
     }
