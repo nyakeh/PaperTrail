@@ -1,125 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:layout_marginLeft="20dp"
-              android:layout_marginRight="20dp"
-              android:layout_marginTop="10dp"
               android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/book_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/book_title_label"
-            android:inputType="text"
-            android:singleLine="true"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/book_author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/book_author_label"
-            android:inputType="text"
-            android:singleLine="true"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/book_blurb"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/book_blurb_label"
-            android:inputType="text"
-            android:lines="2"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/book_progress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/book_progress_label"
-            android:inputType="number"
-            android:singleLine="true"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/book_length"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/book_length_label"
-            android:inputType="number"
-            android:singleLine="true"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/book_isbn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/book_isbn_label"
-            android:inputType="text"
-            android:singleLine="true"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/book_image_url"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/book_image_url_label"
-            android:inputType="text"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <TextView
-        style="?android:listSeparatorTextViewStyle"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/book_started_label"/>
+        style="@style/MyCustomTabLayout"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:tabGravity="fill"
+        app:tabMode="fixed" />
 
-    <Button
-        android:id="@+id/book_started_date"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"/>
 
-    <TextView
-        style="?android:listSeparatorTextViewStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/book_finished_label"/>
-
-    <Button
-        android:id="@+id/book_finished_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
 </LinearLayout>
