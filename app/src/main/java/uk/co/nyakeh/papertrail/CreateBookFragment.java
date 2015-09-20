@@ -20,7 +20,7 @@ import android.widget.EditText;
 import java.util.Date;
 import java.util.UUID;
 
-public class BookFragment extends Fragment {
+public class CreateBookFragment extends Fragment {
     private static final String ARG_BOOK_ID = "book_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE_STARTED = 0;
@@ -37,11 +37,11 @@ public class BookFragment extends Fragment {
     private EditText mISBNField;
     private EditText mImageUrlField;
 
-    public static BookFragment newInstance(UUID bookId) {
+    public static CreateBookFragment newInstance(UUID bookId) {
         Bundle arguments = new Bundle();
         arguments.putSerializable(ARG_BOOK_ID, bookId);
 
-        BookFragment fragment = new BookFragment();
+        CreateBookFragment fragment = new CreateBookFragment();
         fragment.setArguments(arguments);
         return fragment;
     }
@@ -155,7 +155,7 @@ public class BookFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mBook.getDateStarted());
-                dialog.setTargetFragment(BookFragment.this, REQUEST_DATE_STARTED);
+                dialog.setTargetFragment(CreateBookFragment.this, REQUEST_DATE_STARTED);
                 dialog.show(manager, DIALOG_DATE);
             }
         });
@@ -166,7 +166,7 @@ public class BookFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(new Date());
-                dialog.setTargetFragment(BookFragment.this, REQUEST_DATE_FINISHED);
+                dialog.setTargetFragment(CreateBookFragment.this, REQUEST_DATE_FINISHED);
                 dialog.show(manager, DIALOG_DATE);
             }
         });
