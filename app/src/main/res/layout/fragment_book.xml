@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:layout_marginLeft="20dp"
-              android:layout_marginRight="20dp">
+              android:layout_marginRight="20dp"
+              android:layout_marginTop="10dp"
+              android:orientation="vertical">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -15,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/book_title_label"
-            android:inputType="text" />
+            android:inputType="text"
+            android:singleLine="true"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -27,7 +29,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/book_author_label"
-            android:inputType="text" />
+            android:inputType="text"
+            android:singleLine="true"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -39,7 +42,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/book_blurb_label"
-            android:inputType="text" />
+            android:inputType="text"
+            android:lines="2"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -51,7 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/book_length_label"
-            android:inputType="text" />
+            android:inputType="number"
+            android:singleLine="true"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -63,7 +68,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/book_isbn_label"
-            android:inputType="text" />
+            android:inputType="text"
+            android:singleLine="true"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -75,14 +81,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/book_image_url_label"
-            android:inputType="text" />
+            android:inputType="text"/>
     </android.support.design.widget.TextInputLayout>
 
     <TextView
+        style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/book_started_label"
-        style="?android:listSeparatorTextViewStyle"/>
+        android:text="@string/book_started_label"/>
 
     <Button
         android:id="@+id/book_started_date"
@@ -92,10 +98,10 @@
         android:layout_marginRight="16dp"/>
 
     <TextView
+        style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/book_finished_label"
-        style="?android:listSeparatorTextViewStyle"/>
+        android:text="@string/book_finished_label"/>
 
     <Button
         android:id="@+id/book_finished_date"

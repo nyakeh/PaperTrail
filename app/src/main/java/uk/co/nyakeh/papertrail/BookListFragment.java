@@ -84,7 +84,7 @@ public class BookListFragment extends Fragment {
             case R.id.menu_item_new_book:
                 Book book = new Book();
                 BookLab.get(getActivity()).addBook(book);
-                Intent intent = BookPagerActivity.newIntent(getActivity(), book.getId());
+                Intent intent = BookActivity.newIntent(getActivity(), book.getId());
                 startActivity(intent);
                 return true;
             default:
@@ -120,7 +120,7 @@ public class BookListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = BookPagerActivity.newIntent(getActivity(), mBook.getId());
+            Intent intent = BookActivity.newIntent(getActivity(), mBook.getId());
             startActivity(intent);
         }
     }

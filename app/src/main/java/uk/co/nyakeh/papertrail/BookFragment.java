@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 import java.util.Date;
@@ -29,6 +28,7 @@ public class BookFragment extends Fragment {
     private Book mBook;
     private EditText mTitleField;
     private EditText mAuthorField;
+    private EditText mBlurbField;
     private Button mDateButton;
 
     public static BookFragment newInstance(UUID bookId) {
@@ -63,6 +63,23 @@ public class BookFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
                 mBook.setTitle(inputChar.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        mAuthorField = (EditText) view.findViewById(R.id.book_author);
+        mAuthorField.setText(mBook.getAuthor());
+        mAuthorField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
+                mBook.setAuthor(inputChar.toString());
             }
 
             @Override
