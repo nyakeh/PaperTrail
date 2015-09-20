@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BookActivity"
+            android:name=".CreateBookActivity"
             android:label="@string/track_new_book"
             android:parentActivityName=".BookListActivity">
         </activity>

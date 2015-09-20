@@ -6,11 +6,11 @@ import android.support.v4.app.Fragment;
 
 import java.util.UUID;
 
-public class BookActivity extends SingleFragmentActivity {
+public class CreateBookActivity extends SingleFragmentActivity {
     private static final String EXTRA_BOOK_ID = "uk.co.nyakeh.papertrail.book_id";
 
     public static Intent newIntent(Context packageContext, UUID bookId) {
-        Intent intent = new Intent(packageContext, BookActivity.class);
+        Intent intent = new Intent(packageContext, CreateBookActivity.class);
         intent.putExtra(EXTRA_BOOK_ID, bookId);
         return intent;
     }
