@@ -4,20 +4,21 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Book {
+    public static final Date DATE_MAX = new Date(Long.MAX_VALUE);
     private UUID mId;
-    private String mTitle;
-    private String mAuthor;
-    private String mBlurb;
-    private String mLength;
+    private String mTitle ="";
+    private String mAuthor ="";
+    private String mBlurb ="";
+    private String mLength ="";
     private Date mDateStarted;
     private Date mDateFinished;
-    private String mISBN;
-    private String mImageUrl;
+    private String mISBN ="";
+    private String mImageUrl ="";
 
     public Book() {
         this(UUID.randomUUID());
         mDateStarted = new Date();
-        mDateFinished = new Date(Long.MAX_VALUE);
+        mDateFinished = DATE_MAX;
     }
 
     public Book(UUID id) {
@@ -94,5 +95,12 @@ public class Book {
 
     public boolean isFinished() {
         return mDateFinished.before(new Date());
+    }
+
+    public boolean isEmpty() {
+        if (mTitle.isEmpty() && mAuthor.isEmpty() && mBlurb.isEmpty() && mLength.isEmpty() && mISBN.isEmpty() && mImageUrl.isEmpty() && mDateFinished.equals(DATE_MAX)) {
+            return true;
+        }
+        return false;
     }
 }

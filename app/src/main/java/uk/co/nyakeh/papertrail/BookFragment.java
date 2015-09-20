@@ -237,6 +237,10 @@ public class BookFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        BookLab.get(getActivity()).updateBook(mBook);
+        if (mBook.isEmpty()){
+            BookLab.get(getActivity()).deleteBook(mBook.getId());
+        } else {
+            BookLab.get(getActivity()).updateBook(mBook);
+        }
     }
 }
