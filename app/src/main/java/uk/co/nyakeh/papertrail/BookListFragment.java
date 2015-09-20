@@ -2,6 +2,8 @@ package uk.co.nyakeh.papertrail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +43,14 @@ public class BookListFragment extends Fragment {
             mSubtitleVisable = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
         }
 
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddNewBook();
+            }
+        });
+
         updateUI();
         return view;
     }
@@ -64,7 +74,6 @@ public class BookListFragment extends Fragment {
             mBookRecyclerView.setVisibility(View.VISIBLE);
             mBookListEmptyMessageView.setVisibility(View.GONE);
         }
-
     }
 
     @Override
@@ -83,14 +92,18 @@ public class BookListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_new_book:
-                Book book = new Book();
-                BookLab.get(getActivity()).addBook(book);
-                Intent intent = BookActivity.newIntent(getActivity(), book.getId());
-                startActivity(intent);
+                AddNewBook();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void AddNewBook() {
+        Book book = new Book();
+        BookLab.get(getActivity()).addBook(book);
+        Intent intent = BookActivity.newIntent(getActivity(), book.getId());
+        startActivity(intent);
     }
 
     @Override
