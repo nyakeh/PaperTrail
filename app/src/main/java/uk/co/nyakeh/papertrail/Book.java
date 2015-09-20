@@ -6,14 +6,15 @@ import java.util.UUID;
 public class Book {
     public static final Date DATE_MAX = new Date(Long.MAX_VALUE);
     private UUID mId;
-    private String mTitle ="";
-    private String mAuthor ="";
-    private String mBlurb ="";
-    private String mLength ="";
+    private String mTitle = "";
+    private String mAuthor = "";
+    private String mBlurb = "";
+    private int mProgress = 0;
+    private int mLength = 100;
     private Date mDateStarted;
     private Date mDateFinished;
-    private String mISBN ="";
-    private String mImageUrl ="";
+    private String mISBN = "";
+    private String mImageUrl = "";
 
     public Book() {
         this(UUID.randomUUID());
@@ -61,11 +62,19 @@ public class Book {
         mAuthor = author;
     }
 
-    public String getLength() {
+    public int getProgress() {
+        return mProgress;
+    }
+
+    public void setProgress(int progress) {
+        mProgress = progress;
+    }
+
+    public int getLength() {
         return mLength;
     }
 
-    public void setLength(String length) {
+    public void setLength(int length) {
         mLength = length;
     }
 
@@ -98,7 +107,7 @@ public class Book {
     }
 
     public boolean isEmpty() {
-        if (mTitle.isEmpty() && mAuthor.isEmpty() && mBlurb.isEmpty() && mLength.isEmpty() && mISBN.isEmpty() && mImageUrl.isEmpty() && mDateFinished.equals(DATE_MAX)) {
+        if (mTitle.isEmpty() && mAuthor.isEmpty() && mBlurb.isEmpty() && mProgress == 0 && mLength == 100 && mISBN.isEmpty() && mImageUrl.isEmpty() && mDateFinished.equals(DATE_MAX)) {
             return true;
         }
         return false;

@@ -30,6 +30,7 @@ public class BookFragment extends Fragment {
     private EditText mTitleField;
     private EditText mAuthorField;
     private EditText mBlurbField;
+    private EditText mProgressField;
     private EditText mLengthField;
     private Button mDateStartedButton;
     private Button mDateFinishedButton;
@@ -57,7 +58,6 @@ public class BookFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_book, container, false);
-
         mTitleField = (EditText) view.findViewById(R.id.book_title);
         mTitleField.setText(mBook.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
@@ -109,8 +109,28 @@ public class BookFragment extends Fragment {
             }
         });
 
+        mProgressField = (EditText) view.findViewById(R.id.book_progress);
+        mProgressField.setText(Integer.toString(mBook.getProgress()));
+        mProgressField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
+                String inputString = inputChar.toString();
+                if (!inputString.isEmpty()) {
+                    mBook.setProgress(Integer.parseInt(inputString));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
         mLengthField = (EditText) view.findViewById(R.id.book_length);
-        mLengthField.setText(mBook.getLength());
+        mLengthField.setText(Integer.toString(mBook.getLength()));
         mLengthField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -118,7 +138,10 @@ public class BookFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-                mBook.setLength(inputChar.toString());
+                String inputString = inputChar.toString();
+                if (!inputString.isEmpty()) {
+                    mBook.setLength(Integer.parseInt(inputChar.toString()));
+                }
             }
 
             @Override
@@ -237,7 +260,7 @@ public class BookFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (mBook.isEmpty()){
+        if (mBook.isEmpty()) {
             BookLab.get(getActivity()).deleteBook(mBook.getId());
         } else {
             BookLab.get(getActivity()).updateBook(mBook);

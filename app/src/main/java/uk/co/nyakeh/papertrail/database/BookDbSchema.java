@@ -8,6 +8,7 @@ public class BookDbSchema {
             public static final String UUID = "uuid";
             public static final String TITLE = "title";
             public static final String AUTHOR = "author";
+            public static final String PROGRESS = "progress";
             public static final String LENGTH = "length";
             public static final String BLURB = "blurb";
             public static final String DATE_STARTED = "dateStarted";
