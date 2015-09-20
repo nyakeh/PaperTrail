@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -103,6 +104,7 @@ public class BookListFragment extends Fragment {
         private Book mBook;
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
+        private TextView mStartedTextView;
 
         public BookHolder(View itemView) {
             super(itemView);
@@ -110,12 +112,16 @@ public class BookListFragment extends Fragment {
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title_text_view);
             mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author_text_view);
+            mStartedTextView = (TextView) itemView.findViewById(R.id.list_item_book_started_text_view);
         }
 
         private void bindBook(Book book) {
             mBook = book;
             mTitleTextView.setText(book.getTitle());
             mAuthorTextView.setText(book.getAuthor());
+
+            String formattedStartDate = DateFormat.format("EEEE, MMM dd", mBook.getDateStarted()).toString();
+            mStartedTextView.setText(formattedStartDate);
         }
 
         @Override
