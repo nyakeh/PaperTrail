@@ -131,7 +131,10 @@ public class BookListFragment extends Fragment {
             mBook = book;
             mTitleTextView.setText(book.getTitle());
             mAuthorTextView.setText(book.getAuthor());
-            mProgressTextView.setText(Integer.toString(book.getProgress()));
+
+            float progressAsPercentage = (float)book.getProgress()/book.getLength();
+            String s = String.format("%.0f", (progressAsPercentage*100));
+            mProgressTextView.setText(s);
         }
 
         @Override
