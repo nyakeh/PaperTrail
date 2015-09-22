@@ -116,7 +116,7 @@ public class BookListFragment extends Fragment {
         private Book mBook;
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
-        private TextView mStartedTextView;
+        private TextView mProgressTextView;
 
         public BookHolder(View itemView) {
             super(itemView);
@@ -124,16 +124,14 @@ public class BookListFragment extends Fragment {
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title_text_view);
             mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author_text_view);
-            mStartedTextView = (TextView) itemView.findViewById(R.id.list_item_book_started_text_view);
+            mProgressTextView = (TextView) itemView.findViewById(R.id.list_item_book_progress_text_view);
         }
 
         private void bindBook(Book book) {
             mBook = book;
             mTitleTextView.setText(book.getTitle());
             mAuthorTextView.setText(book.getAuthor());
-
-            String formattedStartDate = DateFormat.format("EEEE, MMM dd", mBook.getDateStarted()).toString();
-            mStartedTextView.setText(formattedStartDate);
+            mProgressTextView.setText(Integer.toString(book.getProgress()));
         }
 
         @Override
