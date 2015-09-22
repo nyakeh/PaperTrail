@@ -24,19 +24,15 @@ import java.util.UUID;
 
 public class BookFragment extends Fragment {
     private static final String ARG_BOOK_ID = "book_id";
-    private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE_STARTED = 0;
-    private static final int REQUEST_DATE_FINISHED = 1;
 
     private ViewPager mViewPager;
     private Book mBook;
     private EditText mTitleField;
     private EditText mAuthorField;
     private EditText mBlurbField;
-    private EditText mProgressField;
     private EditText mLengthField;
     private Button mDateStartedButton;
-    private Button mDateFinishedButton;
     private EditText mISBNField;
     private EditText mImageUrlField;
 
@@ -156,16 +152,6 @@ public class BookFragment extends Fragment {
 //            }
 //        });
 //
-//        mDateFinishedButton = (Button) view.findViewById(R.id.book_finished_date);
-//        mDateFinishedButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FragmentManager manager = getFragmentManager();
-//                DatePickerFragment dialog = DatePickerFragment.newInstance(new Date());
-//                dialog.setTargetFragment(BookFragment.this, REQUEST_DATE_FINISHED);
-//                dialog.show(manager, DIALOG_DATE);
-//            }
-//        });
 //
 //        mISBNField = (EditText) view.findViewById(R.id.book_isbn);
 //        mISBNField.setText(mBook.getISBN());
@@ -208,12 +194,6 @@ public class BookFragment extends Fragment {
     private void updateDate() {
         String formattedStartDate = DateFormat.format("EEEE, MMM dd, yyyy", mBook.getDateStarted()).toString();
         mDateStartedButton.setText(formattedStartDate);
-
-        Date dateFinished = mBook.getDateFinished();
-        if (!dateFinished.equals(new Date(Long.MAX_VALUE))) {
-            String formattedFinishedDate = DateFormat.format("EEEE, MMM dd, yyyy", dateFinished).toString();
-            mDateFinishedButton.setText(formattedFinishedDate);
-        }
     }
 
     @Override
@@ -243,12 +223,6 @@ public class BookFragment extends Fragment {
         if (requestCode == REQUEST_DATE_STARTED) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mBook.setDateStarted(date);
-            updateDate();
-        }
-
-        if (requestCode == REQUEST_DATE_FINISHED) {
-            Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            mBook.setDateFinished(date);
             updateDate();
         }
     }
