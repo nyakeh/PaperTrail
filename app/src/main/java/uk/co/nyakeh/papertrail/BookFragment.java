@@ -7,6 +7,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -44,6 +46,7 @@ public class BookFragment extends Fragment {
 
         UUID bookId = (UUID) getArguments().getSerializable(ARG_BOOK_ID);
         mBook = BookLab.get(getActivity()).getBook(bookId);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mBook.getTitle());
     }
 
     @Override
@@ -56,10 +59,7 @@ public class BookFragment extends Fragment {
         }
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
         mViewPager.setTag(R.string.book, mBook);
-
-
         return view;
     }
 
