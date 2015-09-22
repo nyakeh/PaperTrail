@@ -22,7 +22,7 @@
         </activity>
         <activity
             android:name=".BookActivity"
-            android:label="Book tings"
+            android:label="Update book"
             android:parentActivityName=".BookListActivity">
         </activity>
     </application>

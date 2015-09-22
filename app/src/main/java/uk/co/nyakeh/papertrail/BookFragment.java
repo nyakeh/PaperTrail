@@ -68,6 +68,9 @@ public class BookFragment extends Fragment {
         }
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+        mViewPager.setTag(R.string.book, mBook);
+
 //
 //        mTitleField = (EditText) view.findViewById(R.id.book_title);
 //        mTitleField.setText(mBook.getTitle());
@@ -120,25 +123,7 @@ public class BookFragment extends Fragment {
 //            }
 //        });
 //
-//        mProgressField = (EditText) view.findViewById(R.id.book_progress);
-//        mProgressField.setText(Integer.toString(mBook.getProgress()));
-//        mProgressField.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-//                String inputString = inputChar.toString();
-//                if (!inputString.isEmpty()) {
-//                    mBook.setProgress(Integer.parseInt(inputString));
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//            }
-//        });
+
 //
 //        mLengthField = (EditText) view.findViewById(R.id.book_length);
 //        mLengthField.setText(Integer.toString(mBook.getLength()));
