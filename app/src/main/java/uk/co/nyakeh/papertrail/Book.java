@@ -107,7 +107,7 @@ public class Book {
     }
 
     public boolean isEmpty() {
-        if (mTitle.isEmpty() && mAuthor.isEmpty() && mBlurb.isEmpty() && mProgress == 0 && mLength == 100 && mISBN.isEmpty() && mImageUrl.isEmpty() && mDateFinished.equals(DATE_MAX)) {
+        if (mTitle.isEmpty() && mAuthor.isEmpty() && mBlurb.isEmpty() && mProgress == 0 && mLength == 100 && mISBN.isEmpty() && mImageUrl.isEmpty() && mDateStarted.equals(new Date()) && mDateFinished.equals(DATE_MAX)) {
             return true;
         }
         return false;
