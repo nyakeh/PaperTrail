@@ -15,4 +15,6 @@
     <string name="track_new_book">Track new book</string>
     <string name="book_progress_label">Current Progress</string>
     <string name="book">Book</string>
+    <string name="cancel">CANCEL</string>
+    <string name="ok">OK</string>
 </resources>
