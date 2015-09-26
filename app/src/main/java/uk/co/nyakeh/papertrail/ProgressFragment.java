@@ -81,6 +81,8 @@ public class ProgressFragment extends Fragment {
         if (requestCode == REQUEST_DATE_FINISHED) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mBook.setDateFinished(date);
+            mBook.setProgress(mBook.getLength());
+            mProgressField.setText(Integer.toString(mBook.getProgress()));
             updateDate();
         }
     }
