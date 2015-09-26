@@ -33,6 +33,7 @@ public class CreateBookFragment extends Fragment {
     private Button mDateStartedButton;
     private EditText mISBNField;
     private EditText mImageUrlField;
+    private UUID mBookId;
 
     public static CreateBookFragment newInstance(UUID bookId) {
         Bundle arguments = new Bundle();
@@ -48,13 +49,21 @@ public class CreateBookFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        UUID bookId = (UUID) getArguments().getSerializable(ARG_BOOK_ID);
-        mBook = BookLab.get(getActivity()).getBook(bookId);
+        mBookId = (UUID) getArguments().getSerializable(ARG_BOOK_ID);
+        mBook = BookLab.get(getActivity()).getBook(mBookId);
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_book, container, false);
+
+        if (mBook == null){
+            mBook = new Book(mBookId);
+            mBook.setDateStarted(new Date());
+            mBook.setDateFinished(new Date(Long.MAX_VALUE));
+            BookLab.get(getActivity()).addBook(mBook);
+        }
+
         mTitleField = (EditText) view.findViewById(R.id.book_title);
         mTitleField.setText(mBook.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {

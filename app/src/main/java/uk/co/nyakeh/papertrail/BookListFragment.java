@@ -18,10 +18,8 @@ import android.widget.TextView;
 import java.util.List;
 
 public class BookListFragment extends Fragment {
-    private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
     private RecyclerView mBookRecyclerView;
     private BookAdapter mBookAdapter;
-    private boolean mSubtitleVisable;
     private TextView mBookListEmptyMessageView;
 
     @Override
@@ -37,10 +35,6 @@ public class BookListFragment extends Fragment {
         mBookListEmptyMessageView = (TextView) view.findViewById(R.id.book_list_empty_message);
         mBookRecyclerView = (RecyclerView) view.findViewById(R.id.book_recycler_view);
         mBookRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        if (savedInstanceState != null) {
-            mSubtitleVisable = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
-        }
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -103,12 +97,6 @@ public class BookListFragment extends Fragment {
         BookLab.get(getActivity()).addBook(book);
         Intent intent = CreateBookActivity.newIntent(getActivity(), book.getId());
         startActivity(intent);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisable);
     }
 
     private class BookHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

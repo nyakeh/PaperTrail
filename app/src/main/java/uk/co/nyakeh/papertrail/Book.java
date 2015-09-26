@@ -1,5 +1,6 @@
 package uk.co.nyakeh.papertrail;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -107,7 +108,10 @@ public class Book {
     }
 
     public boolean isEmpty() {
-        if (mTitle.isEmpty() && mAuthor.isEmpty() && mBlurb.isEmpty() && mProgress == 0 && mLength == 100 && mISBN.isEmpty() && mImageUrl.isEmpty() && mDateStarted.equals(new Date()) && mDateFinished.equals(DATE_MAX)) {
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+        boolean startedEqualsToday = fmt.format(mDateStarted).equals(fmt.format(new Date()));
+
+        if (mTitle.isEmpty() && mAuthor.isEmpty() && mBlurb.isEmpty() && mProgress == 0 && mLength == 100 && mISBN.isEmpty() && mImageUrl.isEmpty() && startedEqualsToday && mDateFinished.equals(DATE_MAX)) {
             return true;
         }
         return false;
