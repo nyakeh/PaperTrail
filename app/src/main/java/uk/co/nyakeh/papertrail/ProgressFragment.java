@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ public class ProgressFragment extends Fragment {
 
         mProgressField = (EditText) view.findViewById(R.id.book_progress);
         mProgressField.setText(Integer.toString(mBook.getProgress()));
+        mProgressField.setFilters(new InputFilter[]{ new InputFilterMinMax("0", Integer.toString(mBook.getLength()))});
         mProgressField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
