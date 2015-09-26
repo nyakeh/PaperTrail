@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 
 import java.util.Date;
 
@@ -21,6 +22,7 @@ public class ProgressFragment extends Fragment {
     private static final int REQUEST_DATE_FINISHED = 1;
     private static final String DIALOG_DATE = "DialogDate";
     private EditText mProgressField;
+    private SeekBar mProgressSeekbarField;
     private Button mDateFinishedButton;
 
     private Book mBook;
@@ -33,7 +35,7 @@ public class ProgressFragment extends Fragment {
 
         mProgressField = (EditText) view.findViewById(R.id.book_progress);
         mProgressField.setText(Integer.toString(mBook.getProgress()));
-        mProgressField.setFilters(new InputFilter[]{ new InputFilterMinMax("0", Integer.toString(mBook.getLength()))});
+        mProgressField.setFilters(new InputFilter[]{new InputFilterMinMax("0", Integer.toString(mBook.getLength()))});
         mProgressField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -41,14 +43,37 @@ public class ProgressFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-                String inputString = inputChar.toString();
-                if (!inputString.isEmpty()) {
-                    mBook.setProgress(Integer.parseInt(inputString));
+                String progressString = inputChar.toString();
+                if (!progressString.isEmpty()) {
+                    int progressValue = Integer.parseInt(progressString);
+                    mBook.setProgress(progressValue);
+                    mProgressSeekbarField.setProgress(progressValue);
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+            }
+        });
+
+        mProgressSeekbarField = (SeekBar) view.findViewById(R.id.book_progress_seekbar);
+        mProgressSeekbarField.setMax(mBook.getLength());
+        mProgressSeekbarField.setProgress(mBook.getProgress());
+        mProgressSeekbarField.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mBook.setProgress(progress);
+                mProgressField.setText(Integer.toString(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
 
@@ -74,6 +99,12 @@ public class ProgressFragment extends Fragment {
         }
     }
 
+    private void updateProgress(int progressValue) {
+        mBook.setProgress(progressValue);
+        mProgressField.setText(Integer.toString(progressValue));
+        mProgressSeekbarField.setProgress(progressValue);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK) {
@@ -83,9 +114,8 @@ public class ProgressFragment extends Fragment {
         if (requestCode == REQUEST_DATE_FINISHED) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mBook.setDateFinished(date);
-            mBook.setProgress(mBook.getLength());
-            mProgressField.setText(Integer.toString(mBook.getProgress()));
             updateDate();
+            updateProgress(mBook.getLength());
         }
     }
 }
