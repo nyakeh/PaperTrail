@@ -17,4 +17,5 @@
     <string name="book">Book</string>
     <string name="cancel">CANCEL</string>
     <string name="ok">OK</string>
+    <string name="save_book">Save book</string>
 </resources>

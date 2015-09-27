@@ -192,7 +192,7 @@ public class CreateBookFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_book, menu);
+        inflater.inflate(R.menu.fragment_create_book, menu);
     }
 
     @Override
@@ -200,6 +200,10 @@ public class CreateBookFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_item_delete_book:
                 BookLab.get(getActivity()).deleteBook(mBook.getId());
+                getActivity().finish();
+                return true;
+            case R.id.menu_item_save_book:
+                BookLab.get(getActivity()).updateBook(mBook);
                 getActivity().finish();
                 return true;
             default:
