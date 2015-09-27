@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -87,7 +88,8 @@ public class BookListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
         private TextView mProgressTextView;
-        private ImageView mImageImageView;
+        private ImageView mImageView;
+        private ProgressBar mProgressBar;
 
         public BookHolder(View itemView) {
             super(itemView);
@@ -96,7 +98,8 @@ public class BookListFragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title);
             mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author);
             mProgressTextView = (TextView) itemView.findViewById(R.id.list_item_book_progress);
-            mImageImageView = (ImageView) itemView.findViewById(R.id.list_item_book_image);
+            mImageView = (ImageView) itemView.findViewById(R.id.list_item_book_image);
+            mProgressBar = (ProgressBar) itemView.findViewById(R.id.list_item_book_progress_bar);
         }
 
         private void bindBook(Book book) {
@@ -115,7 +118,10 @@ public class BookListFragment extends Fragment {
                     .error(R.drawable.books)
                     .resize(90, 90)
                     .centerCrop()
-                    .into(mImageImageView);
+                    .into(mImageView);
+
+            mProgressBar.setMax(mBook.getLength());
+            mProgressBar.setProgress(mBook.getProgress());
         }
 
         @Override
