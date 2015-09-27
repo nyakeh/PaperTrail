@@ -108,9 +108,9 @@ public class BookListFragment extends Fragment {
             String s = String.format("%.0f", (progressAsPercentage * 100));
             mProgressTextView.setText(s);
 
-            String safeImageUrl = (book.getImageUrl().isEmpty()) ? "fail_gracefully_pls" : book.getImageUrl();
+            String safePicassoImageUrl = (book.getImageUrl().isEmpty()) ? "fail_gracefully_pls" : book.getImageUrl();
             Picasso.with(getActivity())
-                    .load(safeImageUrl)
+                    .load(safePicassoImageUrl)
                     .placeholder(R.drawable.books)
                     .error(R.drawable.books)
                     .resize(90, 90)

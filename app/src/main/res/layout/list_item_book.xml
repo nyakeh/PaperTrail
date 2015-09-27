@@ -28,7 +28,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/books"/>
+                tools:src="@drawable/books"/>
 
             <TextView
                 android:id="@+id/list_item_book_title"

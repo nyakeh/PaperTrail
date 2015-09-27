@@ -14,7 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SeekBar;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 
@@ -24,6 +27,7 @@ public class ProgressFragment extends Fragment {
     private EditText mProgressField;
     private SeekBar mProgressSeekbarField;
     private Button mDateFinishedButton;
+    private ImageView mDateImage;
 
     private Book mBook;
 
@@ -76,6 +80,14 @@ public class ProgressFragment extends Fragment {
 
             }
         });
+
+        mDateImage = (ImageView) view.findViewById(R.id.book_image);
+        String safePicassoImageUrl = (mBook.getImageUrl().isEmpty()) ? "fail_gracefully_pls" : mBook.getImageUrl();
+        Picasso.with(getActivity())
+                .load(safePicassoImageUrl)
+                .placeholder(R.drawable.books)
+                .error(R.drawable.books)
+                .into(mDateImage);
 
         mDateFinishedButton = (Button) view.findViewById(R.id.book_finished_date);
         mDateFinishedButton.setOnClickListener(new View.OnClickListener() {
