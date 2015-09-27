@@ -75,23 +75,6 @@ public class BookListFragment extends Fragment {
         updateUI();
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_book_list, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_new_book:
-                AddNewBook();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     private void AddNewBook() {
         Book book = new Book();
         BookLab.get(getActivity()).addBook(book);
