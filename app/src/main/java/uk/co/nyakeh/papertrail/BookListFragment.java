@@ -6,14 +6,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -88,14 +87,16 @@ public class BookListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
         private TextView mProgressTextView;
+        private ImageView mImageImageView;
 
         public BookHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
-            mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title_text_view);
-            mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author_text_view);
-            mProgressTextView = (TextView) itemView.findViewById(R.id.list_item_book_progress_text_view);
+            mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title);
+            mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author);
+            mProgressTextView = (TextView) itemView.findViewById(R.id.list_item_book_progress);
+            mImageImageView = (ImageView) itemView.findViewById(R.id.list_item_book_image);
         }
 
         private void bindBook(Book book) {
@@ -103,9 +104,18 @@ public class BookListFragment extends Fragment {
             mTitleTextView.setText(book.getTitle());
             mAuthorTextView.setText(book.getAuthor());
 
-            float progressAsPercentage = (float)book.getProgress()/book.getLength();
-            String s = String.format("%.0f", (progressAsPercentage*100));
+            float progressAsPercentage = (float) book.getProgress() / book.getLength();
+            String s = String.format("%.0f", (progressAsPercentage * 100));
             mProgressTextView.setText(s);
+
+            String safeImageUrl = (book.getImageUrl().isEmpty()) ? "fail_gracefully_pls" : book.getImageUrl();
+            Picasso.with(getActivity())
+                    .load(safeImageUrl)
+                    .placeholder(R.drawable.books)
+                    .error(R.drawable.books)
+                    .resize(90, 90)
+                    .centerCrop()
+                    .into(mImageImageView);
         }
 
         @Override
