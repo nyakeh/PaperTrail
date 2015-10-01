@@ -42,37 +42,11 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/book_blurb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/book_blurb_label"
-                android:inputType="text"
-                android:lines="2"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
                 android:id="@+id/book_length"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/book_length_label"
                 android:inputType="number"
-                android:singleLine="true"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/book_isbn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/book_isbn_label"
-                android:inputType="text"
                 android:singleLine="true"/>
         </android.support.design.widget.TextInputLayout>
 

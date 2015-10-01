@@ -28,10 +28,8 @@ public class CreateBookFragment extends Fragment {
     private Book mBook;
     private EditText mTitleField;
     private EditText mAuthorField;
-    private EditText mBlurbField;
     private EditText mLengthField;
     private Button mDateStartedButton;
-    private EditText mISBNField;
     private EditText mImageUrlField;
     private UUID mBookId;
 
@@ -98,23 +96,6 @@ public class CreateBookFragment extends Fragment {
             }
         });
 
-        mBlurbField = (EditText) view.findViewById(R.id.book_blurb);
-        mBlurbField.setText(mBook.getBlurb());
-        mBlurbField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-                mBook.setBlurb(inputChar.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
         mLengthField = (EditText) view.findViewById(R.id.book_length);
         mLengthField.setText(Integer.toString(mBook.getLength()));
         mLengthField.addTextChangedListener(new TextWatcher() {
@@ -143,23 +124,6 @@ public class CreateBookFragment extends Fragment {
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mBook.getDateStarted());
                 dialog.setTargetFragment(CreateBookFragment.this, REQUEST_DATE_STARTED);
                 dialog.show(manager, DIALOG_DATE);
-            }
-        });
-
-        mISBNField = (EditText) view.findViewById(R.id.book_isbn);
-        mISBNField.setText(mBook.getISBN());
-        mISBNField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-                mBook.setISBN(inputChar.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
             }
         });
 

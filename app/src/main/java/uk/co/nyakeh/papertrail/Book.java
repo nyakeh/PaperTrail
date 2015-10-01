@@ -9,12 +9,10 @@ public class Book {
     private UUID mId;
     private String mTitle = "";
     private String mAuthor = "";
-    private String mBlurb = "";
     private int mProgress = 0;
     private int mLength = 100;
     private Date mDateStarted;
     private Date mDateFinished;
-    private String mISBN = "";
     private String mImageUrl = "";
 
     public Book() {
@@ -79,22 +77,6 @@ public class Book {
         mLength = length;
     }
 
-    public String getBlurb() {
-        return mBlurb;
-    }
-
-    public void setBlurb(String blurb) {
-        mBlurb = blurb;
-    }
-
-    public String getISBN() {
-        return mISBN;
-    }
-
-    public void setISBN(String ISBN) {
-        mISBN = ISBN;
-    }
-
     public String getImageUrl() {
         return mImageUrl;
     }
@@ -111,7 +93,7 @@ public class Book {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
         boolean startedEqualsToday = fmt.format(mDateStarted).equals(fmt.format(new Date()));
 
-        if (mTitle.isEmpty() && mAuthor.isEmpty() && mBlurb.isEmpty() && mProgress == 0 && mLength == 100 && mISBN.isEmpty() && mImageUrl.isEmpty() && startedEqualsToday && mDateFinished.equals(DATE_MAX)) {
+        if (mTitle.isEmpty() && mAuthor.isEmpty() && mProgress == 0 && mLength == 100 && mImageUrl.isEmpty() && startedEqualsToday && mDateFinished.equals(DATE_MAX)) {
             return true;
         }
         return false;

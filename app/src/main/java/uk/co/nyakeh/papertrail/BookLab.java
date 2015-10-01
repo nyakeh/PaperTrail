@@ -80,12 +80,10 @@ public class BookLab {
         values.put(BookTable.Cols.UUID, book.getId().toString());
         values.put(BookTable.Cols.TITLE, book.getTitle());
         values.put(BookTable.Cols.AUTHOR, book.getAuthor());
-        values.put(BookTable.Cols.BLURB, book.getBlurb());
         values.put(BookTable.Cols.PROGRESS, book.getProgress());
         values.put(BookTable.Cols.LENGTH, book.getLength());
         values.put(BookTable.Cols.DATE_STARTED, book.getDateStarted().getTime());
         values.put(BookTable.Cols.DATE_FINISHED, book.getDateFinished().getTime());
-        values.put(BookTable.Cols.ISBN, book.getISBN());
         values.put(BookTable.Cols.IMAGE_URL, book.getImageUrl());
         return values;
     }
