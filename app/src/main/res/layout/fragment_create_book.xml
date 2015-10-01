@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/book_author_label"
-                android:inputType="text"
+                android:inputType="textPersonName"
                 android:singleLine="true"/>
         </android.support.design.widget.TextInputLayout>
 
