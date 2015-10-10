@@ -13,8 +13,16 @@
     tools:showIn="@layout/activity_main"
     tools:context=".MainActivity">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/book_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <TextView
-        android:text="Welcome to Paper Trail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:id="@+id/book_list_empty_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/book_list_empty_message"
+        android:gravity="center"
+        android:visibility="gone"/>
 </RelativeLayout>
