@@ -2,9 +2,7 @@ package uk.co.nyakeh.papertrail;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -70,26 +68,17 @@ public class BaseActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            Snackbar.make(findViewById(R.id.content_container), "nav_camera", Snackbar.LENGTH_LONG)
+        if (id == R.id.nav_archive) {
+            Snackbar.make(findViewById(R.id.content_container), "Archive", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_currently_reading) {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             Intent intent = new Intent(this, BookListActivity.class);
             startActivity(intent);
             return true;
-        } else if (id == R.id.nav_slideshow) {
-            Snackbar.make(findViewById(R.id.content_container), "nav_slideshow", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        } else if (id == R.id.nav_manage) {
-            Snackbar.make(findViewById(R.id.content_container), "nav_manage", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        } else if (id == R.id.nav_share) {
-            Snackbar.make(findViewById(R.id.content_container), "nav_share", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        } else if (id == R.id.nav_send) {
-            Snackbar.make(findViewById(R.id.content_container), "nav_send", Snackbar.LENGTH_LONG)
+        } else if (id == R.id.nav_reading_list) {
+            Snackbar.make(findViewById(R.id.content_container), "Reading List", Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
         }
 

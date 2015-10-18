@@ -22,4 +22,8 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="reading_list">Reading List</string>
+    <string name="currently_reading">Currently Reading</string>
+    <string name="archive">Archive</string>
+    <string name="tag_line">Track what you\'re currently reading</string>
 </resources>
