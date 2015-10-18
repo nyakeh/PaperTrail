@@ -17,12 +17,6 @@ public class BaseActivity extends AppCompatActivity
 
     protected static final CharSequence NAVDRAWER_ITEM_INVALID = "Invalid";
 
-    protected static final CharSequence NAVDRAWER_ITEM_ARCHIVE = "Archive";
-
-    protected static final CharSequence NAVDRAWER_ITEM_CURRENTLY_READING = "Currently Reading";
-
-    protected static final CharSequence NAVDRAWER_ITEM_READING_LIST = "Reading List";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

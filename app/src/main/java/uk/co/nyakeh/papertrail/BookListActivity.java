@@ -10,6 +10,6 @@ public class BookListActivity extends SingleFragmentActivity {
 
     @Override
     protected CharSequence getSelfNavDrawerItem() {
-        return NAVDRAWER_ITEM_CURRENTLY_READING;
+        return getString(R.string.currently_reading);
     }
 }
