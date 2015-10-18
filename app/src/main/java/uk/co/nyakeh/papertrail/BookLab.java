@@ -85,6 +85,7 @@ public class BookLab {
         values.put(BookTable.Cols.DATE_STARTED, book.getDateStarted().getTime());
         values.put(BookTable.Cols.DATE_FINISHED, book.getDateFinished().getTime());
         values.put(BookTable.Cols.IMAGE_URL, book.getImageUrl());
+        values.put(BookTable.Cols.CATEGORY, book.getCategory());
         return values;
     }
 

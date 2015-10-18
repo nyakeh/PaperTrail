@@ -14,6 +14,7 @@ public class Book {
     private Date mDateStarted;
     private Date mDateFinished;
     private String mImageUrl = "";
+    private String mCategory = "";
 
     public Book() {
         this(UUID.randomUUID());
@@ -81,9 +82,11 @@ public class Book {
         return mImageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        mImageUrl = imageUrl;
-    }
+    public void setImageUrl(String imageUrl) { mImageUrl = imageUrl; }
+
+    public String getCategory() { return mCategory; }
+
+    public void setCategory(String category) { mCategory = category; }
 
     public boolean isFinished() {
         return mDateFinished.before(new Date());

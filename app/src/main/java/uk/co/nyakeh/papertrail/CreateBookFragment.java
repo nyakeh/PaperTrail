@@ -31,6 +31,7 @@ public class CreateBookFragment extends Fragment {
     private EditText mLengthField;
     private Button mDateStartedButton;
     private EditText mImageUrlField;
+    private EditText mCategoryField;
     private UUID mBookId;
 
     public static CreateBookFragment newInstance(UUID bookId) {
@@ -137,6 +138,23 @@ public class CreateBookFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
                 mBook.setImageUrl(inputChar.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        mCategoryField = (EditText) view.findViewById(R.id.book_category);
+        mCategoryField.setText(mBook.getCategory());
+        mCategoryField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
+                mBook.setCategory(inputChar.toString());
             }
 
             @Override

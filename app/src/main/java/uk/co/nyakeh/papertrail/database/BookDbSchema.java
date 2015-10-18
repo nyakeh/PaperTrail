@@ -13,6 +13,7 @@ public class BookDbSchema {
             public static final String DATE_STARTED = "dateStarted";
             public static final String DATE_FINISHED = "dateFinished";
             public static final String IMAGE_URL = "imageUrl";
+            public static final String CATEGORY = "category";
         }
     }
 }

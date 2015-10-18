@@ -23,6 +23,7 @@ public class BookCursorWrapper extends CursorWrapper {
         Long dateStarted = getLong(getColumnIndex(BookTable.Cols.DATE_STARTED));
         Long dateFinished = getLong(getColumnIndex(BookTable.Cols.DATE_FINISHED));
         String imageUrl = getString(getColumnIndex(BookTable.Cols.IMAGE_URL));
+        String category = getString(getColumnIndex(BookTable.Cols.CATEGORY));
 
         Book book = new Book(UUID.fromString(uuidString));
         book.setTitle(title);
@@ -32,6 +33,7 @@ public class BookCursorWrapper extends CursorWrapper {
         book.setDateStarted(new Date(dateStarted));
         book.setDateFinished(new Date(dateFinished));
         book.setImageUrl(imageUrl);
+        book.setCategory(category);
         return book;
     }
 }
