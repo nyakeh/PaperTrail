@@ -15,6 +15,14 @@ import android.view.MenuItem;
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    protected static final CharSequence NAVDRAWER_ITEM_INVALID = "Invalid";
+
+    protected static final CharSequence NAVDRAWER_ITEM_ARCHIVE = "Archive";
+
+    protected static final CharSequence NAVDRAWER_ITEM_CURRENTLY_READING = "Currently Reading";
+
+    protected static final CharSequence NAVDRAWER_ITEM_READING_LIST = "Reading List";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,24 +52,29 @@ public class BaseActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        int itemId = item.getItemId();
+        CharSequence itemTitle = item.getTitle();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        if (id == R.id.nav_archive) {
-            Snackbar.make(findViewById(R.id.content_container), "Archive", Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show();
-        } else if (id == R.id.nav_currently_reading) {
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (itemTitle.equals(getSelfNavDrawerItem())) {
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        } else if (itemId == R.id.nav_archive) {
+            Snackbar.make(findViewById(R.id.content_container), "Archive", Snackbar.LENGTH_SHORT).show();
+        } else if (itemId == R.id.nav_currently_reading) {
             drawer.closeDrawer(GravityCompat.START);
             Intent intent = new Intent(this, BookListActivity.class);
             startActivity(intent);
             return true;
-        } else if (id == R.id.nav_reading_list) {
-            Snackbar.make(findViewById(R.id.content_container), "Reading List", Snackbar.LENGTH_SHORT)
-                    .setAction("Action", null).show();
+        } else if (itemId == R.id.nav_reading_list) {
+            Snackbar.make(findViewById(R.id.content_container), "Reading List", Snackbar.LENGTH_SHORT).show();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    protected CharSequence getSelfNavDrawerItem() {
+        return NAVDRAWER_ITEM_INVALID;
     }
 }

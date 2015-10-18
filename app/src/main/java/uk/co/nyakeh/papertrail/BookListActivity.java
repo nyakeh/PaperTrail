@@ -7,4 +7,9 @@ public class BookListActivity extends SingleFragmentActivity {
     protected Fragment createFragment() {
         return new BookListFragment();
     }
+
+    @Override
+    protected CharSequence getSelfNavDrawerItem() {
+        return NAVDRAWER_ITEM_CURRENTLY_READING;
+    }
 }

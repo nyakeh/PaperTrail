@@ -20,4 +20,9 @@ public class CreateBookActivity extends SingleFragmentActivity {
         UUID bookId = (UUID) getIntent().getSerializableExtra(EXTRA_BOOK_ID);
         return CreateBookFragment.newInstance(bookId);
     }
+
+    @Override
+    protected CharSequence getSelfNavDrawerItem() {
+        return NAVDRAWER_ITEM_INVALID;
+    }
 }
