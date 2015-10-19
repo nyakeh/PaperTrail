@@ -5,7 +5,8 @@
     <string name="book_title_label">Title</string>
     <string name="book_author_label">Author</string>
     <string name="delete_book">Delete book</string>
-    <string name="book_list_empty_message">You haven\'t any books yet</string>
+    <string name="book_list_empty_message">You haven\'t got any active books</string>
+    <string name="archive_empty_message">The books you finish will appear here</string>
     <string name="new_book">New Book</string>
     <string name="book_blurb_label">Blurb</string>
     <string name="book_length_label">Page Count</string>
@@ -27,4 +28,5 @@
     <string name="archive">Archive</string>
     <string name="tag_line">Track what you\'re currently reading</string>
     <string name="book_category_label">Category</string>
+    <string name="update_book">Update book</string>
 </resources>

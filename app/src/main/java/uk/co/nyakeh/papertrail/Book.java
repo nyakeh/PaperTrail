@@ -68,6 +68,10 @@ public class Book {
 
     public void setProgress(int progress) {
         mProgress = progress;
+        if (mProgress == mLength)
+        {
+            setDateFinished(new Date());
+        }
     }
 
     public int getLength() {
@@ -89,7 +93,8 @@ public class Book {
     public void setCategory(String category) { mCategory = category; }
 
     public boolean isFinished() {
-        return mDateFinished.before(new Date());
+        Date date = new Date();
+        return mDateFinished.before(date);
     }
 
     public boolean isEmpty() {

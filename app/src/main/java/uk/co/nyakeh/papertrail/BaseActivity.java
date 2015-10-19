@@ -54,7 +54,10 @@ public class BaseActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (itemId == R.id.nav_archive) {
-            Snackbar.make(findViewById(R.id.content_container), "Archive", Snackbar.LENGTH_SHORT).show();
+            drawer.closeDrawer(GravityCompat.START);
+            Intent intent = new Intent(this, ArchiveActivity.class);
+            startActivity(intent);
+            return true;
         } else if (itemId == R.id.nav_currently_reading) {
             drawer.closeDrawer(GravityCompat.START);
             Intent intent = new Intent(this, BookListActivity.class);

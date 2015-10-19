@@ -37,14 +37,36 @@ public class BookLab {
         mDatabase.insert(BookTable.NAME, null, values);
     }
 
-    public List<Book> getBooks() {
+    public List<Book> getActiveBooks() {
         ArrayList<Book> books = new ArrayList<>();
         BookCursorWrapper cursor = queryBooks(null, null);
 
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
-                books.add(cursor.getBook());
+                Book book = cursor.getBook();
+                if (!book.isFinished()) {
+                    books.add(book);
+                }
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return books;
+    }
+
+    public List<Book> getArchivedBooks() {
+        ArrayList<Book> books = new ArrayList<>();
+        BookCursorWrapper cursor = queryBooks(null, null);
+
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                Book book = cursor.getBook();
+                if (book.isFinished()) {
+                    books.add(book);
+                }
                 cursor.moveToNext();
             }
         } finally {

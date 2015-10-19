@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class BookListFragment extends Fragment {
+public class ArchiveFragment extends Fragment {
     private RecyclerView mBookRecyclerView;
     private BookAdapter mBookAdapter;
     private TextView mBookListEmptyMessageView;
@@ -30,26 +30,19 @@ public class BookListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_book_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_archive, container, false);
 
         mBookListEmptyMessageView = (TextView) view.findViewById(R.id.book_list_empty_message);
         mBookRecyclerView = (RecyclerView) view.findViewById(R.id.book_recycler_view);
         mBookRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddNewBook();
-            }
-        });
         updateUI();
         return view;
     }
 
     private void updateUI() {
         BookLab bookLab = BookLab.get(getActivity());
-        List<Book> books = bookLab.getActiveBooks();
+        List<Book> books = bookLab.getArchivedBooks();
 
         if (mBookAdapter == null) {
             mBookAdapter = new BookAdapter(books);
@@ -72,13 +65,6 @@ public class BookListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         updateUI();
-    }
-
-    private void AddNewBook() {
-        Book book = new Book();
-        BookLab.get(getActivity()).addBook(book);
-        Intent intent = CreateBookActivity.newIntent(getActivity(), book.getId());
-        startActivity(intent);
     }
 
     private class BookHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -130,7 +116,7 @@ public class BookListFragment extends Fragment {
         }
     }
 
-    public class BookAdapter extends RecyclerView.Adapter<BookHolder> {
+    private class BookAdapter extends RecyclerView.Adapter<BookHolder> {
 
         private List<Book> mBooks;
 
@@ -142,7 +128,6 @@ public class BookListFragment extends Fragment {
         public BookHolder onCreateViewHolder(ViewGroup parent, int i) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater.inflate(R.layout.list_item_book, parent, false);
-
             return new BookHolder(view);
         }
 
