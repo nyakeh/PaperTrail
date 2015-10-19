@@ -35,6 +35,9 @@ public class ArchiveFragment extends Fragment {
         mBookRecyclerView = (RecyclerView) view.findViewById(R.id.book_recycler_view);
         mBookRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
+        mBookRecyclerView.addItemDecoration(itemDecoration);
+
         updateUI();
         return view;
     }
