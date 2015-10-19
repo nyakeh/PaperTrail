@@ -141,7 +141,7 @@ public class BookListFragment extends Fragment {
         @Override
         public BookHolder onCreateViewHolder(ViewGroup parent, int i) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(R.layout.list_item_book, parent, false);
+            View view = layoutInflater.inflate(R.layout.list_item_book_active, parent, false);
 
             return new BookHolder(view);
         }

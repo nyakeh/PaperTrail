@@ -2,15 +2,14 @@ package uk.co.nyakeh.papertrail;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -19,7 +18,7 @@ import java.util.List;
 
 public class ArchiveFragment extends Fragment {
     private RecyclerView mBookRecyclerView;
-    private BookAdapter mBookAdapter;
+    private ArchivedBookAdapter mArchivedBookAdapter;
     private TextView mBookListEmptyMessageView;
 
     @Override
@@ -44,12 +43,12 @@ public class ArchiveFragment extends Fragment {
         BookLab bookLab = BookLab.get(getActivity());
         List<Book> books = bookLab.getArchivedBooks();
 
-        if (mBookAdapter == null) {
-            mBookAdapter = new BookAdapter(books);
-            mBookRecyclerView.setAdapter(mBookAdapter);
+        if (mArchivedBookAdapter == null) {
+            mArchivedBookAdapter = new ArchivedBookAdapter(books);
+            mBookRecyclerView.setAdapter(mArchivedBookAdapter);
         } else {
-            mBookAdapter.setBooks(books);
-            mBookAdapter.notifyDataSetChanged();
+            mArchivedBookAdapter.setBooks(books);
+            mArchivedBookAdapter.notifyDataSetChanged();
         }
 
         if (books.isEmpty()) {
@@ -67,34 +66,30 @@ public class ArchiveFragment extends Fragment {
         updateUI();
     }
 
-    private class BookHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class ArchivedBookHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private Book mBook;
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
-        private TextView mProgressTextView;
+        private TextView mDateFinishedTextView;
         private ImageView mImageView;
-        private ProgressBar mProgressBar;
 
-        public BookHolder(View itemView) {
+        public ArchivedBookHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title);
             mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author);
-            mProgressTextView = (TextView) itemView.findViewById(R.id.list_item_book_progress);
+            mDateFinishedTextView = (TextView) itemView.findViewById(R.id.list_item_book_date_finished);
             mImageView = (ImageView) itemView.findViewById(R.id.list_item_book_image);
-            mProgressBar = (ProgressBar) itemView.findViewById(R.id.list_item_book_progress_bar);
         }
 
         private void bindBook(Book book) {
             mBook = book;
             mTitleTextView.setText(book.getTitle());
             mAuthorTextView.setText(book.getAuthor());
-
-            float progressAsPercentage = (float) book.getProgress() / book.getLength();
-            String s = String.format("%.0f", (progressAsPercentage * 100));
-            mProgressTextView.setText(s);
+            String formattedFinishedDate = DateFormat.format("EEEE, MMM dd, yyyy", mBook.getDateFinished()).toString();
+            mDateFinishedTextView.setText(formattedFinishedDate);
 
             String safePicassoImageUrl = (book.getImageUrl().isEmpty()) ? "fail_gracefully_pls" : book.getImageUrl();
             Picasso.with(getActivity())
@@ -104,9 +99,6 @@ public class ArchiveFragment extends Fragment {
                     .resize(90, 90)
                     .centerCrop()
                     .into(mImageView);
-
-            mProgressBar.setMax(mBook.getLength());
-            mProgressBar.setProgress(mBook.getProgress());
         }
 
         @Override
@@ -116,25 +108,25 @@ public class ArchiveFragment extends Fragment {
         }
     }
 
-    private class BookAdapter extends RecyclerView.Adapter<BookHolder> {
+    private class ArchivedBookAdapter extends RecyclerView.Adapter<ArchivedBookHolder> {
 
         private List<Book> mBooks;
 
-        public BookAdapter(List<Book> books) {
+        public ArchivedBookAdapter(List<Book> books) {
             mBooks = books;
         }
 
         @Override
-        public BookHolder onCreateViewHolder(ViewGroup parent, int i) {
+        public ArchivedBookHolder onCreateViewHolder(ViewGroup parent, int i) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(R.layout.list_item_book, parent, false);
-            return new BookHolder(view);
+            View view = layoutInflater.inflate(R.layout.list_item_book_archived, parent, false);
+            return new ArchivedBookHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(BookHolder bookHolder, int position) {
+        public void onBindViewHolder(ArchivedBookHolder archivedBookHolder, int position) {
             Book book = mBooks.get(position);
-            bookHolder.bindBook(book);
+            archivedBookHolder.bindBook(book);
         }
 
         @Override
