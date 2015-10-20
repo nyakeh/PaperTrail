@@ -45,7 +45,7 @@ public class BookLab {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 Book book = cursor.getBook();
-                if (!book.isFinished()) {
+                if (book.getProgress() > 0 && book.getProgress() < book.getLength()) {
                     books.add(book);
                 }
                 cursor.moveToNext();
@@ -65,6 +65,25 @@ public class BookLab {
             while (!cursor.isAfterLast()){
                 Book book = cursor.getBook();
                 if (book.isFinished()) {
+                    books.add(book);
+                }
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+        return books;
+    }
+
+    public List<Book> getReadingList() {
+        ArrayList<Book> books = new ArrayList<>();
+        BookCursorWrapper cursor = queryBooks(null, null);
+
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()){
+                Book book = cursor.getBook();
+                if (book.getProgress() == 0) {
                     books.add(book);
                 }
                 cursor.moveToNext();

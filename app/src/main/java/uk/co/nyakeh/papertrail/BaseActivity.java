@@ -53,21 +53,16 @@ public class BaseActivity extends AppCompatActivity
         if (itemTitle.equals(getSelfNavDrawerItem())) {
             drawer.closeDrawer(GravityCompat.START);
             return true;
-        } else if (itemId == R.id.nav_archive) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(this, ArchiveActivity.class);
-            startActivity(intent);
-            return true;
-        } else if (itemId == R.id.nav_currently_reading) {
-            drawer.closeDrawer(GravityCompat.START);
-            Intent intent = new Intent(this, BookListActivity.class);
-            startActivity(intent);
-            return true;
-        } else if (itemId == R.id.nav_reading_list) {
-            Snackbar.make(findViewById(R.id.content_container), "Reading List", Snackbar.LENGTH_SHORT).show();
         }
 
+        Intent intent = new Intent(this, BookListActivity.class);
+        if (itemId == R.id.nav_archive) {
+            intent = new Intent(this, ArchiveActivity.class);
+        } else if (itemId == R.id.nav_reading_list) {
+            intent = new Intent(this, ReadingListActivity.class);
+        }
         drawer.closeDrawer(GravityCompat.START);
+        startActivity(intent);
         return true;
     }
 

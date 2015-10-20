@@ -36,6 +36,10 @@
             android:name=".ArchiveActivity"
             android:label="@string/archive">
         </activity>
+        <activity
+            android:name=".ReadingListActivity"
+            android:label="@string/reading_list">
+        </activity>
     </application>
 
 </manifest>
