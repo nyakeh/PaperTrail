@@ -29,4 +29,5 @@
     <string name="tag_line">Track what you\'re currently reading</string>
     <string name="book_category_label">Category</string>
     <string name="update_book">Update book</string>
+    <string name="reading_list_empty_message">Queue up the books you want to read next</string>
 </resources>

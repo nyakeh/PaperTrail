@@ -43,6 +43,7 @@ public class BookListFragment extends Fragment {
                 AddNewBook();
             }
         });
+
         updateUI();
         return view;
     }

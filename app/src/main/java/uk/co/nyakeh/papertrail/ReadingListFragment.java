@@ -2,6 +2,7 @@ package uk.co.nyakeh.papertrail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +30,7 @@ public class ReadingListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_archive, container, false);
+        View view = inflater.inflate(R.layout.fragment_reading_list, container, false);
 
         mBookListEmptyMessageView = (TextView) view.findViewById(R.id.book_list_empty_message);
         mBookRecyclerView = (RecyclerView) view.findViewById(R.id.book_recycler_view);
@@ -38,8 +39,23 @@ public class ReadingListFragment extends Fragment {
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
         mBookRecyclerView.addItemDecoration(itemDecoration);
 
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddNewBook();
+            }
+        });
+
         updateUI();
         return view;
+    }
+
+    private void AddNewBook() {
+        Book book = new Book(Constants.QUEUE);
+        BookLab.get(getActivity()).addBook(book);
+        Intent intent = CreateBookActivity.newIntent(getActivity(), book.getId(), Constants.QUEUE);
+        startActivity(intent);
     }
 
     private void updateUI() {

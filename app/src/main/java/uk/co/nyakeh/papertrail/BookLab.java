@@ -95,7 +95,6 @@ public class BookLab {
     }
 
     public Book getBook(UUID id) {
-
         BookCursorWrapper cursor = queryBooks(BookTable.Cols.UUID + " = ?", new String[]{id.toString()});
 
         try {
