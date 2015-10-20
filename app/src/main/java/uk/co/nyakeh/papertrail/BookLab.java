@@ -45,7 +45,7 @@ public class BookLab {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 Book book = cursor.getBook();
-                if (book.getStatus().equals("reading")) {
+                if (book.getStatus().equals(Constants.READING)) {
                     books.add(book);
                 }
                 cursor.moveToNext();
@@ -64,7 +64,7 @@ public class BookLab {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 Book book = cursor.getBook();
-                if (book.getStatus().equals("archive")) {
+                if (book.getStatus().equals(Constants.ARCHIVE)) {
                     books.add(book);
                 }
                 cursor.moveToNext();
@@ -83,7 +83,7 @@ public class BookLab {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 Book book = cursor.getBook();
-                if (book.getStatus().equals("queue")) {
+                if (book.getStatus().equals(Constants.QUEUE)) {
                     books.add(book);
                 }
                 cursor.moveToNext();

@@ -75,9 +75,9 @@ public class BookListFragment extends Fragment {
     }
 
     private void AddNewBook() {
-        Book book = new Book("reading");
+        Book book = new Book(Constants.READING);
         BookLab.get(getActivity()).addBook(book);
-        Intent intent = CreateBookActivity.newIntent(getActivity(), book.getId(), "reading");
+        Intent intent = CreateBookActivity.newIntent(getActivity(), book.getId(), Constants.READING);
         startActivity(intent);
     }
 

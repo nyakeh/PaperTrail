@@ -71,11 +71,11 @@ public class Book {
         if (mProgress == mLength && mDateFinished != null && mDateFinished.equals(DATE_MAX))
         {
             setDateFinished(new Date());
-            setStatus("archive");
+            setStatus(Constants.ARCHIVE);
         }else
         {
             setDateFinished(DATE_MAX);
-            setStatus("reading");
+            setStatus(Constants.READING);
         }
     }
 
