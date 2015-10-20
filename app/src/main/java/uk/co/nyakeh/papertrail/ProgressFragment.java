@@ -68,6 +68,7 @@ public class ProgressFragment extends Fragment {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mBook.setProgress(progress);
                 mProgressField.setText(Integer.toString(progress));
+                updateDate();
             }
 
             @Override
@@ -104,11 +105,12 @@ public class ProgressFragment extends Fragment {
     }
 
     private void updateDate() {
+        String date = "";
         Date dateFinished = mBook.getDateFinished();
         if (!dateFinished.equals(new Date(Long.MAX_VALUE))) {
-            String formattedFinishedDate = DateFormat.format("EEEE, MMM dd, yyyy", dateFinished).toString();
-            mDateFinishedButton.setText(formattedFinishedDate);
+            date = DateFormat.format("EEEE, MMM dd, yyyy", dateFinished).toString();
         }
+        mDateFinishedButton.setText(date);
     }
 
     private void updateProgress(int progressValue) {

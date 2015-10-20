@@ -68,7 +68,7 @@ public class Book {
 
     public void setProgress(int progress) {
         mProgress = progress;
-        if (mProgress == mLength && mDateFinished != null && mDateFinished.equals(DATE_MAX))
+        if (mProgress == mLength)
         {
             setDateFinished(new Date());
             setStatus(Constants.ARCHIVE);
