@@ -22,6 +22,7 @@ import java.util.UUID;
 
 public class CreateBookFragment extends Fragment {
     private static final String ARG_BOOK_ID = "book_id";
+    private static final String ARG_BOOK_STATUS = "book_status";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE_STARTED = 0;
 
@@ -33,6 +34,7 @@ public class CreateBookFragment extends Fragment {
     private EditText mImageUrlField;
     private EditText mCategoryField;
     private UUID mBookId;
+    private String mBookStatus;
 
     public static CreateBookFragment newInstance(UUID bookId) {
         Bundle arguments = new Bundle();
@@ -49,6 +51,7 @@ public class CreateBookFragment extends Fragment {
         setHasOptionsMenu(true);
 
         mBookId = (UUID) getArguments().getSerializable(ARG_BOOK_ID);
+        mBookStatus = (String) getArguments().getSerializable(ARG_BOOK_STATUS);
         mBook = BookLab.get(getActivity()).getBook(mBookId);
     }
 
@@ -60,6 +63,7 @@ public class CreateBookFragment extends Fragment {
             mBook = new Book(mBookId);
             mBook.setDateStarted(new Date());
             mBook.setDateFinished(new Date(Long.MAX_VALUE));
+            mBook.setStatus(mBookStatus);
             BookLab.get(getActivity()).addBook(mBook);
         }
 

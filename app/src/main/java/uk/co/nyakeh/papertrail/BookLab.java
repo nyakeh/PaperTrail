@@ -45,7 +45,7 @@ public class BookLab {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 Book book = cursor.getBook();
-                if (book.getProgress() > 0 && book.getProgress() < book.getLength()) {
+                if (book.getStatus().equals("reading")) {
                     books.add(book);
                 }
                 cursor.moveToNext();
@@ -64,7 +64,7 @@ public class BookLab {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 Book book = cursor.getBook();
-                if (book.isFinished()) {
+                if (book.getStatus().equals("archive")) {
                     books.add(book);
                 }
                 cursor.moveToNext();
@@ -83,7 +83,7 @@ public class BookLab {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 Book book = cursor.getBook();
-                if (book.getProgress() == 0) {
+                if (book.getStatus().equals("queue")) {
                     books.add(book);
                 }
                 cursor.moveToNext();
@@ -127,6 +127,7 @@ public class BookLab {
         values.put(BookTable.Cols.DATE_FINISHED, book.getDateFinished().getTime());
         values.put(BookTable.Cols.IMAGE_URL, book.getImageUrl());
         values.put(BookTable.Cols.CATEGORY, book.getCategory());
+        values.put(BookTable.Cols.STATUS, book.getStatus());
         return values;
     }
 

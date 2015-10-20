@@ -16,7 +16,7 @@ public class BookBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + BookTable.NAME + "(" + BookTable.Cols.UUID + ", " + BookTable.Cols.TITLE + ", " + BookTable.Cols.AUTHOR + ", " + BookTable.Cols.PROGRESS + ", " + BookTable.Cols.LENGTH + ", " + BookTable.Cols.DATE_STARTED + ", " + BookTable.Cols.DATE_FINISHED + ", " + BookTable.Cols.IMAGE_URL +  ", " + BookTable.Cols.CATEGORY + ")");
+        db.execSQL("create table " + BookTable.NAME + "(" + BookTable.Cols.UUID + ", " + BookTable.Cols.TITLE + ", " + BookTable.Cols.AUTHOR + ", " + BookTable.Cols.PROGRESS + ", " + BookTable.Cols.LENGTH + ", " + BookTable.Cols.DATE_STARTED + ", " + BookTable.Cols.DATE_FINISHED + ", " + BookTable.Cols.IMAGE_URL +  ", " + BookTable.Cols.CATEGORY + ", " + BookTable.Cols.STATUS + ")");
     }
 
     @Override

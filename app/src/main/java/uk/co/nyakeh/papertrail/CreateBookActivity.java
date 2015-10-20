@@ -8,10 +8,12 @@ import java.util.UUID;
 
 public class CreateBookActivity extends SingleFragmentActivity {
     private static final String EXTRA_BOOK_ID = "uk.co.nyakeh.papertrail.book_id";
+    private static final String EXTRA_BOOK_STATUS = "uk.co.nyakeh.papertrail.book_status";
 
-    public static Intent newIntent(Context packageContext, UUID bookId) {
+    public static Intent newIntent(Context packageContext, UUID bookId, String status) {
         Intent intent = new Intent(packageContext, CreateBookActivity.class);
         intent.putExtra(EXTRA_BOOK_ID, bookId);
+        intent.putExtra(EXTRA_BOOK_STATUS, status);
         return intent;
     }
 

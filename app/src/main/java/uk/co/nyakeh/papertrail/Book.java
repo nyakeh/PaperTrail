@@ -15,11 +15,13 @@ public class Book {
     private Date mDateFinished;
     private String mImageUrl = "";
     private String mCategory = "";
+    private String mStatus = "";
 
-    public Book() {
+    public Book(String status) {
         this(UUID.randomUUID());
         mDateStarted = new Date();
         mDateFinished = DATE_MAX;
+        mStatus = status;
     }
 
     public Book(UUID id) {
@@ -62,15 +64,18 @@ public class Book {
         mAuthor = author;
     }
 
-    public int getProgress() {
-        return mProgress;
-    }
+    public int getProgress() { return mProgress; }
 
     public void setProgress(int progress) {
         mProgress = progress;
         if (mProgress == mLength && mDateFinished != null && mDateFinished.equals(DATE_MAX))
         {
             setDateFinished(new Date());
+            setStatus("archive");
+        }else
+        {
+            setDateFinished(DATE_MAX);
+            setStatus("reading");
         }
     }
 
@@ -82,9 +87,7 @@ public class Book {
         mLength = length;
     }
 
-    public String getImageUrl() {
-        return mImageUrl;
-    }
+    public String getImageUrl() { return mImageUrl; }
 
     public void setImageUrl(String imageUrl) { mImageUrl = imageUrl; }
 
@@ -92,10 +95,9 @@ public class Book {
 
     public void setCategory(String category) { mCategory = category; }
 
-    public boolean isFinished() {
-        Date date = new Date();
-        return mDateFinished.before(date);
-    }
+    public String getStatus() { return mStatus; }
+
+    public void setStatus(String status) { mStatus = status; }
 
     public boolean isEmpty() {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
