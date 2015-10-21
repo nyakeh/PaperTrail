@@ -40,7 +40,7 @@ public class BookFragment extends Fragment {
 
         UUID bookId = (UUID) getArguments().getSerializable(ARG_BOOK_ID);
         mBook = BookLab.get(getActivity()).getBook(bookId);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mBook.getTitle());
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mBook.getTitle());
     }
 
     @Override
@@ -54,6 +54,7 @@ public class BookFragment extends Fragment {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setTag(R.string.book, mBook);
+
         return view;
     }
 
@@ -62,18 +63,26 @@ public class BookFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_book, menu);
 
-//        mSwitch_status = (Switch)menu.findItem(R.id.status_switch_item).getActionView().findViewById(R.id.status_switch);
-//
-//        mSwitch_status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked) {
-//                    Toast.makeText(getActivity(), "ON", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(getActivity(), "OFF", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+        MenuItem item = menu.findItem(R.id.status_switch_item);
+        item.setActionView(R.layout.switch_layout);
+        mSwitch_status = (Switch) item.getActionView().findViewById(R.id.status_switch);
+        if (mBook.getStatus().equals(Constants.READING)) {
+            mSwitch_status.setChecked(true);
+        }
+        mSwitch_status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mBook.setStatus(Constants.READING);
+                } else {
+                    if (mBook.isFinished()) {
+                        mBook.setStatus(Constants.ARCHIVE);
+                    } else {
+                        mBook.setStatus(Constants.QUEUE);
+                    }
+                }
+            }
+        });
     }
 
     @Override

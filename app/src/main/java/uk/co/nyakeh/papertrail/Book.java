@@ -68,7 +68,7 @@ public class Book {
 
     public void setProgress(int progress) {
         mProgress = progress;
-        if (mProgress == mLength)
+        if (isFinished())
         {
             setDateFinished(new Date());
             setStatus(Constants.ARCHIVE);
@@ -107,5 +107,9 @@ public class Book {
             return true;
         }
         return false;
+    }
+
+    public boolean isFinished() {
+        return mProgress == mLength;
     }
 }
