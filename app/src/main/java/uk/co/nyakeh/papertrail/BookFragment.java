@@ -1,27 +1,20 @@
 package uk.co.nyakeh.papertrail;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.Toast;
 
-import java.util.Date;
 import java.util.UUID;
 
 public class BookFragment extends Fragment {
@@ -29,6 +22,7 @@ public class BookFragment extends Fragment {
 
     private ViewPager mViewPager;
     private Book mBook;
+    Switch mSwitch_status;
 
     public static BookFragment newInstance(UUID bookId) {
         Bundle arguments = new Bundle();
@@ -67,6 +61,19 @@ public class BookFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_book, menu);
+
+//        mSwitch_status = (Switch)menu.findItem(R.id.status_switch_item).getActionView().findViewById(R.id.status_switch);
+//
+//        mSwitch_status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    Toast.makeText(getActivity(), "ON", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Toast.makeText(getActivity(), "OFF", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
     }
 
     @Override
