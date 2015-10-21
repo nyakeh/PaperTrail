@@ -5,16 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.SeekBar;
 
 import com.squareup.picasso.Picasso;
@@ -24,7 +21,7 @@ import java.util.Date;
 public class ProgressFragment extends Fragment {
     private static final int REQUEST_DATE_FINISHED = 1;
     private static final String DIALOG_DATE = "DialogDate";
-    private EditText mProgressField;
+    private NumberPicker mProgressNumberPickerField;
     private SeekBar mProgressSeekbarField;
     private Button mDateFinishedButton;
     private ImageView mDateImage;
@@ -37,28 +34,18 @@ public class ProgressFragment extends Fragment {
 
         mBook = (Book) container.getTag(R.string.book);
 
-        mProgressField = (EditText) view.findViewById(R.id.book_progress);
-        mProgressField.setText(Integer.toString(mBook.getProgress()));
-        mProgressField.setFilters(new InputFilter[]{new InputFilterMinMax("0", Integer.toString(mBook.getLength()))});
-        mProgressField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-                String progressString = inputChar.toString();
-                if (!progressString.isEmpty()) {
-                    int progressValue = Integer.parseInt(progressString);
-                    mBook.setProgress(progressValue);
-                    mProgressSeekbarField.setProgress(progressValue);
+        mProgressNumberPickerField = (NumberPicker) view.findViewById(R.id.book_progress_number_picker);
+        mProgressNumberPickerField.setMinValue(0);
+        mProgressNumberPickerField.setMaxValue(mBook.getLength());
+        mProgressNumberPickerField.setValue(mBook.getProgress());
+        mProgressNumberPickerField.setWrapSelectorWheel(false);
+        mProgressNumberPickerField.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                @Override
+                public void onValueChange(NumberPicker picker, int oldValue, int newValue) {
+                    mBook.setProgress(newValue);
+                    mProgressSeekbarField.setProgress(newValue);
                 }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
+            });
 
         mProgressSeekbarField = (SeekBar) view.findViewById(R.id.book_progress_seekbar);
         mProgressSeekbarField.setMax(mBook.getLength());
@@ -67,18 +54,16 @@ public class ProgressFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 mBook.setProgress(progress);
-                mProgressField.setText(Integer.toString(progress));
+                mProgressNumberPickerField.setValue(progress);
                 updateDate();
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
 
@@ -115,7 +100,7 @@ public class ProgressFragment extends Fragment {
 
     private void updateProgress(int progressValue) {
         mBook.setProgress(progressValue);
-        mProgressField.setText(Integer.toString(progressValue));
+        mProgressNumberPickerField.setValue(progressValue);
         mProgressSeekbarField.setProgress(progressValue);
     }
 

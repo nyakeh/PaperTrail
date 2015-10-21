@@ -32,12 +32,11 @@
                 android:layout_gravity="center_vertical"
                 />
 
-            <EditText
-                android:id="@+id/book_progress"
+            <NumberPicker
+                android:id="@+id/book_progress_number_picker"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="number"/>
+                android:layout_weight="1"  />
 
         </LinearLayout>
 
