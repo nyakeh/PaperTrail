@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:layout_gravity="center"
-            android:transitionName="@string/transition_name_book_cover"
+            android:transitionName="@string/transition_name_book_image"
             tools:src="@drawable/books"/>
 
         <TextView

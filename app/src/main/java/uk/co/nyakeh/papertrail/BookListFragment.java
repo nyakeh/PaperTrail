@@ -133,7 +133,7 @@ public class BookListFragment extends Fragment {
 
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     getActivity(),
-                    new Pair<View, String>(view.findViewById(R.id.list_item_book_image), getString(R.string.transition_name_book_cover))
+                    new Pair<View, String>(view.findViewById(R.id.list_item_book_image), getString(R.string.transition_name_book_image))
             );
             ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
         }

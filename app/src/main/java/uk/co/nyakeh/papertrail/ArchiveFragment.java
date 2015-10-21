@@ -2,7 +2,10 @@ package uk.co.nyakeh.papertrail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
@@ -105,9 +108,13 @@ public class ArchiveFragment extends Fragment {
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
             Intent intent = BookActivity.newIntent(getActivity(), mBook.getId());
-            startActivity(intent);
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    getActivity(),
+                    new Pair<View, String>(view.findViewById(R.id.list_item_book_image), getString(R.string.transition_name_book_image))
+            );
+            ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
         }
     }
 
