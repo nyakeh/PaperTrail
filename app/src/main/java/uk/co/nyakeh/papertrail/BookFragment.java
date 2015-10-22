@@ -21,7 +21,7 @@ public class BookFragment extends Fragment {
 
     private ViewPager mViewPager;
     private Book mBook;
-    Switch mSwitch_status;
+    static Switch mSwitch_status;
 
     public static BookFragment newInstance(UUID bookId) {
         Bundle arguments = new Bundle();
@@ -107,5 +107,9 @@ public class BookFragment extends Fragment {
         adapter.addFragment(new ProgressFragment(), "Progress");
         adapter.addFragment(new MetaDataFragment(), "Meta");
         viewPager.setAdapter(adapter);
+    }
+
+    public static void updateStatusSwitch(boolean isChecked){
+        mSwitch_status.setChecked(isChecked);
     }
 }

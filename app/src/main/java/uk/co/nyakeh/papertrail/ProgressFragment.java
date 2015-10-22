@@ -42,7 +42,7 @@ public class ProgressFragment extends Fragment {
         mProgressNumberPickerField.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                 @Override
                 public void onValueChange(NumberPicker picker, int oldValue, int newValue) {
-                    mBook.setProgress(newValue);
+                    updateProgress(newValue);
                     mProgressSeekbarField.setProgress(newValue);
                 }
             });
@@ -53,7 +53,7 @@ public class ProgressFragment extends Fragment {
         mProgressSeekbarField.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                mBook.setProgress(progress);
+                updateProgress(progress);
                 mProgressNumberPickerField.setValue(progress);
                 updateDate();
             }
@@ -98,10 +98,11 @@ public class ProgressFragment extends Fragment {
         mDateFinishedButton.setText(date);
     }
 
-    private void updateProgress(int progressValue) {
-        mBook.setProgress(progressValue);
-        mProgressNumberPickerField.setValue(progressValue);
-        mProgressSeekbarField.setProgress(progressValue);
+    public void updateProgress(int progress) {
+        mBook.setProgress(progress);
+        if (mBook.getStatus().equals(Constants.ARCHIVE)){
+            BookFragment.updateStatusSwitch(false);
+        }
     }
 
     @Override
@@ -114,7 +115,11 @@ public class ProgressFragment extends Fragment {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mBook.setDateFinished(date);
             updateDate();
-            updateProgress(mBook.getLength());
+            int progressValue = mBook.getLength();
+            updateProgress(progressValue);
+            mProgressNumberPickerField.setValue(progressValue);
+            mProgressSeekbarField.setProgress(progressValue);
         }
     }
+
 }
