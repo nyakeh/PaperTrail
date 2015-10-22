@@ -42,8 +42,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1072b254-b144-439c-885e-f6e110fb9921" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/BookFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/BookFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/ProgressFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/ProgressFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/fragment_book.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/fragment_book.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PaperTrail.iws" />
@@ -82,12 +81,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BookFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BookFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/BookFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6171617">
-              <caret line="36" column="43" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="89" column="35" selection-start-line="89" selection-start-column="35" selection-end-line="89" selection-end-column="35" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_book.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/fragment_book.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.31323284">
+              <caret line="11" column="49" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
+              <folding>
+                <element signature="e#417#438#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1604,7 +1615,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_book_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_base_drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/MetaDataFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/fragment_book.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/switch_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/Book.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/InputFilterMinMax.java" />
@@ -1626,6 +1636,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_book_reading_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/ProgressFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/BookFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/fragment_book.xml" />
       </list>
     </option>
   </component>
@@ -1640,10 +1651,9 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1928" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="x" value="-1927" />
+    <option name="width" value="974" />
+    <option name="height" value="1087" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -1702,6 +1712,10 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="papertrail" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2211,11 +2225,17 @@
       <option name="project" value="LOCAL" />
       <updated>1445544153417</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Update status_switch when progress==100 on a book your currently reading. This was done by exposing the toggle to be accessed by its child views fragment.">
+      <created>1445545943360</created>
+      <option name="number" value="00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1445545943360</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="-1927" y="0" width="974" height="1087" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2224,7 +2244,8 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32481363" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3268817" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32795697" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3988889" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -2239,13 +2260,12 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14872068" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30525163" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32481363" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32777777" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2295,7 +2315,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
-    <MESSAGE value="Fixed all layouts for new NoActionBar app theme (for the navigation menu).&#10;" />
     <MESSAGE value="Fixed grammar error in  my usage of your VS you're.&#10;Styled navigation menu for my specific use case.&#10;Put in placeholder messages till i build the archive/list functionality.&#10;" />
     <MESSAGE value="Deleted unused baseActivity settings menu. &#10;Forgot to git add logo used in navigation drawer." />
     <MESSAGE value="If attempting to open the current page from the nav draw, do nothing.&#10;" />
@@ -2320,7 +2339,8 @@
     <MESSAGE value="Updated libraries.&#10;Experimenting with animating the book cover between the pages it appears on.&#10;Deleted input validator as the NumberPicker has this functionality out of the box." />
     <MESSAGE value="Animating the book image between the archive &amp; book details pages." />
     <MESSAGE value="CardView OnTouch colour change interaction.&#10;Progress view - removed unneeded margin @ the top.&#10;Change title of active page to 'currently reading'.&#10;Deleted Activity transition animations - they weren't smooth." />
-    <option name="LAST_COMMIT_MESSAGE" value="CardView OnTouch colour change interaction.&#10;Progress view - removed unneeded margin @ the top.&#10;Change title of active page to 'currently reading'.&#10;Deleted Activity transition animations - they weren't smooth." />
+    <MESSAGE value="Update status_switch when progress==100 on a book your currently reading. This was done by exposing the toggle to be accessed by its child views fragment." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update status_switch when progress==100 on a book your currently reading. This was done by exposing the toggle to be accessed by its child views fragment." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2474,14 +2494,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="99" column="25" selection-start-line="99" selection-start-column="25" selection-end-line="99" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/fragment_book.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="42" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2735,9 +2747,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/BookFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6171617">
-          <caret line="36" column="43" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="89" column="35" selection-start-line="89" selection-start-column="35" selection-end-line="89" selection-end-column="35" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/fragment_book.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31323284">
+          <caret line="11" column="49" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
+          <folding>
+            <element signature="e#417#438#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

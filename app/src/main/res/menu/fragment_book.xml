@@ -10,5 +10,5 @@
         android:id="@+id/menu_item_delete_book"
         android:title="@string/delete_book"
         android:icon="@drawable/ic_action_delete"
-        app:showAsAction="ifRoom|withText"/>
+        app:showAsAction="never"/>
 </menu>
