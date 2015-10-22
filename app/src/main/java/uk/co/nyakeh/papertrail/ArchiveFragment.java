@@ -110,11 +110,7 @@ public class ArchiveFragment extends Fragment {
         @Override
         public void onClick(View view) {
             Intent intent = BookActivity.newIntent(getActivity(), mBook.getId());
-            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    getActivity(),
-                    new Pair<View, String>(view.findViewById(R.id.list_item_book_image), getString(R.string.transition_name_book_image))
-            );
-            ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+            startActivity(intent);
         }
     }
 

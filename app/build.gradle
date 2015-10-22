@@ -8,8 +8,8 @@ android {
         applicationId "uk.co.nyakeh.papertrail"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 8
-        versionName "1.5.4"
+        versionCode 9
+        versionName "1.5.6"
     }
     buildTypes {
         release {

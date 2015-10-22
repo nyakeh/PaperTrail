@@ -13,7 +13,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="16dp"
-        android:transitionName="@string/transition_name_book_image"
         tools:src="@drawable/books"/>
 
     <TextView
