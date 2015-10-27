@@ -75,36 +75,29 @@ public class ArchiveFragment extends Fragment {
     private class ArchivedBookHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private Book mBook;
+        private TextView mLetterTextView;
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
         private TextView mDateFinishedTextView;
-        private ImageView mImageView;
 
         public ArchivedBookHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
+            mLetterTextView = (TextView) itemView.findViewById(R.id.list_item_book_letter);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title);
             mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author);
             mDateFinishedTextView = (TextView) itemView.findViewById(R.id.list_item_book_date_finished);
-            mImageView = (ImageView) itemView.findViewById(R.id.list_item_book_image);
         }
 
         private void bindBook(Book book) {
             mBook = book;
+            String letter = (book.getCategory().isEmpty()) ? "" : book.getCategory().substring(0,1);
+            mLetterTextView.setText(letter);
             mTitleTextView.setText(book.getTitle());
             mAuthorTextView.setText(book.getAuthor());
             String formattedFinishedDate = DateFormat.format("EEEE, MMM dd, yyyy", mBook.getDateFinished()).toString();
             mDateFinishedTextView.setText(formattedFinishedDate);
-
-            String safePicassoImageUrl = (book.getImageUrl().isEmpty()) ? "fail_gracefully_pls" : book.getImageUrl();
-            Picasso.with(getActivity())
-                    .load(safePicassoImageUrl)
-                    .placeholder(R.drawable.books)
-                    .error(R.drawable.books)
-                    .resize(90, 90)
-                    .centerCrop()
-                    .into(mImageView);
         }
 
         @Override

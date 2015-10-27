@@ -6,20 +6,23 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="10dp">
 
-    <ImageView
-        android:id="@+id/list_item_book_image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="16dp"
-        tools:src="@drawable/books"/>
+    <TextView
+        android:id="@+id/list_item_book_letter"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:background="@drawable/circle_background"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="X"
+        android:textColor="#fff"
+        android:textSize="28sp"/>
 
     <TextView
         android:id="@+id/list_item_book_title_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/list_item_book_image"
+        android:layout_toRightOf="@+id/list_item_book_letter"
         android:padding="4dp"
         android:text="Title:"
         android:textColor="@color/colorPrimaryDark"/>
@@ -38,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_book_title"
-        android:layout_toRightOf="@+id/list_item_book_image"
+        android:layout_toRightOf="@+id/list_item_book_letter"
         android:padding="4dp"
         android:text="Author:"
         android:textColor="@color/colorPrimaryDark"/>
@@ -58,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_book_author"
-        android:layout_toRightOf="@+id/list_item_book_image"
+        android:layout_toRightOf="@+id/list_item_book_letter"
         android:padding="4dp"
         android:text="Finished:"
         android:textColor="@color/colorPrimaryDark"/>
