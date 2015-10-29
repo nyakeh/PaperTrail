@@ -67,6 +67,9 @@ public class Book {
     public int getProgress() { return mProgress; }
 
     public void setProgress(int progress) {
+        if (mProgress == 0 && progress != 0){
+            setDateStarted(new Date());
+        }
         mProgress = progress;
         if (isFinished())
         {
