@@ -8,22 +8,22 @@
 
     <TextView
         android:id="@+id/list_item_book_letter"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/fab_margin"
         android:background="@drawable/circle_background"
         android:gravity="center_vertical|center_horizontal"
         android:text="X"
         android:textColor="#fff"
-        android:textSize="28sp"/>
+        android:textSize="24sp"/>
 
     <TextView
         android:id="@+id/list_item_book_title_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/list_item_book_letter"
-        android:padding="4dp"
+        android:padding="2dp"
         android:text="Title:"
         android:textColor="@color/colorPrimaryDark"/>
 
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/list_item_book_title_label"
-        android:padding="4dp"
+        android:padding="2dp"
         android:textStyle="bold"
         tools:text="The Lean Startup"/>
 
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_book_title"
         android:layout_toRightOf="@+id/list_item_book_letter"
-        android:padding="4dp"
+        android:padding="2dp"
         android:text="Author:"
         android:textColor="@color/colorPrimaryDark"/>
 
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_book_title"
         android:layout_toRightOf="@+id/list_item_book_author_label"
-        android:padding="4dp"
+        android:padding="2dp"
         android:textStyle="bold"
         tools:text="Eric Ries"/>
 
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_book_author"
         android:layout_toRightOf="@+id/list_item_book_letter"
-        android:padding="4dp"
+        android:padding="2dp"
         android:text="Finished:"
         android:textColor="@color/colorPrimaryDark"/>
 
@@ -72,8 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_book_author"
         android:layout_toRightOf="@+id/list_item_book_finished_label"
-        android:paddingLeft="4dp"
-        android:paddingTop="4dp"
+        android:padding="2dp"
         android:textStyle="bold"
         tools:text="MONDAY, OCT 19, 2005"/>
 
