@@ -5,14 +5,14 @@ public class BookDbSchema {
         public static final String NAME = "books";
 
         public static final class Cols {
-            public static final String UUID = "uuid";
+            public static final String ID = "id";
             public static final String TITLE = "title";
             public static final String AUTHOR = "author";
             public static final String PROGRESS = "progress";
             public static final String LENGTH = "length";
-            public static final String DATE_STARTED = "dateStarted";
-            public static final String DATE_FINISHED = "dateFinished";
-            public static final String IMAGE_URL = "imageUrl";
+            public static final String STARTED = "started";
+            public static final String FINISHED = "finished";
+            public static final String IMAGE_URL = "image_url";
             public static final String CATEGORY = "category";
             public static final String STATUS = "status";
         }

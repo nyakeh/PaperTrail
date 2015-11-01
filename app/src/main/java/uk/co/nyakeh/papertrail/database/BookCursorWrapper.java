@@ -15,13 +15,13 @@ public class BookCursorWrapper extends CursorWrapper {
     }
 
     public Book getBook() {
-        String uuidString = getString(getColumnIndex(BookTable.Cols.UUID));
+        String uuidString = getString(getColumnIndex(BookTable.Cols.ID));
         String title = getString(getColumnIndex(BookTable.Cols.TITLE));
         String author = getString(getColumnIndex(BookTable.Cols.AUTHOR));
         int progress = getInt(getColumnIndex(BookTable.Cols.PROGRESS));
         int length = getInt(getColumnIndex(BookTable.Cols.LENGTH));
-        Long dateStarted = getLong(getColumnIndex(BookTable.Cols.DATE_STARTED));
-        Long dateFinished = getLong(getColumnIndex(BookTable.Cols.DATE_FINISHED));
+        Long dateStarted = getLong(getColumnIndex(BookTable.Cols.STARTED));
+        Long dateFinished = getLong(getColumnIndex(BookTable.Cols.FINISHED));
         String imageUrl = getString(getColumnIndex(BookTable.Cols.IMAGE_URL));
         String category = getString(getColumnIndex(BookTable.Cols.CATEGORY));
         String status = getString(getColumnIndex(BookTable.Cols.STATUS));

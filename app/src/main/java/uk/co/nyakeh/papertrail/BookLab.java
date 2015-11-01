@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import uk.co.nyakeh.papertrail.database.BookBaseHelper;
+import uk.co.nyakeh.papertrail.database.DbBaseHelper;
 import uk.co.nyakeh.papertrail.database.BookCursorWrapper;
 
 import static uk.co.nyakeh.papertrail.database.BookDbSchema.BookTable;
@@ -22,7 +22,7 @@ public class BookLab {
 
     private BookLab(Context context) {
         mContext = context.getApplicationContext();
-        mDatabase = new BookBaseHelper(mContext).getWritableDatabase();
+        mDatabase = new DbBaseHelper(mContext).getWritableDatabase();
     }
 
     public static BookLab get(Context context) {
@@ -95,7 +95,7 @@ public class BookLab {
     }
 
     public Book getBook(UUID id) {
-        BookCursorWrapper cursor = queryBooks(BookTable.Cols.UUID + " = ?", new String[]{id.toString()});
+        BookCursorWrapper cursor = queryBooks(BookTable.Cols.ID + " = ?", new String[]{id.toString()});
 
         try {
             if (cursor.getCount() == 0){
@@ -112,18 +112,18 @@ public class BookLab {
     public void updateBook(Book book){
         String uuidString = book.getId().toString();
         ContentValues values = getContentValues(book);
-        mDatabase.update(BookTable.NAME, values, BookTable.Cols.UUID + " = ?", new String[] { uuidString });
+        mDatabase.update(BookTable.NAME, values, BookTable.Cols.ID + " = ?", new String[] { uuidString });
     }
 
     private static ContentValues getContentValues(Book book) {
         ContentValues values = new ContentValues();
-        values.put(BookTable.Cols.UUID, book.getId().toString());
+        values.put(BookTable.Cols.ID, book.getId().toString());
         values.put(BookTable.Cols.TITLE, book.getTitle());
         values.put(BookTable.Cols.AUTHOR, book.getAuthor());
         values.put(BookTable.Cols.PROGRESS, book.getProgress());
         values.put(BookTable.Cols.LENGTH, book.getLength());
-        values.put(BookTable.Cols.DATE_STARTED, book.getDateStarted().getTime());
-        values.put(BookTable.Cols.DATE_FINISHED, book.getDateFinished().getTime());
+        values.put(BookTable.Cols.STARTED, book.getDateStarted().getTime());
+        values.put(BookTable.Cols.FINISHED, book.getDateFinished().getTime());
         values.put(BookTable.Cols.IMAGE_URL, book.getImageUrl());
         values.put(BookTable.Cols.CATEGORY, book.getCategory());
         values.put(BookTable.Cols.STATUS, book.getStatus());
@@ -143,6 +143,6 @@ public class BookLab {
     }
 
     public void deleteBook(UUID id) {
-        mDatabase.delete(BookTable.NAME, BookTable.Cols.UUID + " = ?", new String[] { id.toString() });
+        mDatabase.delete(BookTable.NAME, BookTable.Cols.ID + " = ?", new String[] { id.toString() });
     }
 }
