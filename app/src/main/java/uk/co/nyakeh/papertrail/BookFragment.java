@@ -22,7 +22,6 @@ public class BookFragment extends Fragment {
 
     private ViewPager mViewPager;
     private Book mBook;
-    private List<Note> mNotes;
     static Switch mSwitch_status;
 
     public static BookFragment newInstance(UUID bookId) {
@@ -41,7 +40,6 @@ public class BookFragment extends Fragment {
 
         UUID bookId = (UUID) getArguments().getSerializable(ARG_BOOK_ID);
         mBook = BookLab.get(getActivity()).getBook(bookId);
-        mNotes = BookLab.get(getActivity()).getNotes(bookId);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mBook.getTitle());
     }
 
@@ -56,7 +54,6 @@ public class BookFragment extends Fragment {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setTag(R.string.book, mBook);
-        mViewPager.setTag(R.string.note, mNotes);
 
         return view;
     }

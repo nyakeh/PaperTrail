@@ -15,8 +15,6 @@ import android.widget.TextView;
 import java.util.List;
 
 public class NoteFragment extends Fragment {
-
-    private List<Note> mNotes;
     private EditText mCreateField;
     private RecyclerView mNoteRecyclerView;
     private NoteAdapter mNoteAdapter;
@@ -26,7 +24,6 @@ public class NoteFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.note_page, container, false);
 
-        mNotes = (List<Note>) container.getTag( R.string.note);
         mBook = (Book) container.getTag(R.string.book);
 
         mCreateField = (EditText) view.findViewById(R.id.note_create);
@@ -46,13 +43,13 @@ public class NoteFragment extends Fragment {
 
     private void updateUI() {
         BookLab bookLab = BookLab.get(getActivity());
-//        List<Note> notes = bookLab.getReadingList();
+        List<Note> notes = bookLab.getNotes(mBook.getId());
 
         if (mNoteAdapter == null) {
-            mNoteAdapter = new NoteAdapter(mNotes);
+            mNoteAdapter = new NoteAdapter(notes);
             mNoteRecyclerView.setAdapter(mNoteAdapter);
         } else {
-            mNoteAdapter.setNotes(mNotes);
+            mNoteAdapter.setNotes(notes);
             mNoteAdapter.notifyDataSetChanged();
         }
     }
