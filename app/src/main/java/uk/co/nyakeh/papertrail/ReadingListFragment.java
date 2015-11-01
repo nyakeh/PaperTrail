@@ -6,20 +6,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class ReadingListFragment extends Fragment {
     private RecyclerView mBookRecyclerView;
-    private ReadingListBookAdapter mArchivedBookAdapter;
+    private ReadingListBookAdapter mReadingListBookAdapter;
     private TextView mBookListEmptyMessageView;
 
     @Override
@@ -59,12 +55,12 @@ public class ReadingListFragment extends Fragment {
         BookLab bookLab = BookLab.get(getActivity());
         List<Book> books = bookLab.getReadingList();
 
-        if (mArchivedBookAdapter == null) {
-            mArchivedBookAdapter = new ReadingListBookAdapter(books);
-            mBookRecyclerView.setAdapter(mArchivedBookAdapter);
+        if (mReadingListBookAdapter == null) {
+            mReadingListBookAdapter = new ReadingListBookAdapter(books);
+            mBookRecyclerView.setAdapter(mReadingListBookAdapter);
         } else {
-            mArchivedBookAdapter.setBooks(books);
-            mArchivedBookAdapter.notifyDataSetChanged();
+            mReadingListBookAdapter.setBooks(books);
+            mReadingListBookAdapter.notifyDataSetChanged();
         }
 
         if (books.isEmpty()) {
