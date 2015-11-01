@@ -182,6 +182,10 @@ public class BookLab {
         mDatabase.delete(BookTable.NAME, BookTable.Cols.ID + " = ?", new String[]{id.toString()});
     }
 
+    public void deleteNote(UUID id) {
+        mDatabase.delete(NoteTable.NAME, BookTable.Cols.ID + " = ?", new String[]{id.toString()});
+    }
+
     public List<Note> getNotes(UUID bookId) {
         ArrayList<Note> notes = new ArrayList<>();
         NoteCursorWrapper cursor = queryNotes(NoteTable.Cols.BOOK_ID + " = ?", new String[]{bookId.toString()});
