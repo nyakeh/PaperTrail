@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 import uk.co.nyakeh.papertrail.database.BookCursorWrapper;
-import uk.co.nyakeh.papertrail.database.DbBaseHelper;
+import uk.co.nyakeh.papertrail.database.BookBaseHelper;
 import uk.co.nyakeh.papertrail.database.NoteCursorWrapper;
 
 import static uk.co.nyakeh.papertrail.database.BookDbSchema.BookTable;
@@ -24,7 +24,7 @@ public class BookLab {
 
     private BookLab(Context context) {
         mContext = context.getApplicationContext();
-        mDatabase = new DbBaseHelper(mContext).getWritableDatabase();
+        mDatabase = new BookBaseHelper(mContext).getWritableDatabase();
     }
 
     public static BookLab get(Context context) {
