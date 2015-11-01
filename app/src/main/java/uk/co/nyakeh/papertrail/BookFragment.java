@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import java.util.List;
 import java.util.UUID;
 
 public class BookFragment extends Fragment {
@@ -21,6 +22,7 @@ public class BookFragment extends Fragment {
 
     private ViewPager mViewPager;
     private Book mBook;
+    private List<Note> mNotes;
     static Switch mSwitch_status;
 
     public static BookFragment newInstance(UUID bookId) {
@@ -39,6 +41,7 @@ public class BookFragment extends Fragment {
 
         UUID bookId = (UUID) getArguments().getSerializable(ARG_BOOK_ID);
         mBook = BookLab.get(getActivity()).getBook(bookId);
+        mNotes = BookLab.get(getActivity()).getNotes(bookId);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mBook.getTitle());
     }
 
@@ -53,6 +56,7 @@ public class BookFragment extends Fragment {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setTag(R.string.book, mBook);
+        mViewPager.setTag(R.string.note, mNotes);
 
         return view;
     }
@@ -104,8 +108,9 @@ public class BookFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         PageAdapter adapter = new PageAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(new ProgressFragment(), "Progress");
-        adapter.addFragment(new MetaDataFragment(), "Meta");
+        adapter.addFragment(new ProgressFragment(), getString(R.string.Progress));
+        adapter.addFragment(new NoteFragment(), getString(R.string.Notes));
+        adapter.addFragment(new MetaDataFragment(), getString(R.string.Meta));
         viewPager.setAdapter(adapter);
     }
 
