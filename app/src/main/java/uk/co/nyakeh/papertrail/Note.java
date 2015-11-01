@@ -11,6 +11,12 @@ public class Note {
     private Date mCreated;
     private Date mUpdated;
 
+    public Note() {
+        mId = UUID.randomUUID();
+        mCreated = new Date();
+        mUpdated = new Date();
+    }
+
     public Note(UUID id) {
         mId = id;
     }

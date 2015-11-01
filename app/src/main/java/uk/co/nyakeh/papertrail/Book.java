@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Book {
-    public static final Date DATE_MAX = new Date(Long.MAX_VALUE);
     private UUID mId;
     private String mTitle = "";
     private String mAuthor = "";
@@ -16,6 +15,8 @@ public class Book {
     private String mImageUrl = "";
     private String mCategory = "";
     private String mStatus = "";
+
+    private static final Date DATE_MAX = new Date(Long.MAX_VALUE);
 
     public Book(String status) {
         this(UUID.randomUUID());

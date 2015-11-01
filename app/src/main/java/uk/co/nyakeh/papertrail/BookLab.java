@@ -35,8 +35,13 @@ public class BookLab {
     }
 
     public void addBook(Book book) {
-        ContentValues values = getContentValues(book);
+        ContentValues values = getBookContentValues(book);
         mDatabase.insert(BookTable.NAME, null, values);
+    }
+
+    public void addNote(Note note) {
+        ContentValues values = getNoteContentValues(note);
+        mDatabase.insert(NoteTable.NAME, null, values);
     }
 
     public List<Book> getActiveBooks() {
@@ -113,11 +118,17 @@ public class BookLab {
 
     public void updateBook(Book book) {
         String uuidString = book.getId().toString();
-        ContentValues values = getContentValues(book);
+        ContentValues values = getBookContentValues(book);
         mDatabase.update(BookTable.NAME, values, BookTable.Cols.ID + " = ?", new String[]{uuidString});
     }
 
-    private static ContentValues getContentValues(Book book) {
+    public void updateNote(Note note) {
+        String uuidString = note.getId().toString();
+        ContentValues values = getNoteContentValues(note);
+        mDatabase.update(NoteTable.NAME, values, NoteTable.Cols.ID + " = ?", new String[]{uuidString});
+    }
+
+    private static ContentValues getBookContentValues(Book book) {
         ContentValues values = new ContentValues();
         values.put(BookTable.Cols.ID, book.getId().toString());
         values.put(BookTable.Cols.TITLE, book.getTitle());
@@ -129,6 +140,17 @@ public class BookLab {
         values.put(BookTable.Cols.IMAGE_URL, book.getImageUrl());
         values.put(BookTable.Cols.CATEGORY, book.getCategory());
         values.put(BookTable.Cols.STATUS, book.getStatus());
+        return values;
+    }
+
+    private static ContentValues getNoteContentValues(Note note) {
+        ContentValues values = new ContentValues();
+        values.put(NoteTable.Cols.ID, note.getId().toString());
+        values.put(NoteTable.Cols.BOOK_ID, note.getBookId().toString());
+        values.put(NoteTable.Cols.TITLE, note.getTitle());
+        values.put(NoteTable.Cols.CONTENT, note.getContent());
+        values.put(NoteTable.Cols.CREATED, note.getCreated().getTime());
+        values.put(NoteTable.Cols.UPDATED, note.getUpdated().getTime());
         return values;
     }
 

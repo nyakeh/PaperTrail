@@ -41,6 +41,10 @@
             android:name=".ReadingListActivity"
             android:label="@string/reading_list">
         </activity>
+        <activity
+            android:name=".CreateNoteActivity"
+            android:label="@string/create_note">
+        </activity>
     </application>
 
 </manifest>

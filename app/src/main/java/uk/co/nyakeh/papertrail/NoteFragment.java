@@ -1,5 +1,6 @@
 package uk.co.nyakeh.papertrail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -19,18 +20,21 @@ public class NoteFragment extends Fragment {
     private EditText mCreateField;
     private RecyclerView mNoteRecyclerView;
     private NoteAdapter mNoteAdapter;
+    private Book mBook;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.note_page, container, false);
 
         mNotes = (List<Note>) container.getTag( R.string.note);
+        mBook = (Book) container.getTag(R.string.book);
 
         mCreateField = (EditText) view.findViewById(R.id.note_create);
         mCreateField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(getActivity().findViewById(R.id.content_container), "#NewTing", Snackbar.LENGTH_SHORT).show();
+                Intent intent = CreateNoteActivity.newIntent(getActivity(), mBook.getId());
+                startActivity(intent);
             }
         });
 

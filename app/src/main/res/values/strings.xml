@@ -34,4 +34,5 @@
     <string name="Progress">Progress</string>
     <string name="Notes">Notes</string>
     <string name="Meta">Meta</string>
+    <string name="create_note">Create Note</string>
 </resources>
