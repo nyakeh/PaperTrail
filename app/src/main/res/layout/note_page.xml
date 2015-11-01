@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="10dp"
+        android:paddingBottom="40dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <EditText
@@ -20,5 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:hint="Make a Note..."/>
+        android:hint="Make a Note..."
+        android:background="@android:color/white"
+        android:padding="5dp"/>
 </RelativeLayout>
