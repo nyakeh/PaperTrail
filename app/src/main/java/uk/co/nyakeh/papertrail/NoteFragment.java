@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -83,8 +84,9 @@ public class NoteFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-//            Intent intent = BookActivity.newIntent(getActivity(), mNote.getId());
-//            startActivity(intent);
+            FragmentManager fm = getFragmentManager();
+            NoteDialogFragment dialogFragment = new NoteDialogFragment();
+            dialogFragment.show(fm, "Sample Fragment");
         }
     }
 
