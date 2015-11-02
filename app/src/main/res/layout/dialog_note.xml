@@ -26,11 +26,11 @@
         android:id="@+id/dialog_note_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Delete"/>
+        android:text="@string/delete"/>
 
     <Button
         android:id="@+id/dialog_note_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Update"/>
+        android:text="@string/update"/>
 </LinearLayout>

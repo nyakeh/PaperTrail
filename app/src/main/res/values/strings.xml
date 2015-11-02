@@ -32,11 +32,11 @@
     <string name="reading_list_empty_message">Queue up the books you want to read next</string>
     <string name="note">Note</string>
     <string name="Progress">Progress</string>
-    <string name="Notes">Notes</string>
-    <string name="Meta">Meta</string>
+    <string name="notes">Notes</string>
+    <string name="meta">Meta</string>
     <string name="create_note">Create Note</string>
-    <string name="Update">Update</string>
-    <string name="Delete">Delete</string>
-    <string name="NoteTitle">note_title</string>
-    <string name="NoteContent">note_content</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="note_title">note_title</string>
+    <string name="note_content">note_content</string>
 </resources>

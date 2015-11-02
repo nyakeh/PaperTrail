@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import java.util.List;
 import java.util.UUID;
 
 public class BookFragment extends Fragment {
@@ -106,8 +105,8 @@ public class BookFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         PageAdapter adapter = new PageAdapter(getActivity().getSupportFragmentManager());
         adapter.addFragment(new ProgressFragment(), getString(R.string.Progress));
-        adapter.addFragment(new NoteFragment(), getString(R.string.Notes));
-        adapter.addFragment(new MetaDataFragment(), getString(R.string.Meta));
+        adapter.addFragment(new NoteFragment(), getString(R.string.notes));
+        adapter.addFragment(new MetaDataFragment(), getString(R.string.meta));
         viewPager.setAdapter(adapter);
     }
 

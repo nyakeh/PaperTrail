@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 public class NoteFragment extends Fragment {
@@ -86,8 +88,9 @@ public class NoteFragment extends Fragment {
             FragmentManager fm = getFragmentManager();
             NoteDialogFragment noteDialogFragment = new NoteDialogFragment();
             Bundle args = new Bundle();
-            args.putString(getString(R.string.NoteTitle), mNote.getTitle());
-            args.putString(getString(R.string.NoteContent), mNote.getContent());
+            args.putString(getString(R.string.note_title), mNote.getTitle());
+            args.putString(getString(R.string.note_content), mNote.getContent());
+            args.putString(getString(R.string.note), new Gson().toJson(mNote));
             noteDialogFragment.setArguments(args);
             noteDialogFragment.show(fm, "Note Dialog Fragment");
         }
