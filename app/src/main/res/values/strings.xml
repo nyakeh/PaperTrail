@@ -35,4 +35,8 @@
     <string name="Notes">Notes</string>
     <string name="Meta">Meta</string>
     <string name="create_note">Create Note</string>
+    <string name="Update">Update</string>
+    <string name="Delete">Delete</string>
+    <string name="NoteTitle">note_title</string>
+    <string name="NoteContent">note_content</string>
 </resources>

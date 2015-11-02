@@ -2,7 +2,6 @@ package uk.co.nyakeh.papertrail;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -85,8 +84,12 @@ public class NoteFragment extends Fragment {
         @Override
         public void onClick(View v) {
             FragmentManager fm = getFragmentManager();
-            NoteDialogFragment dialogFragment = new NoteDialogFragment();
-            dialogFragment.show(fm, "Sample Fragment");
+            NoteDialogFragment noteDialogFragment = new NoteDialogFragment();
+            Bundle args = new Bundle();
+            args.putString(getString(R.string.NoteTitle), mNote.getTitle());
+            args.putString(getString(R.string.NoteContent), mNote.getContent());
+            noteDialogFragment.setArguments(args);
+            noteDialogFragment.show(fm, "Note Dialog Fragment");
         }
     }
 
