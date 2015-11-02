@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
               android:gravity="center"
               android:padding="10dp"
               android:orientation="vertical">
@@ -10,19 +11,20 @@
         android:id="@+id/dialog_note_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet..."
-        android:textSize="20dp" />
+        tools:text="Lorem ipsum"
+        android:textStyle="bold"
+        android:textSize="26dp" />
 
     <TextView
         android:id="@+id/dialog_note_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet..."
+        tools:text="Lorem ipsum dolor sit amet..."
         android:textSize="20dp" />
 
     <Button
         android:id="@+id/dialog_note_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete" />
+    android:text="Dismiss" />
 </LinearLayout>
