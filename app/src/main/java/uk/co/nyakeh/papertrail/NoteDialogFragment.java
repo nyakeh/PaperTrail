@@ -92,7 +92,6 @@ public class NoteDialogFragment extends DialogFragment {
         else {
             BookLab.get(getActivity()).updateNote(mNote);
         }
-        DialogFragmentCallbackInterface callback = (DialogFragmentCallbackInterface) getTargetFragment();
-        callback.callBackMethod();
+        ((NoteDialogFragmentCallbackInterface) getTargetFragment()).onFinishCallBack();
     }
 }

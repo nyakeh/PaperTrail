@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-public class NoteFragment extends Fragment implements DialogFragmentCallbackInterface  {
+public class NoteFragment extends Fragment implements NoteDialogFragmentCallbackInterface {
     private EditText mCreateField;
     private RecyclerView mNoteRecyclerView;
     private NoteAdapter mNoteAdapter;
@@ -65,7 +65,7 @@ public class NoteFragment extends Fragment implements DialogFragmentCallbackInte
     }
 
     @Override
-    public void callBackMethod() {
+    public void onFinishCallBack() {
         updateUI();
     }
 
