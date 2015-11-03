@@ -4,6 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:gravity="top|center"
+              android:minWidth="300dp"
               android:orientation="vertical"
               android:padding="10dp">
 
@@ -12,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:src="@drawable/ic_archive"
-        android:contentDescription="@string/delete"/>
+        android:contentDescription="@string/delete"
+        android:src="@drawable/ic_delete"/>
 
     <EditText
         android:id="@+id/dialog_note_title"
