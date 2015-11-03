@@ -10,17 +10,39 @@
         android:id="@+id/note_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="40dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="40dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <EditText
-        android:id="@+id/note_create"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:hint="Make a Note..."
         android:background="@android:color/white"
-        android:padding="5dp"/>
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <EditText
+            android:id="@+id/note_create"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:hint="Make a Note..."
+            android:padding="5dp"/>
+
+        <ImageView
+            android:id="@+id/note_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_edit"/>
+
+        <ImageView
+            android:id="@+id/note_save"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_save"/>
+    </LinearLayout>
 </RelativeLayout>

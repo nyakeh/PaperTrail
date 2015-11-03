@@ -38,9 +38,7 @@ public class CreateNoteFragment extends Fragment {
 
         String startingNoteContent = (String) getArguments().getSerializable(ARG_NOTE_CONTENT);
         UUID bookId = (UUID) getArguments().getSerializable(ARG_BOOK_ID);
-        Note note = new Note();
-        note.setBookId(bookId);
-        note.setContent(startingNoteContent);
+        Note note = new Note(bookId, startingNoteContent);
         BookLab.get(getActivity()).addNote(note);
         mNote = note;
     }

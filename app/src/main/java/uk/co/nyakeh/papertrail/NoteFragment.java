@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -20,6 +21,8 @@ import java.util.List;
 
 public class NoteFragment extends Fragment implements NoteDialogFragmentCallbackInterface {
     private EditText mCreateNoteField;
+    private ImageView mCreateNoteEditField;
+    private ImageView mCreateNoteSaveField;
     private RecyclerView mNoteRecyclerView;
     private NoteAdapter mNoteAdapter;
     private Book mBook;
@@ -34,8 +37,29 @@ public class NoteFragment extends Fragment implements NoteDialogFragmentCallback
         mCreateNoteField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent createNoteIntent = CreateNoteActivity.newIntent(getActivity(), mBook.getId(), mCreateNoteField.getText().toString());
-                startActivity(createNoteIntent);
+                createNoteThroughActivity();
+            }
+        });
+
+        mCreateNoteEditField = (ImageView) view.findViewById(R.id.note_edit);
+        mCreateNoteEditField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNoteThroughActivity();
+            }
+        });
+
+        mCreateNoteSaveField = (ImageView) view.findViewById(R.id.note_save);
+        mCreateNoteSaveField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCreateNoteField.getText() != null && !mCreateNoteField.getText().toString().isEmpty()) {
+                    Note note = new Note(mBook.getId(), mCreateNoteField.getText().toString());
+                    BookLab.get(getActivity()).addNote(note);
+                    mCreateNoteField.setText("");
+                    mCreateNoteField.clearFocus();
+                    updateUI();
+                }
             }
         });
 
@@ -43,6 +67,11 @@ public class NoteFragment extends Fragment implements NoteDialogFragmentCallback
         mNoteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         updateUI();
         return view;
+    }
+
+    public void createNoteThroughActivity() {
+        Intent createNoteIntent = CreateNoteActivity.newIntent(getActivity(), mBook.getId(), mCreateNoteField.getText().toString());
+        startActivity(createNoteIntent);
     }
 
     public void updateUI() {
@@ -85,6 +114,10 @@ public class NoteFragment extends Fragment implements NoteDialogFragmentCallback
 
         private void bindNote(Note note) {
             mNote = note;
+
+            if (note.getTitle() == null || note.getTitle().isEmpty()){
+                mTitleTextView.setVisibility(View.GONE);
+            }
             mTitleTextView.setText(note.getTitle());
             mContentTextView.setText(note.getContent());
         }
@@ -118,7 +151,7 @@ public class NoteFragment extends Fragment implements NoteDialogFragmentCallback
         @Override
         public ReadingListBookHolder onCreateViewHolder(ViewGroup parent, int i) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(R.layout.list_item_book_reading_list, parent, false);
+            View view = layoutInflater.inflate(R.layout.list_item_note, parent, false);
             return new ReadingListBookHolder(view);
         }
 

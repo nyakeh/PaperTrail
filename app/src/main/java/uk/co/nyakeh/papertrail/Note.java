@@ -6,19 +6,21 @@ import java.util.UUID;
 public class Note {
     private UUID mId;
     private UUID mBookId;
-    private String mTitle;
-    private String mContent;
+    private String mTitle = "";
+    private String mContent = "";
     private Date mCreated;
     private Date mUpdated;
 
-    public Note() {
+    public Note(UUID id) {
+        mId = id;
+    }
+
+    public Note(UUID bookId, String content) {
         mId = UUID.randomUUID();
         mCreated = new Date();
         mUpdated = new Date();
-    }
-
-    public Note(UUID id) {
-        mId = id;
+        mBookId = bookId;
+        mContent = content;
     }
 
     public UUID getId() {
