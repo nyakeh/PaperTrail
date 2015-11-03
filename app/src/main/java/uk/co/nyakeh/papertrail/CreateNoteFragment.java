@@ -16,15 +16,17 @@ import java.util.UUID;
 
 public class CreateNoteFragment extends Fragment {
     private static final String ARG_BOOK_ID = "book_id";
+    private static final String ARG_NOTE_CONTENT = "note_content";
 
     private EditText mNoteTitle;
     private EditText mNoteContent;
     private Note mNote;
 
-    public static CreateNoteFragment newInstance(UUID bookId) {
+    public static CreateNoteFragment newInstance(UUID bookId, String startingNoteContent) {
+        CreateNoteFragment fragment = new CreateNoteFragment();
         Bundle arguments = new Bundle();
         arguments.putSerializable(ARG_BOOK_ID, bookId);
-        CreateNoteFragment fragment = new CreateNoteFragment();
+        arguments.putSerializable(ARG_NOTE_CONTENT, startingNoteContent);
         fragment.setArguments(arguments);
         return fragment;
     }
@@ -34,9 +36,11 @@ public class CreateNoteFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        UUID mBookId = (UUID) getArguments().getSerializable(ARG_BOOK_ID);
+        String startingNoteContent = (String) getArguments().getSerializable(ARG_NOTE_CONTENT);
+        UUID bookId = (UUID) getArguments().getSerializable(ARG_BOOK_ID);
         Note note = new Note();
-        note.setBookId(mBookId);
+        note.setBookId(bookId);
+        note.setContent(startingNoteContent);
         BookLab.get(getActivity()).addNote(note);
         mNote = note;
     }
@@ -62,6 +66,7 @@ public class CreateNoteFragment extends Fragment {
         });
 
         mNoteContent = (EditText) view.findViewById(R.id.note_content);
+        mNoteContent.setText(mNote.getContent());
         mNoteContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

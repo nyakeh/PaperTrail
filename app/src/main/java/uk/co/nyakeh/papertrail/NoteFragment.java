@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class NoteFragment extends Fragment implements NoteDialogFragmentCallbackInterface {
-    private EditText mCreateField;
+    private EditText mCreateNoteField;
     private RecyclerView mNoteRecyclerView;
     private NoteAdapter mNoteAdapter;
     private Book mBook;
@@ -30,12 +30,12 @@ public class NoteFragment extends Fragment implements NoteDialogFragmentCallback
 
         mBook = (Book) container.getTag(R.string.book);
 
-        mCreateField = (EditText) view.findViewById(R.id.note_create);
-        mCreateField.setOnClickListener(new View.OnClickListener() {
+        mCreateNoteField = (EditText) view.findViewById(R.id.note_create);
+        mCreateNoteField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = CreateNoteActivity.newIntent(getActivity(), mBook.getId());
-                startActivity(intent);
+                Intent createNoteIntent = CreateNoteActivity.newIntent(getActivity(), mBook.getId(), mCreateNoteField.getText().toString());
+                startActivity(createNoteIntent);
             }
         });
 
