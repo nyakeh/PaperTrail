@@ -1,11 +1,13 @@
 package uk.co.nyakeh.papertrail;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-public class NoteFragment extends Fragment {
+public class NoteFragment extends Fragment implements DialogFragmentCallbackInterface  {
     private EditText mCreateField;
     private RecyclerView mNoteRecyclerView;
     private NoteAdapter mNoteAdapter;
@@ -43,7 +45,7 @@ public class NoteFragment extends Fragment {
         return view;
     }
 
-    private void updateUI() {
+    public void updateUI() {
         BookLab bookLab = BookLab.get(getActivity());
         List<Note> notes = bookLab.getNotes(mBook.getId());
 
@@ -62,6 +64,10 @@ public class NoteFragment extends Fragment {
         updateUI();
     }
 
+    @Override
+    public void callBackMethod() {
+        updateUI();
+    }
 
     private class ReadingListBookHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -92,6 +98,11 @@ public class NoteFragment extends Fragment {
             args.putString(getString(R.string.note_content), mNote.getContent());
             args.putString(getString(R.string.note), new Gson().toJson(mNote));
             noteDialogFragment.setArguments(args);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                noteDialogFragment.setEnterTransition(new Fade());
+            }
+            noteDialogFragment.setTargetFragment(NoteFragment.this, 1);
             noteDialogFragment.show(fm, "Note Dialog Fragment");
         }
     }

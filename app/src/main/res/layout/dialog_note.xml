@@ -3,9 +3,17 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:gravity="center"
+              android:gravity="top|center"
               android:orientation="vertical"
               android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/dialog_note_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:src="@drawable/ic_archive"
+        android:contentDescription="@string/delete"/>
 
     <EditText
         android:id="@+id/dialog_note_title"
@@ -21,12 +29,6 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         tools:text="Lorem ipsum dolor sit amet..."/>
-
-    <Button
-        android:id="@+id/dialog_note_delete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/delete"/>
 
     <Button
         android:id="@+id/dialog_note_update"

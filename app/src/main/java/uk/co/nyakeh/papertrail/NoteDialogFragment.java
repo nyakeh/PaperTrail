@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 
@@ -24,7 +25,6 @@ public class NoteDialogFragment extends DialogFragment {
 
         String jsonNote = getArguments().getString(getString(R.string.note));
         mNote = new Gson().fromJson(jsonNote, Note.class);
-        //getDialog().setTitle(mNote.getTitle());
 
         mTitleEditText = (EditText) view.findViewById(R.id.dialog_note_title);
         mTitleEditText.setText(mNote.getTitle());
@@ -59,13 +59,13 @@ public class NoteDialogFragment extends DialogFragment {
             public void afterTextChanged(Editable s) {
             }
         });
-        Button btnDelete = (Button) view.findViewById(R.id.dialog_note_delete);
+
+        ImageView btnDelete = (ImageView) view.findViewById(R.id.dialog_note_delete);
         btnDelete.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 mDeleteOnClose = true;
-                BookLab.get(getActivity()).deleteNote(mNote.getId());
                 dismiss();
             }
 
@@ -86,8 +86,13 @@ public class NoteDialogFragment extends DialogFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (!mDeleteOnClose){
+        if (mDeleteOnClose){
+            BookLab.get(getActivity()).deleteNote(mNote.getId());
+        }
+        else {
             BookLab.get(getActivity()).updateNote(mNote);
         }
+        DialogFragmentCallbackInterface callback = (DialogFragmentCallbackInterface) getTargetFragment();
+        callback.callBackMethod();
     }
 }
