@@ -26,6 +26,7 @@
         android:layout_height="match_parent"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:layoutAnimation="@anim/grid_layout_animation"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <TextView
