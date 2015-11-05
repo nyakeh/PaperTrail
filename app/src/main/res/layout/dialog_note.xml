@@ -28,12 +28,14 @@
         android:id="@+id/dialog_note_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:maxLines="7"
         tools:text="Lorem ipsum dolor sit amet..."/>
 
-    <Button
+    <ImageView
         android:id="@+id/dialog_note_update"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/update"/>
+        android:layout_gravity="right"
+        android:contentDescription="@string/update"
+        android:src="@drawable/ic_save"/>
 </LinearLayout>

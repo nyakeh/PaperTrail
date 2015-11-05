@@ -76,7 +76,7 @@ public class NoteDialogFragment extends DialogFragment {
             }
 
         });
-        Button btnUpdate = (Button) view.findViewById(R.id.dialog_note_update);
+        ImageView btnUpdate = (ImageView) view.findViewById(R.id.dialog_note_update);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
 
             @Override

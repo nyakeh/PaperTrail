@@ -97,7 +97,11 @@ public class CreateNoteFragment extends Fragment {
                 getActivity().finish();
                 return true;
             case R.id.menu_item_save_note:
-                BookLab.get(getActivity()).updateNote(mNote);
+                if (noteEmpty()) {
+                    BookLab.get(getActivity()).deleteNote(mNote.getId());
+                } else {
+                    BookLab.get(getActivity()).updateNote(mNote);
+                }
                 getActivity().finish();
                 return true;
             default:
@@ -109,5 +113,17 @@ public class CreateNoteFragment extends Fragment {
     public void onPause() {
         super.onPause();
         BookLab.get(getActivity()).updateNote(mNote);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (noteEmpty()) {
+            BookLab.get(getActivity()).deleteNote(mNote.getId());
+        }
+    }
+
+    public boolean noteEmpty() {
+        return mNote.getContent() == null || mNote.getContent().isEmpty();
     }
 }

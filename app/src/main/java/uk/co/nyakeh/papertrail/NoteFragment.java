@@ -75,8 +75,7 @@ public class NoteFragment extends Fragment implements NoteDialogFragmentCallback
     }
 
     public void updateUI() {
-        BookLab bookLab = BookLab.get(getActivity());
-        List<Note> notes = bookLab.getNotes(mBook.getId());
+        List<Note> notes = BookLab.get(getActivity()).getNotes(mBook.getId());
 
         if (mNoteAdapter == null) {
             mNoteAdapter = new NoteAdapter(notes);
@@ -117,8 +116,10 @@ public class NoteFragment extends Fragment implements NoteDialogFragmentCallback
 
             if (note.getTitle() == null || note.getTitle().isEmpty()){
                 mTitleTextView.setVisibility(View.GONE);
+            }else  {
+                mTitleTextView.setVisibility(View.VISIBLE);
+                mTitleTextView.setText(note.getTitle());
             }
-            mTitleTextView.setText(note.getTitle());
             mContentTextView.setText(note.getContent());
         }
 
