@@ -115,14 +115,6 @@ public class CreateNoteFragment extends Fragment {
         BookLab.get(getActivity()).updateNote(mNote);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (noteEmpty()) {
-            BookLab.get(getActivity()).deleteNote(mNote.getId());
-        }
-    }
-
     public boolean noteEmpty() {
         return mNote.getContent() == null || mNote.getContent().isEmpty();
     }
