@@ -2,7 +2,6 @@ package uk.co.nyakeh.papertrail;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -48,7 +47,7 @@ public class ProgressFragment extends Fragment {
                 }
             });
 
-        mProgressSeekbarField = (SeekBar) view.findViewById(R.id.book_progress_seekbar);
+        mProgressSeekbarField = (SeekBar) view.findViewById(R.id.book_progress_bar);
         mProgressSeekbarField.setMax(mBook.getLength());
         mProgressSeekbarField.setProgress(mBook.getProgress());
         mProgressSeekbarField.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

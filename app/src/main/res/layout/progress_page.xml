@@ -13,41 +13,39 @@
         android:paddingRight="@dimen/auxiliary_margin"
         android:paddingTop="@dimen/auxiliary_margin">
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/book_progress_label"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="5">
 
-            <SeekBar
-                android:id="@+id/book_progress_seekbar"
+            <ImageView
+                android:id="@+id/book_image"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
                 android:layout_weight="4"
-                />
+                android:transitionName="@string/transition_book_cover"
+                tools:src="@drawable/books"/>
 
             <NumberPicker
                 android:id="@+id/book_progress_number_picker"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
-
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/book_image"
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:transitionName="@string/transition_book_cover"
-            tools:src="@drawable/books"/>
+            android:layout_height="wrap_content"
+            android:text="@string/book_progress_label"/>
+
+        <SeekBar
+            android:id="@+id/book_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            />
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
