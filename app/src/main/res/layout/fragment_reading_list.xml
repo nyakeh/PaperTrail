@@ -24,8 +24,8 @@
         android:id="@+id/book_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingLeft="@dimen/auxiliary_margin"
+        android:paddingRight="@dimen/auxiliary_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <TextView
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_margin="@dimen/auxiliary_margin"
         android:src="@drawable/ic_action_add"/>
 
 </android.support.design.widget.CoordinatorLayout>

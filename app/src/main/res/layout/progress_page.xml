@@ -9,9 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="10dp">
+        android:paddingLeft="@dimen/auxiliary_margin"
+        android:paddingRight="@dimen/auxiliary_margin"
+        android:paddingTop="@dimen/auxiliary_margin">
 
         <TextView
             style="?android:listSeparatorTextViewStyle"
@@ -44,8 +44,9 @@
         <ImageView
             android:id="@+id/book_image"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
+            android:transitionName="@string/transition_book_cover"
             tools:src="@drawable/books"/>
 
         <TextView

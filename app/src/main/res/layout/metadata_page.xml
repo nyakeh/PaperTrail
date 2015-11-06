@@ -8,9 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="10dp">
+        android:paddingLeft="@dimen/auxiliary_margin"
+        android:paddingRight="@dimen/auxiliary_margin"
+        android:paddingTop="@dimen/auxiliary_margin">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -85,7 +85,7 @@
             android:id="@+id/book_started_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginLeft="@dimen/auxiliary_margin"
+            android:layout_marginRight="@dimen/auxiliary_margin"/>
     </LinearLayout>
 </ScrollView>

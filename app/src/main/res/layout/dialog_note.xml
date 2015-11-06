@@ -6,7 +6,7 @@
               android:gravity="top|center"
               android:minWidth="300dp"
               android:orientation="vertical"
-              android:padding="10dp">
+              android:padding="@dimen/auxiliary_margin">
 
     <ImageView
         android:id="@+id/dialog_note_delete"
