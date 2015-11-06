@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Title goes here"
-        android:textSize="26dp"
+        android:textSize="26sp"
         android:textStyle="bold"/>
 
     <EditText
