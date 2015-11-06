@@ -2,6 +2,7 @@ package uk.co.nyakeh.papertrail;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,8 +24,8 @@ public class ProgressFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
     private NumberPicker mProgressNumberPickerField;
     private SeekBar mProgressSeekbarField;
-    private Button mDateFinishedButton;
-    private ImageView mDateImage;
+    private Button mBookFinishedButton;
+    private ImageView mBookImage;
 
     private Book mBook;
 
@@ -67,16 +68,16 @@ public class ProgressFragment extends Fragment {
             }
         });
 
-        mDateImage = (ImageView) view.findViewById(R.id.book_image);
+        mBookImage = (ImageView) view.findViewById(R.id.book_image);
         String safePicassoImageUrl = (mBook.getImageUrl().isEmpty()) ? "fail_gracefully_pls" : mBook.getImageUrl();
         Picasso.with(getActivity())
                 .load(safePicassoImageUrl)
                 .placeholder(R.drawable.books)
                 .error(R.drawable.books)
-                .into(mDateImage);
+                .into(mBookImage);
 
-        mDateFinishedButton = (Button) view.findViewById(R.id.book_finished_date);
-        mDateFinishedButton.setOnClickListener(new View.OnClickListener() {
+        mBookFinishedButton = (Button) view.findViewById(R.id.book_finished_date);
+        mBookFinishedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
@@ -95,7 +96,7 @@ public class ProgressFragment extends Fragment {
         if (!dateFinished.equals(new Date(Long.MAX_VALUE))) {
             date = DateFormat.format("EEEE, MMM dd, yyyy", dateFinished).toString();
         }
-        mDateFinishedButton.setText(date);
+        mBookFinishedButton.setText(date);
     }
 
     public void updateProgress(int progress) {
