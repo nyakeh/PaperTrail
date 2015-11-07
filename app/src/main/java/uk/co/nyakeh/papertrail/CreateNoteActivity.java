@@ -27,8 +27,8 @@ public class CreateNoteActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Bundle extras = getIntent().getExtras();
-        String startingNoteContent = extras.getString(ARG_NOTE_CONTENT);
         UUID bookId = (UUID) extras.get(ARG_BOOK_ID);
+        String startingNoteContent = extras.getString(ARG_NOTE_CONTENT);
 
         Note note = new Note(bookId, startingNoteContent);
         BookLab.get(this).addNote(note);

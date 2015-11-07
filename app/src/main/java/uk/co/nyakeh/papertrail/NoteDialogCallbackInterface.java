@@ -1,5 +1,5 @@
 package uk.co.nyakeh.papertrail;
 
-public interface NoteDialogFragmentCallbackInterface {
+public interface NoteDialogCallbackInterface {
     void onFinishCallBack();
 }

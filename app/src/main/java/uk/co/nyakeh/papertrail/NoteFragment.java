@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-public class NoteFragment extends Fragment implements NoteDialogFragmentCallbackInterface {
+public class NoteFragment extends Fragment implements NoteDialogCallbackInterface {
     private EditText mCreateNoteField;
     private ImageView mCreateNoteEditField;
     private ImageView mCreateNoteSaveField;

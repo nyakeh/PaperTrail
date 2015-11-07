@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -98,6 +97,6 @@ public class NoteDialogFragment extends DialogFragment {
         else {
             BookLab.get(getActivity()).updateNote(mNote);
         }
-        ((NoteDialogFragmentCallbackInterface) getTargetFragment()).onFinishCallBack();
+        ((NoteDialogCallbackInterface) getTargetFragment()).onFinishCallBack();
     }
 }

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
@@ -67,12 +68,11 @@ public class DatePickerFragment extends DialogFragment {
 
     private void sendResult(int resultCode, Date date){
         if (getTargetFragment() == null){
-            return;
+            ((DateDialogCallbackInterface)getActivity()).onDateSelectedCallBack(date);
+        }else{
+            Intent intent = new Intent();
+            intent.putExtra(EXTRA_DATE, date);
+            getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, intent);
         }
-
-        Intent intent = new Intent();
-        intent.putExtra(EXTRA_DATE, date);
-
-        getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, intent);
     }
 }

@@ -3,8 +3,6 @@ package uk.co.nyakeh.papertrail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -79,8 +77,10 @@ public class BookListFragment extends Fragment {
 
     private void AddNewBook() {
         Book book = new Book(Constants.READING);
-        BookLab.get(getActivity()).addBook(book);
-        Intent intent = CreateBookActivity.newIntent(getActivity(), book.getId(), Constants.READING);
+            BookLab.get(getActivity()).addBook(book);
+        Intent intent = new Intent(getActivity(), CreateBookActivity.class);
+        intent.putExtra("book_id", book.getId());
+        intent.putExtra("book_status", Constants.READING);
         startActivity(intent);
     }
 
