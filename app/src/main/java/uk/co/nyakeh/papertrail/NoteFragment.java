@@ -32,6 +32,7 @@ public class NoteFragment extends Fragment implements NoteDialogFragmentCallback
         View view = inflater.inflate(R.layout.note_page, container, false);
 
         mBook = (Book) container.getTag(R.string.book);
+        mCreateNoteField = (EditText) view.findViewById(R.id.note_create);
 
         mCreateNoteEditField = (ImageView) view.findViewById(R.id.note_edit);
         mCreateNoteEditField.setOnClickListener(new View.OnClickListener() {
@@ -109,9 +110,9 @@ public class NoteFragment extends Fragment implements NoteDialogFragmentCallback
         private void bindNote(Note note) {
             mNote = note;
 
-            if (note.getTitle() == null || note.getTitle().isEmpty()){
+            if (note.getTitle() == null || note.getTitle().isEmpty()) {
                 mTitleTextView.setVisibility(View.GONE);
-            }else  {
+            } else {
                 mTitleTextView.setVisibility(View.VISIBLE);
                 mTitleTextView.setText(note.getTitle());
             }
