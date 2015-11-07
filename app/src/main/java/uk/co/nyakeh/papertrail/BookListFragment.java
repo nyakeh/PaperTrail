@@ -3,6 +3,8 @@ package uk.co.nyakeh.papertrail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -128,6 +130,10 @@ public class BookListFragment extends Fragment {
         public void onClick(View view) {
             Intent intent = BookActivity.newIntent(getActivity(), mBook.getId());
             startActivity(intent);
+
+//            String transitionName = getString(R.string.transition_book_cover);
+//            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), mImageView, transitionName);
+//            ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
         }
     }
 

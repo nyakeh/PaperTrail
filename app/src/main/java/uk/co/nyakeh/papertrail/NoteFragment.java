@@ -33,19 +33,12 @@ public class NoteFragment extends Fragment implements NoteDialogFragmentCallback
 
         mBook = (Book) container.getTag(R.string.book);
 
-        mCreateNoteField = (EditText) view.findViewById(R.id.note_create);
-        mCreateNoteField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createNoteThroughActivity();
-            }
-        });
-
         mCreateNoteEditField = (ImageView) view.findViewById(R.id.note_edit);
         mCreateNoteEditField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createNoteThroughActivity();
+                mCreateNoteField.setText("");
             }
         });
 
@@ -70,8 +63,10 @@ public class NoteFragment extends Fragment implements NoteDialogFragmentCallback
     }
 
     public void createNoteThroughActivity() {
-        Intent createNoteIntent = CreateNoteActivity.newIntent(getActivity(), mBook.getId(), mCreateNoteField.getText().toString());
-        startActivity(createNoteIntent);
+        Intent intent = new Intent(getActivity(), CreateNoteActivity.class);
+        intent.putExtra("book_id", mBook.getId());
+        intent.putExtra("note_content", mCreateNoteField.getText().toString());
+        startActivity(intent);
     }
 
     public void updateUI() {
