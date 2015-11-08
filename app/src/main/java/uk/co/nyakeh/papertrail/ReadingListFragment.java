@@ -103,7 +103,8 @@ public class ReadingListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = BookActivity.newIntent(getActivity(), mBook.getId());
+            Intent intent = new Intent(getActivity(), BookActivity.class);
+            intent.putExtra("book_id", mBook.getId());
             startActivity(intent);
         }
     }

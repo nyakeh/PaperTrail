@@ -101,7 +101,7 @@ public class ProgressFragment extends Fragment {
     public void updateProgress(int progress) {
         mBook.setProgress(progress);
         if (mBook.getStatus().equals(Constants.ARCHIVE)){
-            BookFragment.updateStatusSwitch(false);
+            BookActivity.updateStatusSwitch(false);
         }
     }
 

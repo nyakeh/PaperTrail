@@ -138,12 +138,12 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
 
         @Override
         public void onClick(View view) {
-            Intent intent = BookActivity.newIntent(BookListActivity.this, mBook.getId());
+            Intent intent = new Intent(BookListActivity.this, BookActivity.class);
+            intent.putExtra("book_id", mBook.getId());
             startActivity(intent);
-
 //            String transitionName = getString(R.string.transition_book_cover);
-//            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), mImageView, transitionName);
-//            ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+//            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(BookListActivity.this, mImageView, transitionName);
+//            ActivityCompat.startActivity(BookListActivity.this, intent, options.toBundle());
         }
     }
 
