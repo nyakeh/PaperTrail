@@ -32,6 +32,7 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_book_list);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -142,8 +143,11 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
             intent.putExtra("book_id", mBook.getId());
             startActivity(intent);
 //            String transitionName = getString(R.string.transition_book_cover);
-//            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(BookListActivity.this, mImageView, transitionName);
-//            ActivityCompat.startActivity(BookListActivity.this, intent, options.toBundle());
+//            ActivityOptionsCompat options = null;
+//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+//                options = ActivityOptionsCompat.makeSceneTransitionAnimation(BookListActivity.this, (View) mImageView, transitionName);
+//            }
+//            startActivity(intent, options.toBundle());
         }
     }
 

@@ -34,7 +34,6 @@ public class CreateNoteActivity extends AppCompatActivity {
         BookLab.get(this).addNote(note);
         mNote = note;
 
-
         mNoteTitle = (EditText) findViewById(R.id.note_title);
         mNoteTitle.addTextChangedListener(new TextWatcher() {
             @Override

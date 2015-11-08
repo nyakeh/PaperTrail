@@ -82,7 +82,6 @@ public class ReadingListFragment extends Fragment {
     }
 
     private class ReadingListBookHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         private Book mBook;
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
@@ -110,9 +109,7 @@ public class ReadingListFragment extends Fragment {
     }
 
     private class ReadingListBookAdapter extends RecyclerView.Adapter<ReadingListBookHolder> {
-
         private List<Book> mBooks;
-
         public ReadingListBookAdapter(List<Book> books) {
             mBooks = books;
         }
