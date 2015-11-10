@@ -44,9 +44,9 @@ public class BookActivity extends AppCompatActivity {
         if (mViewPager != null) {
             setupViewPager((ViewPager) findViewById(R.id.viewpager));
         }
+        mViewPager.setTag(R.string.book, mBook);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        mViewPager.setTag(R.string.book, mBook);
     }
 
     @Override

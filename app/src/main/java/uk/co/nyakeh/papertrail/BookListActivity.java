@@ -130,8 +130,8 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
                     .load(safePicassoImageUrl)
                     .placeholder(R.drawable.books)
                     .error(R.drawable.books)
-                    .resize(90, 90)
-                    .centerCrop()
+                    //.resize(90, 90)
+                    //.centerCrop()
                     .into(mImageView);
 
             mProgressBar.setMax(mBook.getLength());

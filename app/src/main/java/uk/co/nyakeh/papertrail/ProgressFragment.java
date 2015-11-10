@@ -32,25 +32,10 @@ public class ProgressFragment extends Fragment {
 
     private Book mBook;
 
-
-
-    private void scheduleStartPostponedTransition(final View sharedElement) {
-        sharedElement.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
-                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-                    @Override
-                    public boolean onPreDraw() {
-                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
-                        ActivityCompat.startPostponedEnterTransition(getActivity());
-                        return true;
-                    }
-                });
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.progress_page, container, false);
-
+        scheduleStartPostponedTransition(view);
         mBook = (Book) container.getTag(R.string.book);
 
         mProgressNumberPickerField = (NumberPicker) view.findViewById(R.id.book_progress_number_picker);
@@ -105,7 +90,6 @@ public class ProgressFragment extends Fragment {
             }
         });
         updateDate();
-        scheduleStartPostponedTransition(view);
         return view;
     }
 
@@ -123,6 +107,19 @@ public class ProgressFragment extends Fragment {
         if (mBook.getStatus().equals(Constants.ARCHIVE)){
             BookActivity.updateStatusSwitch(false);
         }
+    }
+
+    private void scheduleStartPostponedTransition(final View sharedElement) {
+        sharedElement.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public boolean onPreDraw() {
+                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
+                        ActivityCompat.startPostponedEnterTransition(getActivity());
+                        return true;
+                    }
+                });
     }
 
     @Override
