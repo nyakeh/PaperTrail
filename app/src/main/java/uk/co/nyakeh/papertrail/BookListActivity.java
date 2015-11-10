@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -141,13 +142,13 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
         public void onClick(View view) {
             Intent intent = new Intent(BookListActivity.this, BookActivity.class);
             intent.putExtra("book_id", mBook.getId());
-            startActivity(intent);
-//            String transitionName = getString(R.string.transition_book_cover);
-//            ActivityOptionsCompat options = null;
-//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-//                options = ActivityOptionsCompat.makeSceneTransitionAnimation(BookListActivity.this, (View) mImageView, transitionName);
-//            }
-//            startActivity(intent, options.toBundle());
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                String transitionName = getString(R.string.transition_book_cover);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(BookListActivity.this, mImageView, transitionName);
+                startActivity(intent, options.toBundle());
+            } else {
+                startActivity(intent);
+            }
         }
     }
 
