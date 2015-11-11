@@ -3,13 +3,18 @@ package uk.co.nyakeh.papertrail;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+
+import java.util.List;
 
 public class SettingsActivity extends AppCompatPreferenceActivity implements NavigationView.OnNavigationItemSelectedListener {
     @Override
@@ -38,31 +43,31 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_prefs);
 
-            //SettingsUtils.registerOnSharedPreferenceChangeListener(getActivity(), this);
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            sp.registerOnSharedPreferenceChangeListener(this);
+
+            Preference button = findPreference(getString(R.string.backupButton));
+            button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    backupBookData();
+                    return true;
+                }
+            });
         }
 
-        @Override
-        public void onDestroy() {
-            super.onDestroy();
-            //SettingsUtils.unregisterOnSharedPreferenceChangeListener(getActivity(), this);
+        private void backupBookData() {
+            Log.d("backupBookData:", "#");
+            BookLab bookLab = BookLab.get(getActivity());
+            String data = bookLab.getAllData();
         }
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-//            if (SettingsUtils.PREF_SYNC_CALENDAR.equals(key)) {
-//                Intent intent;
-//                if (SettingsUtils.shouldSyncCalendar(getActivity())) {
-//                    // Add all calendar entries
-//                    intent = new Intent(SessionCalendarService.ACTION_UPDATE_ALL_SESSIONS_CALENDAR);
-//                } else {
-//                    // Remove all calendar entries
-//                    intent = new Intent(SessionCalendarService.ACTION_CLEAR_ALL_SESSIONS_CALENDAR);
-//                }
-//
-//                intent.setClass(getActivity(), SessionCalendarService.class);
-//                getActivity().startService(intent);
-//            }
+            if (key.equals("pref_local_times"))
+                Log.d("onSharedPreference:", key + " ");
         }
+
     }
 
     @Override

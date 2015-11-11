@@ -202,4 +202,11 @@ public class BookLab {
         }
         return notes;
     }
+
+    public String getAllData() {
+        String header = "\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\n";
+        String csvData = "";
+
+        return header + csvData;
+    }
 }
