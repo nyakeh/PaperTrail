@@ -55,9 +55,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
         }
 
         private void backupBookData() {
-            Log.d("backupBookData:", "#");
             BookLab bookLab = BookLab.get(getActivity());
             String data = bookLab.getBackupData();
+            Log.d("backupBookData:", data);
         }
 
         @Override

@@ -204,7 +204,7 @@ public class BookLab {
     }
 
     public String getBackupData() {
-        String header = "\\Id\\,\\Title\\,\\Author\\,\\Category\\,\\Status\\,\\Progress\\,\\Length\\,\\Started\\,\\Finished\\,\\ImageUrl\\,\\n";
+        String header = "Id,Title,Author,Category,Status,Progress,Length,Started,Finished,ImageUrl,\\n";
         String csvData = "";
 
         BookCursorWrapper cursor = queryBooks(null, null);
