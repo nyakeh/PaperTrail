@@ -1,17 +1,17 @@
 package uk.co.nyakeh.papertrail;
 
-import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -22,11 +22,16 @@ public class BookActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private Book mBook;
-    static Switch mSwitch_status;
+    private static Switch mSwitch_status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setReturnTransition(new Fade());
+            Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.book_detail);
+            getWindow().setEnterTransition(transition);
+        }
         setContentView(R.layout.fragment_book);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             postponeEnterTransition();
@@ -45,6 +50,7 @@ public class BookActivity extends AppCompatActivity {
             setupViewPager((ViewPager) findViewById(R.id.viewpager));
         }
         mViewPager.setTag(R.string.book, mBook);
+        mViewPager.setClipChildren(false); // not currently used but one day...
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(mViewPager);
     }

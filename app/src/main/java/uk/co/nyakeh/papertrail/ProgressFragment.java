@@ -138,5 +138,4 @@ public class ProgressFragment extends Fragment {
             mProgressSeekbarField.setProgress(progressValue);
         }
     }
-
 }
