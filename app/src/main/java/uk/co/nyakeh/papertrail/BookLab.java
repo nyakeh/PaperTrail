@@ -212,7 +212,7 @@ public class BookLab {
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                String book = cursor.getBookAsString();
+                String book = cursor.getBooksAsHtml();
                 csvData += book;
                 cursor.moveToNext();
             }

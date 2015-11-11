@@ -1,5 +1,6 @@
 package uk.co.nyakeh.papertrail;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -58,9 +59,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
 
         private void backupBookData() {
             BookLab bookLab = BookLab.get(getActivity());
-            String data = bookLab.getBackupData();
-            Log.d("backupBookData:", data);
-            Snackbar.make(getView(),data, Snackbar.LENGTH_LONG).show();
+            String readingDataHtml = bookLab.getBackupData();
+            Log.d("backupBookData:", readingDataHtml);
+
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", readingDataHtml);
+            clipboard.setPrimaryClip(clip);
+
+            Snackbar.make(getView(), "Data copied to your clipboard", Snackbar.LENGTH_LONG).show();
         }
 
         @Override

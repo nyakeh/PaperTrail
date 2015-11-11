@@ -39,7 +39,7 @@ public class BookCursorWrapper extends CursorWrapper {
         return book;
     }
 
-    public String getBookAsString() {
+    public String getBooksAsHtml() {
         String id = getString(getColumnIndex(BookTable.Cols.ID));
         String title = getString(getColumnIndex(BookTable.Cols.TITLE));
         String author = getString(getColumnIndex(BookTable.Cols.AUTHOR));
