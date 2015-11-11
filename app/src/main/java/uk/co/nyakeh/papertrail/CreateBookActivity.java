@@ -38,6 +38,7 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
         setContentView(R.layout.fragment_create_book);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle extras = getIntent().getExtras();
         mBookId = (UUID) extras.get(ARG_BOOK_ID);
