@@ -62,7 +62,7 @@ public class BookCursorWrapper extends CursorWrapper {
         bookAsString += length + ",";
         bookAsString += new Date(dateStarted) + ",";
         bookAsString += new Date(dateFinished) + ",";
-        bookAsString += imageUrl + ",\\n";
+        bookAsString += imageUrl + ",\\r\\n,";
         return bookAsString;
     }
 }

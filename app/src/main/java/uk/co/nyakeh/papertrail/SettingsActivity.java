@@ -7,12 +7,14 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 public class SettingsActivity extends AppCompatPreferenceActivity implements NavigationView.OnNavigationItemSelectedListener {
     @Override
@@ -58,6 +60,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             BookLab bookLab = BookLab.get(getActivity());
             String data = bookLab.getBackupData();
             Log.d("backupBookData:", data);
+            Snackbar.make(getView(),data, Snackbar.LENGTH_LONG).show();
         }
 
         @Override
