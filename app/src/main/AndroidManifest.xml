@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="uk.co.nyakeh.papertrail"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="uk.co.nyakeh.papertrail"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -44,6 +45,10 @@
         <activity
             android:name=".CreateNoteActivity"
             android:label="@string/create_note">
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings">
         </activity>
     </application>
 
