@@ -14,8 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
-import java.util.List;
-
 public class SettingsActivity extends AppCompatPreferenceActivity implements NavigationView.OnNavigationItemSelectedListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +57,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
         private void backupBookData() {
             Log.d("backupBookData:", "#");
             BookLab bookLab = BookLab.get(getActivity());
-            String data = bookLab.getAllData();
+            String data = bookLab.getBackupData();
         }
 
         @Override

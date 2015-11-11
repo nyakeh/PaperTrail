@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import uk.co.nyakeh.papertrail.database.BookCursorWrapper;
 import uk.co.nyakeh.papertrail.database.BookBaseHelper;
+import uk.co.nyakeh.papertrail.database.BookCursorWrapper;
 import uk.co.nyakeh.papertrail.database.NoteCursorWrapper;
 
 import static uk.co.nyakeh.papertrail.database.BookDbSchema.BookTable;
@@ -203,9 +203,22 @@ public class BookLab {
         return notes;
     }
 
-    public String getAllData() {
-        String header = "\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\Id\\,\\n";
+    public String getBackupData() {
+        String header = "\\Id\\,\\Title\\,\\Author\\,\\Category\\,\\Status\\,\\Progress\\,\\Length\\,\\Started\\,\\Finished\\,\\ImageUrl\\,\\n";
         String csvData = "";
+
+        BookCursorWrapper cursor = queryBooks(null, null);
+
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                String book = cursor.getBookAsString();
+                csvData += book;
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
 
         return header + csvData;
     }

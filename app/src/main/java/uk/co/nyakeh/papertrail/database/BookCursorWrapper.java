@@ -15,7 +15,7 @@ public class BookCursorWrapper extends CursorWrapper {
     }
 
     public Book getBook() {
-        String uuidString = getString(getColumnIndex(BookTable.Cols.ID));
+        String id = getString(getColumnIndex(BookTable.Cols.ID));
         String title = getString(getColumnIndex(BookTable.Cols.TITLE));
         String author = getString(getColumnIndex(BookTable.Cols.AUTHOR));
         int progress = getInt(getColumnIndex(BookTable.Cols.PROGRESS));
@@ -26,7 +26,7 @@ public class BookCursorWrapper extends CursorWrapper {
         String category = getString(getColumnIndex(BookTable.Cols.CATEGORY));
         String status = getString(getColumnIndex(BookTable.Cols.STATUS));
 
-        Book book = new Book(UUID.fromString(uuidString));
+        Book book = new Book(UUID.fromString(id));
         book.setTitle(title);
         book.setAuthor(author);
         book.setProgress(progress);
@@ -37,5 +37,32 @@ public class BookCursorWrapper extends CursorWrapper {
         book.setCategory(category);
         book.setStatus(status);
         return book;
+    }
+
+    public String getBookAsString() {
+        String id = getString(getColumnIndex(BookTable.Cols.ID));
+        String title = getString(getColumnIndex(BookTable.Cols.TITLE));
+        String author = getString(getColumnIndex(BookTable.Cols.AUTHOR));
+        int progress = getInt(getColumnIndex(BookTable.Cols.PROGRESS));
+        int length = getInt(getColumnIndex(BookTable.Cols.LENGTH));
+        Long dateStarted = getLong(getColumnIndex(BookTable.Cols.STARTED));
+        Long dateFinished = getLong(getColumnIndex(BookTable.Cols.FINISHED));
+        String imageUrl = getString(getColumnIndex(BookTable.Cols.IMAGE_URL));
+        String category = getString(getColumnIndex(BookTable.Cols.CATEGORY));
+        String status = getString(getColumnIndex(BookTable.Cols.STATUS));
+
+        String bookAsString = "";
+
+        bookAsString += id + ",";
+        bookAsString += title + ",";
+        bookAsString += author + ",";
+        bookAsString += category + ",";
+        bookAsString += status + ",";
+        bookAsString += progress + ",";
+        bookAsString += length + ",";
+        bookAsString += new Date(dateStarted) + ",";
+        bookAsString += new Date(dateFinished) + ",";
+        bookAsString += imageUrl + ",\\n";
+        return bookAsString;
     }
 }
