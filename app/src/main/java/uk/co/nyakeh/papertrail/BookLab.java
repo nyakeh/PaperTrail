@@ -204,7 +204,7 @@ public class BookLab {
     }
 
     public String getBackupData() {
-        String header = "Id,Title,Author,Category,Status,Progress,Length,Started,Finished,ImageUrl,\\r\\n,";
+        String header = "<table><tr><th>Id</th><th>Title</th><th>Author</th><th>Category</th><th>Status</th><th>Started</th><th>Finished</th><th>Progress</th><th>Length</th><th>ImageUrl</th></tr>";
         String csvData = "";
 
         BookCursorWrapper cursor = queryBooks(null, null);
@@ -220,6 +220,6 @@ public class BookLab {
             cursor.close();
         }
 
-        return header + csvData;
+        return header + csvData + "</table>";
     }
 }

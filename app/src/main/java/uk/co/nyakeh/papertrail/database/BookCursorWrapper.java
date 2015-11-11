@@ -51,18 +51,23 @@ public class BookCursorWrapper extends CursorWrapper {
         String category = getString(getColumnIndex(BookTable.Cols.CATEGORY));
         String status = getString(getColumnIndex(BookTable.Cols.STATUS));
 
-        String bookAsString = "";
+        String bookAsString = "<tr><td>";
 
-        bookAsString += id + ",";
-        bookAsString += title + ",";
-        bookAsString += author + ",";
-        bookAsString += category + ",";
-        bookAsString += status + ",";
-        bookAsString += progress + ",";
-        bookAsString += length + ",";
-        bookAsString += new Date(dateStarted) + ",";
-        bookAsString += new Date(dateFinished) + ",";
-        bookAsString += imageUrl + ",\\r\\n,";
+        bookAsString += id + "</td><td>";
+        bookAsString += title + "</td><td>";
+        bookAsString += author + "</td><td>";
+        bookAsString += category + "</td><td>";
+        bookAsString += status + "</td><td>";
+        bookAsString += new Date(dateStarted) + "</td><td>";
+        Date finished = new Date(dateFinished);
+        if (finished.equals(new Date(Long.MAX_VALUE))) {
+            bookAsString += "</td><td>";
+        }else {
+            bookAsString += finished + "</td><td>";
+        }
+        bookAsString += progress + "</td><td>";
+        bookAsString += length + "</td><td>";
+        bookAsString += imageUrl + "</td></tr>";
         return bookAsString;
     }
 }
