@@ -57,6 +57,8 @@ public class BaseActivity extends AppCompatActivity
             intent = new Intent(this, ArchiveActivity.class);
         } else if (itemId == R.id.nav_reading_list) {
             intent = new Intent(this, ReadingListActivity.class);
+        } else if (itemId == R.id.nav_settings) {
+            intent = new Intent(this, SettingsActivity.class);
         }
         drawer.closeDrawer(GravityCompat.START);
         startActivity(intent);

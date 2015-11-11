@@ -45,10 +45,6 @@
             android:name=".CreateNoteActivity"
             android:label="@string/create_note">
         </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings">
-        </activity>
     </application>
 
 </manifest>
