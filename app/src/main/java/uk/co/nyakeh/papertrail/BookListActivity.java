@@ -193,6 +193,7 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
         switch (item.getItemId()) {
             case R.id.menu_item_add_search:
                 Intent intent = new Intent(BookListActivity.this, SearchActivity.class);
+                intent.putExtra("book_status", Constants.READING);
                 startActivity(intent);
                 return true;
             default:
