@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,8 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
         super.onResume();
         updateUI();
     }
+
+
 
     private void AddNewBook() {
         Book book = new Book(Constants.READING);
@@ -176,6 +179,24 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
 
         public void setBooks(List<Book> books) {
             mBooks = books;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.fragment_book_search, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_add_search:
+                Intent intent = new Intent(BookListActivity.this, SearchActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

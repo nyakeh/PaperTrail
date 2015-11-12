@@ -52,7 +52,8 @@
         </activity>
         <activity
             android:name=".SearchActivity"
-            android:label="@string/search">
+            android:label="@string/search"
+            android:parentActivityName=".BookListActivity">
         </activity>
     </application>
 
