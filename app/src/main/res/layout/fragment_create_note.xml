@@ -42,7 +42,6 @@
             android:gravity="top|left"
             android:hint="What did you want to persist?"
             android:inputType="textMultiLine"
-            android:lines="1"
             android:maxLines="10"/>
 
     </LinearLayout>
