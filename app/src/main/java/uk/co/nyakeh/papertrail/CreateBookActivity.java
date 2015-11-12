@@ -166,6 +166,9 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
             case R.id.menu_item_delete_book:
                 BookLab.get(this).deleteBook(mBook.getId());
                 finish();

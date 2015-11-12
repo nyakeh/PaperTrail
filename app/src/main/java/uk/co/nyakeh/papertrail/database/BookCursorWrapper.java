@@ -2,13 +2,13 @@ package uk.co.nyakeh.papertrail.database;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
-import android.text.format.DateFormat;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
 import uk.co.nyakeh.papertrail.Book;
+
 import static uk.co.nyakeh.papertrail.database.BookDbSchema.BookTable;
 
 public class BookCursorWrapper extends CursorWrapper {
