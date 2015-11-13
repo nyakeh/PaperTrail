@@ -30,6 +30,8 @@ public class BookCursorWrapper extends CursorWrapper {
         String imageUrl = getString(getColumnIndex(BookTable.Cols.IMAGE_URL));
         String category = getString(getColumnIndex(BookTable.Cols.CATEGORY));
         String status = getString(getColumnIndex(BookTable.Cols.STATUS));
+        String isbn = getString(getColumnIndex(BookTable.Cols.ISBN));
+        String description = getString(getColumnIndex(BookTable.Cols.DESCRIPTION));
 
         Book book = new Book(UUID.fromString(id));
         book.setTitle(title);
@@ -41,6 +43,8 @@ public class BookCursorWrapper extends CursorWrapper {
         book.setImageUrl(imageUrl);
         book.setCategory(category);
         book.setStatus(status);
+        book.setISBN(isbn);
+        book.setDescription(description);
         return book;
     }
 
@@ -55,6 +59,8 @@ public class BookCursorWrapper extends CursorWrapper {
         String imageUrl = getString(getColumnIndex(BookTable.Cols.IMAGE_URL));
         String category = getString(getColumnIndex(BookTable.Cols.CATEGORY));
         String status = getString(getColumnIndex(BookTable.Cols.STATUS));
+        String isbn = getString(getColumnIndex(BookTable.Cols.ISBN));
+        String description = getString(getColumnIndex(BookTable.Cols.DESCRIPTION));
 
         String finishedString = "";
         if (!dateFinished.equals(new Date(Long.MAX_VALUE))) {
@@ -70,6 +76,8 @@ public class BookCursorWrapper extends CursorWrapper {
         bookAsString += status + "</td><td>";
         bookAsString += progress + "</td><td>";
         bookAsString += length + "</td><td>";
+        bookAsString += description + "</td><td>";
+        bookAsString += isbn + "</td><td>";
         bookAsString += imageUrl + "</td><td>";
         bookAsString += id + "</td></tr>";
         return bookAsString;

@@ -15,6 +15,8 @@ public class Book {
     private String mImageUrl = "";
     private String mCategory = "";
     private String mStatus = "";
+    private String mISBN = "";
+    private String mDescription = "";
 
     private static final Date DATE_MAX = new Date(Long.MAX_VALUE);
 
@@ -104,6 +106,14 @@ public class Book {
     public String getStatus() { return mStatus; }
 
     public void setStatus(String status) { mStatus = status; }
+
+    public String getISBN() { return mISBN; }
+
+    public void setISBN(String ISBN) { mISBN = ISBN; }
+
+    public String getDescription() { return mDescription; }
+
+    public void setDescription(String description) {  mDescription = description; }
 
     public boolean isEmpty() {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
