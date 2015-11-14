@@ -8,12 +8,13 @@ import java.util.Date;
 import java.util.UUID;
 
 import uk.co.nyakeh.papertrail.Book;
+import uk.co.nyakeh.papertrail.Constants;
 
 import static uk.co.nyakeh.papertrail.database.BookDbSchema.BookTable;
 
 public class BookCursorWrapper extends CursorWrapper {
 
-    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
 
     public BookCursorWrapper(Cursor cursor) {
         super(cursor);

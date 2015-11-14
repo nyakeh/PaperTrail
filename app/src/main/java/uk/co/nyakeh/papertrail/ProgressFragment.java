@@ -20,6 +20,7 @@ import android.widget.SeekBar;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ProgressFragment extends Fragment {
@@ -44,12 +45,12 @@ public class ProgressFragment extends Fragment {
         mProgressNumberPickerField.setValue(mBook.getProgress());
         mProgressNumberPickerField.setWrapSelectorWheel(false);
         mProgressNumberPickerField.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-                @Override
-                public void onValueChange(NumberPicker picker, int oldValue, int newValue) {
-                    updateProgress(newValue);
-                    mProgressSeekbarField.setProgress(newValue);
-                }
-            });
+            @Override
+            public void onValueChange(NumberPicker picker, int oldValue, int newValue) {
+                updateProgress(newValue);
+                mProgressSeekbarField.setProgress(newValue);
+            }
+        });
 
         mProgressSeekbarField = (SeekBar) view.findViewById(R.id.book_progress_bar);
         mProgressSeekbarField.setMax(mBook.getLength());
@@ -96,15 +97,16 @@ public class ProgressFragment extends Fragment {
     private void updateDate() {
         String date = "";
         Date dateFinished = mBook.getDateFinished();
-        if (!dateFinished.equals(new Date(Long.MAX_VALUE))) {
-            date = DateFormat.format("EEEE, MMM dd, yyyy", dateFinished).toString();
+        SimpleDateFormat day = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
+        if (!day.format(dateFinished).equals(day.format(new Date(Long.MAX_VALUE)))) {
+            date = DateFormat.format(Constants.DISPLAY_DATE_FORMAT, dateFinished).toString();
         }
         mBookFinishedButton.setText(date);
     }
 
     public void updateProgress(int progress) {
         mBook.setProgress(progress);
-        if (mBook.getStatus().equals(Constants.ARCHIVE)){
+        if (mBook.getStatus().equals(Constants.ARCHIVE)) {
             BookActivity.updateStatusSwitch(false);
         }
     }

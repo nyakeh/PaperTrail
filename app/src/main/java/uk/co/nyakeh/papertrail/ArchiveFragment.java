@@ -90,7 +90,7 @@ public class ArchiveFragment extends Fragment {
             mLetterTextView.setText(letter);
             mTitleTextView.setText(book.getTitle());
             mAuthorTextView.setText(book.getAuthor());
-            String formattedFinishedDate = DateFormat.format("EEEE, MMM dd, yyyy", mBook.getDateFinished()).toString();
+            String formattedFinishedDate = DateFormat.format(Constants.DISPLAY_DATE_FORMAT, mBook.getDateFinished()).toString();
             mDateFinishedTextView.setText(formattedFinishedDate);
         }
 

@@ -104,9 +104,7 @@ public class Book {
         return mLength;
     }
 
-    public void setLength(int length) {
-        mLength = length;
-    }
+    public void setLength(int length) { mLength = length; }
 
     public String getImageUrl() { return mImageUrl; }
 
@@ -129,10 +127,11 @@ public class Book {
     public void setDescription(String description) {  mDescription = description; }
 
     public boolean isEmpty() {
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-        boolean startedEqualsToday = fmt.format(mDateStarted).equals(fmt.format(new Date()));
+        SimpleDateFormat day = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
+        boolean startedToday = day.format(mDateStarted).equals(day.format(new Date()));
+        boolean notFinished = day.format(mDateFinished).equals(day.format(DATE_MAX));
 
-        if (mTitle.isEmpty() && mAuthor.isEmpty() && mProgress == 0 && mLength == 100 && mImageUrl.isEmpty() && startedEqualsToday && mDateFinished.equals(DATE_MAX)) {
+        if (mTitle.isEmpty() && mAuthor.isEmpty() && mProgress == 0 && mLength == 100 && mImageUrl.isEmpty() && startedToday && notFinished) {
             return true;
         }
         return false;

@@ -141,7 +141,7 @@ public class MetaDataFragment extends Fragment {
     }
 
     private void updateDate() {
-        String formattedStartDate = DateFormat.format("EEEE, MMM dd, yyyy", mBook.getDateStarted()).toString();
+        String formattedStartDate = DateFormat.format(Constants.DISPLAY_DATE_FORMAT, mBook.getDateStarted()).toString();
         mDateStartedButton.setText(formattedStartDate);
     }
 

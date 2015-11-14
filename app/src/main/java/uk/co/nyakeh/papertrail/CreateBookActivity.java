@@ -42,7 +42,7 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
 
         Bundle extras = getIntent().getExtras();
         String jsonBook = extras.getString(ARG_NEW_BOOK);
-        if (jsonBook.isEmpty()) {
+        if (jsonBook == null) {
             UUID mBookId = (UUID) extras.get(ARG_BOOK_ID);
             String mBookStatus = extras.getString(ARG_BOOK_STATUS);
 
@@ -160,7 +160,7 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
     }
 
     private void updateDate() {
-        String formattedStartDate = DateFormat.format("EEEE, MMM dd, yyyy", mBook.getDateStarted()).toString();
+        String formattedStartDate = DateFormat.format(Constants.DISPLAY_DATE_FORMAT, mBook.getDateStarted()).toString();
         mDateStartedButton.setText(formattedStartDate);
     }
 
