@@ -13,10 +13,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+
 import java.util.Date;
 import java.util.UUID;
 
 public class CreateBookActivity extends AppCompatActivity implements DateDialogCallbackInterface {
+    private static final String ARG_NEW_BOOK = "new_book";
     private static final String ARG_BOOK_ID = "book_id";
     private static final String ARG_BOOK_STATUS = "book_status";
     private static final String DIALOG_DATE = "DialogDate";
@@ -28,8 +31,6 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
     private Button mDateStartedButton;
     private EditText mImageUrlField;
     private EditText mCategoryField;
-    private UUID mBookId;
-    private String mBookStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +41,21 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle extras = getIntent().getExtras();
-        mBookId = (UUID) extras.get(ARG_BOOK_ID);
-        mBookStatus = extras.getString(ARG_BOOK_STATUS);
-        mBook = BookLab.get(this).getBook(mBookId);
-        if (mBook == null) {
-            mBook = new Book(mBookId);
-            mBook.setDateStarted(new Date());
-            mBook.setDateFinished(new Date(Long.MAX_VALUE));
-            mBook.setStatus(mBookStatus);
-            BookLab.get(this).addBook(mBook);
+        String jsonBook = extras.getString(ARG_NEW_BOOK);
+        if (jsonBook.isEmpty()) {
+            UUID mBookId = (UUID) extras.get(ARG_BOOK_ID);
+            String mBookStatus = extras.getString(ARG_BOOK_STATUS);
+
+            mBook = BookLab.get(this).getBook(mBookId);
+            if (mBook == null) {
+                mBook = new Book(mBookId);
+                mBook.setDateStarted(new Date());
+                mBook.setDateFinished(new Date(Long.MAX_VALUE));
+                mBook.setStatus(mBookStatus);
+                BookLab.get(this).addBook(mBook);
+            }
+        } else {
+            mBook = new Gson().fromJson(jsonBook, Book.class);
         }
 
         mTitleField = (EditText) findViewById(R.id.book_title);

@@ -20,6 +20,10 @@ public class Book {
 
     private static final Date DATE_MAX = new Date(Long.MAX_VALUE);
 
+    public Book(UUID id) {
+        mId = id;
+    }
+
     public Book(String status) {
         this(UUID.randomUUID());
         mDateStarted = new Date();
@@ -27,8 +31,14 @@ public class Book {
         mStatus = status;
     }
 
-    public Book(UUID id) {
-        mId = id;
+    public Book(String status,String title,String author,String isbn) {
+        this(UUID.randomUUID());
+        mDateStarted = new Date();
+        mDateFinished = DATE_MAX;
+        mStatus = status;
+        mTitle = title;
+        mAuthor = author;
+        mISBN = isbn;
     }
 
     public UUID getId() {

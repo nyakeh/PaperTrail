@@ -1,5 +1,6 @@
 package uk.co.nyakeh.papertrail;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,8 +33,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.UUID;
 
 public class SearchActivity extends AppCompatActivity {
+    private static final String ARG_BOOK_CREATION_STATUS = "book_creation_status";
+    private String mBookCreationStatus;
     private EditText mSearchText;
     private Button mSearchClearTextButton;
     private RecyclerView mSearchResultsRecyclerView;
@@ -45,6 +51,9 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Bundle extras = getIntent().getExtras();
+        mBookCreationStatus = extras.getString(ARG_BOOK_CREATION_STATUS);
+
         mSearchText = (EditText) findViewById(R.id.search_text);
         mSearchText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -53,7 +62,6 @@ public class SearchActivity extends AppCompatActivity {
                     new BookSearch().execute(inputChar.toString());
                 }
             }
-
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -120,7 +128,7 @@ public class SearchActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             TextView txt = (TextView) findViewById(R.id.search_output);
             Log.d("Raw results: ", result);
-            JSONObject resultObject = null;
+            JSONObject resultObject;
             try {
                 resultObject = new JSONObject(result);
                 txt.setText("Total books: " + resultObject.getString("totalItems"));
@@ -139,9 +147,8 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-
     private class SearchResultHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private JSONObject mSearchResult;
+        private Book mSearchResult;
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
         private TextView mIsbnTextView;
@@ -156,12 +163,10 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         private void bindSearchResult(JSONObject book) {
-            mSearchResult = book;
             StringBuilder authorBuilder = new StringBuilder("");
             String isbn = "";
             try {
                 JSONObject volumeObject = book.getJSONObject("volumeInfo");
-                mTitleTextView.setText(volumeObject.getString("title"));
                 JSONArray authorArray = volumeObject.getJSONArray("authors");
                 for (int i = 0; i < authorArray.length(); i++) {
                     if (i > 0) {
@@ -169,7 +174,6 @@ public class SearchActivity extends AppCompatActivity {
                     }
                     authorBuilder.append(authorArray.getString(i));
                 }
-                mAuthorTextView.setText(authorBuilder.toString());
                 JSONArray isbnArray = volumeObject.getJSONArray("industryIdentifiers");
                 for (int i = 0; i < isbnArray.length(); i++) {
                     JSONObject isbnObject = isbnArray.getJSONObject(i);
@@ -177,18 +181,21 @@ public class SearchActivity extends AppCompatActivity {
                         isbn = isbnObject.getString("identifier");
                     }
                 }
-                mIsbnTextView.setText(isbn);
+                mSearchResult = new Book(mBookCreationStatus, volumeObject.getString("title"), authorBuilder.toString(), isbn);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            mTitleTextView.setText(mSearchResult.getTitle());
+            mAuthorTextView.setText(mSearchResult.getAuthor());
+            mIsbnTextView.setText(mSearchResult.getISBN());
         }
 
         @Override
         public void onClick(View view) {
-            Snackbar.make(findViewById(R.id.settings_layout), mTitleTextView.getText(), Snackbar.LENGTH_LONG).show();
-//            Intent intent = new Intent(SearchActivity.this, CreateBookActivity.class);
-//            intent.putExtra("book_id", mBook.getId());
-//            startActivity(intent);
+            Snackbar.make(findViewById(R.id.settings_layout), mSearchResult.getTitle(), Snackbar.LENGTH_LONG).show();
+            Intent intent = new Intent(SearchActivity.this, CreateBookActivity.class);
+            intent.putExtra("new_book", new Gson().toJson(mSearchResult));
+            startActivity(intent);
         }
     }
 
