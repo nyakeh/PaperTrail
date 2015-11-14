@@ -29,6 +29,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class SearchActivity extends AppCompatActivity {
     private EditText mSearchText;
@@ -90,19 +91,14 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             String xml = "";
-
             URL url;
-            HttpURLConnection urlConnection = null;
+            HttpURLConnection urlConnection;
             String queryString = params[0];
             try {
-                url = new URL("https://www.googleapis.com/books/v1/volumes?q=" + queryString + "&filter=ebooks&key=" + getString(R.string.google_books_api_key));
-
+                url = new URL("https://www.googleapis.com/books/v1/volumes?q=" + URLEncoder.encode(queryString, "UTF-8") + "&filter=ebooks&key=" + getString(R.string.google_books_api_key));
                 urlConnection = (HttpURLConnection) url.openConnection();
-
                 InputStream in = urlConnection.getInputStream();
-
                 InputStreamReader isw = new InputStreamReader(in);
-
                 BufferedReader br = new BufferedReader(isw);
                 StringBuilder sb = new StringBuilder();
                 String line;
@@ -123,7 +119,6 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             TextView txt = (TextView) findViewById(R.id.search_output);
-            //txt.setText("Executed" + result);
             Log.d("Raw results: ", result);
             JSONObject resultObject = null;
             try {
