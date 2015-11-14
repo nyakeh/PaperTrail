@@ -18,9 +18,6 @@ import android.widget.EditText;
 import java.util.Date;
 
 public class MetaDataFragment extends Fragment {
-    private static final int REQUEST_DATE_STARTED = 0;
-    private static final String DIALOG_DATE = "DialogDate";
-
     private EditText mTitleField;
     private EditText mAuthorField;
     private EditText mLengthField;
@@ -97,8 +94,8 @@ public class MetaDataFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mBook.getDateStarted());
-                dialog.setTargetFragment(MetaDataFragment.this, REQUEST_DATE_STARTED);
-                dialog.show(manager, DIALOG_DATE);
+                dialog.setTargetFragment(MetaDataFragment.this, Constants.REQUEST_DATE_STARTED);
+                dialog.show(manager, Constants.DIALOG_DATE);
             }
         });
 
@@ -151,7 +148,7 @@ public class MetaDataFragment extends Fragment {
             return;
         }
 
-        if (requestCode == REQUEST_DATE_STARTED) {
+        if (requestCode == Constants.REQUEST_DATE_STARTED) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mBook.setDateStarted(date);
             updateDate();

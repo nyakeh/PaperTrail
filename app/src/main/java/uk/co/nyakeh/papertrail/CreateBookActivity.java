@@ -22,7 +22,6 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
     private static final String ARG_NEW_BOOK = "new_book";
     private static final String ARG_BOOK_ID = "book_id";
     private static final String ARG_BOOK_STATUS = "book_status";
-    private static final String DIALOG_DATE = "DialogDate";
 
     private Book mBook;
     private EditText mTitleField;
@@ -118,7 +117,7 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
             public void onClick(View v) {
                 FragmentManager manager = getSupportFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mBook.getDateStarted());
-                dialog.show(manager, DIALOG_DATE);
+                dialog.show(manager, Constants.DIALOG_DATE);
             }
         });
 

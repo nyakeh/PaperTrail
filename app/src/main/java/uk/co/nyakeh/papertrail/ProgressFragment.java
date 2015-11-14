@@ -24,8 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ProgressFragment extends Fragment {
-    private static final int REQUEST_DATE_FINISHED = 1;
-    private static final String DIALOG_DATE = "DialogDate";
     private NumberPicker mProgressNumberPickerField;
     private SeekBar mProgressSeekbarField;
     private Button mBookFinishedButton;
@@ -86,8 +84,8 @@ public class ProgressFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(new Date());
-                dialog.setTargetFragment(ProgressFragment.this, REQUEST_DATE_FINISHED);
-                dialog.show(manager, DIALOG_DATE);
+                dialog.setTargetFragment(ProgressFragment.this, Constants.REQUEST_DATE_FINISHED);
+                dialog.show(manager, Constants.DIALOG_DATE);
             }
         });
         updateDate();
@@ -130,7 +128,7 @@ public class ProgressFragment extends Fragment {
             return;
         }
 
-        if (requestCode == REQUEST_DATE_FINISHED) {
+        if (requestCode == Constants.REQUEST_DATE_FINISHED) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mBook.setDateFinished(date);
             updateDate();
