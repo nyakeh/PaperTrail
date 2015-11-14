@@ -6,13 +6,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Random;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class SearchActivity extends AppCompatActivity {
     private EditText mSearchText;
@@ -32,7 +43,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
                 // performSearch()
                 if (!inputChar.toString().isEmpty()) {
-                    new BookSearch().execute("quiet");
+                    new BookSearch().execute(inputChar.toString());
                 }
             }
 
@@ -69,13 +80,50 @@ public class SearchActivity extends AppCompatActivity {
     private class BookSearch extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
-            return String.valueOf(new Random().nextInt());
+            String xml = "";
+
+            URL url;
+            HttpURLConnection urlConnection = null;
+            String queryString = params[0];
+            try {
+                url = new URL("https://www.googleapis.com/books/v1/volumes?q=" + queryString + "");
+
+                urlConnection = (HttpURLConnection) url.openConnection();
+
+                InputStream in = urlConnection.getInputStream();
+
+                InputStreamReader isw = new InputStreamReader(in);
+
+                BufferedReader br = new BufferedReader(isw);
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line+"\n");
+                }
+                br.close();
+
+                xml = sb.toString();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return xml;
         }
 
         @Override
         protected void onPostExecute(String result) {
             TextView txt = (TextView) findViewById(R.id.search_output);
-            txt.setText("Executed" + result);
+            //txt.setText("Executed" + result);
+            Log.d("Raw results: ", result);
+            JSONObject resultObject = null;
+            try {
+                resultObject = new JSONObject(result);
+                txt.setText("Total books: " + resultObject.getString("totalItems"));
+                JSONArray bookArray = resultObject.getJSONArray("items");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

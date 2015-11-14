@@ -6,11 +6,9 @@ import android.database.CursorWrapper;
 import java.util.Date;
 import java.util.UUID;
 
-import uk.co.nyakeh.papertrail.Book;
 import uk.co.nyakeh.papertrail.Note;
 
-import static uk.co.nyakeh.papertrail.database.BookDbSchema.BookTable;
-import static uk.co.nyakeh.papertrail.database.NoteDbSchema.*;
+import static uk.co.nyakeh.papertrail.database.NoteDbSchema.NoteTable;
 
 public class NoteCursorWrapper extends CursorWrapper {
     public NoteCursorWrapper(Cursor cursor) {
