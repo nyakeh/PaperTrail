@@ -31,7 +31,7 @@ public class Book {
         mStatus = status;
     }
 
-    public Book(String status,String title,String author,String isbn) {
+    public Book(String status,String title,String author,String isbn,Integer pageCount,String imageUrl,String description) {
         this(UUID.randomUUID());
         mDateStarted = new Date();
         mDateFinished = DATE_MAX;
@@ -39,6 +39,9 @@ public class Book {
         mTitle = title;
         mAuthor = author;
         mISBN = isbn;
+        mLength = pageCount;
+        mImageUrl = imageUrl;
+        mDescription = description;
     }
 
     public UUID getId() {

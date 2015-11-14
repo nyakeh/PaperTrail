@@ -151,7 +151,7 @@ public class ReadingListFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_item_add_search:
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
-                intent.putExtra("book_status", Constants.QUEUE);
+                intent.putExtra("book_creation_status", Constants.QUEUE);
                 startActivity(intent);
                 return true;
             default:

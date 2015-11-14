@@ -33,7 +33,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.UUID;
 
 public class SearchActivity extends AppCompatActivity {
     private static final String ARG_BOOK_CREATION_STATUS = "book_creation_status";
@@ -62,6 +61,7 @@ public class SearchActivity extends AppCompatActivity {
                     new BookSearch().execute(inputChar.toString());
                 }
             }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -105,6 +105,10 @@ public class SearchActivity extends AppCompatActivity {
             try {
                 url = new URL("https://www.googleapis.com/books/v1/volumes?q=" + URLEncoder.encode(queryString, "UTF-8") + "&filter=ebooks&maxResults=10&printType=books&showPreorders=true&key=" + getString(R.string.google_books_api_key));
                 urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setReadTimeout(10000);
+                urlConnection.setConnectTimeout(15000);
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setDoInput(true);
                 InputStream in = urlConnection.getInputStream();
                 InputStreamReader isw = new InputStreamReader(in);
                 BufferedReader br = new BufferedReader(isw);
@@ -163,25 +167,54 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         private void bindSearchResult(JSONObject book) {
+            String title = "";
             StringBuilder authorBuilder = new StringBuilder("");
             String isbn = "";
+            String imageUrl = "";
+            int pageCount = 100;
+            String description = "";
             try {
                 JSONObject volumeObject = book.getJSONObject("volumeInfo");
-                JSONArray authorArray = volumeObject.getJSONArray("authors");
-                for (int i = 0; i < authorArray.length(); i++) {
-                    if (i > 0) {
-                        authorBuilder.append(", ");
+
+                try {
+                    title = volumeObject.getString("title");
+                } catch (Exception e) { }
+
+                try {
+                    JSONArray authorArray = volumeObject.getJSONArray("authors");
+                    for (int i = 0; i < authorArray.length(); i++) {
+                        if (i > 0) {
+                            authorBuilder.append(", ");
+                        }
+                        authorBuilder.append(authorArray.getString(i));
                     }
-                    authorBuilder.append(authorArray.getString(i));
-                }
-                JSONArray isbnArray = volumeObject.getJSONArray("industryIdentifiers");
-                for (int i = 0; i < isbnArray.length(); i++) {
-                    JSONObject isbnObject = isbnArray.getJSONObject(i);
-                    if (isbnObject.getString("type").equals("ISBN_10")){
-                        isbn = isbnObject.getString("identifier");
+                } catch (Exception e) { }
+
+                try {
+                    JSONArray isbnArray = volumeObject.getJSONArray("industryIdentifiers");
+                    for (int i = 0; i < isbnArray.length(); i++) {
+                        JSONObject isbnObject = isbnArray.getJSONObject(i);
+                        if (isbnObject.getString("type").equals("ISBN_10")) {
+                            isbn = isbnObject.getString("identifier");
+                        }
                     }
-                }
-                mSearchResult = new Book(mBookCreationStatus, volumeObject.getString("title"), authorBuilder.toString(), isbn);
+                } catch (Exception e) { }
+
+                try {
+                    imageUrl = volumeObject.getJSONObject("imageLinks").getString("thumbnail");
+                } catch (Exception e) { }
+
+                try {
+                    String pageCountString = volumeObject.getString("pageCount");
+                    if (!pageCountString.isEmpty()) {
+                        pageCount = Integer.parseInt(pageCountString);
+                    }
+                } catch (Exception e) { }
+
+                try {
+                    description = volumeObject.getString("description");
+                } catch (Exception e) { }
+                mSearchResult = new Book(mBookCreationStatus, title, authorBuilder.toString(), isbn, pageCount, imageUrl, description);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -195,6 +228,7 @@ public class SearchActivity extends AppCompatActivity {
             Snackbar.make(findViewById(R.id.settings_layout), mSearchResult.getTitle(), Snackbar.LENGTH_LONG).show();
             Intent intent = new Intent(SearchActivity.this, CreateBookActivity.class);
             intent.putExtra("new_book", new Gson().toJson(mSearchResult));
+            BookLab.get(SearchActivity.this).addBook(mSearchResult);
             startActivity(intent);
         }
     }
