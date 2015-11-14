@@ -12,9 +12,6 @@ import android.widget.EditText;
 import java.util.UUID;
 
 public class CreateNoteActivity extends AppCompatActivity {
-    private static final String ARG_BOOK_ID = "book_id";
-    private static final String ARG_NOTE_CONTENT = "note_content";
-
     private EditText mNoteTitle;
     private EditText mNoteContent;
     private Note mNote;
@@ -28,8 +25,8 @@ public class CreateNoteActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle extras = getIntent().getExtras();
-        UUID bookId = (UUID) extras.get(ARG_BOOK_ID);
-        String startingNoteContent = extras.getString(ARG_NOTE_CONTENT);
+        UUID bookId = (UUID) extras.get(Constants.ARG_BOOK_ID);
+        String startingNoteContent = extras.getString(Constants.ARG_NOTE_CONTENT);
 
         Note note = new Note(bookId, startingNoteContent);
         BookLab.get(this).addNote(note);
@@ -38,12 +35,12 @@ public class CreateNoteActivity extends AppCompatActivity {
         mNoteTitle = (EditText) findViewById(R.id.note_title);
         mNoteTitle.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
+                mNote.setTitle(inputChar.toString());
             }
 
             @Override
-            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-                mNote.setTitle(inputChar.toString());
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
@@ -55,12 +52,12 @@ public class CreateNoteActivity extends AppCompatActivity {
         mNoteContent.setText(mNote.getContent());
         mNoteContent.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
+                mNote.setContent(inputChar.toString());
             }
 
             @Override
-            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-                mNote.setContent(inputChar.toString());
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
@@ -86,7 +83,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.menu_item_save_note:
-                if (noteEmpty()) {
+                if ((mNote.getContent() == null || mNote.getContent().isEmpty()) && (mNote.getTitle() == null || mNote.getTitle().isEmpty())) {
                     BookLab.get(this).deleteNote(mNote.getId());
                 } else {
                     BookLab.get(this).updateNote(mNote);
@@ -102,9 +99,5 @@ public class CreateNoteActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         BookLab.get(this).updateNote(mNote);
-    }
-
-    public boolean noteEmpty() {
-        return (mNote.getContent() == null || mNote.getContent().isEmpty()) && (mNote.getTitle() == null || mNote.getTitle().isEmpty()) ;
     }
 }

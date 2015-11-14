@@ -133,7 +133,7 @@ public class NoteFragment extends Fragment implements NoteDialogCallbackInterfac
                 noteDialogFragment.setEnterTransition(new Fade());
             }
             noteDialogFragment.setTargetFragment(NoteFragment.this, 1);
-            noteDialogFragment.show(fm, "Note Dialog Fragment");
+            noteDialogFragment.show(fm, "Note Dialog");
         }
     }
 

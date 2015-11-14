@@ -35,7 +35,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class SearchActivity extends AppCompatActivity {
-    private static final String ARG_BOOK_CREATION_STATUS = "book_creation_status";
     private String mBookCreationStatus;
     private EditText mSearchText;
     private Button mSearchClearTextButton;
@@ -51,7 +50,7 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle extras = getIntent().getExtras();
-        mBookCreationStatus = extras.getString(ARG_BOOK_CREATION_STATUS);
+        mBookCreationStatus = extras.getString(Constants.ARG_BOOK_CREATION_STATUS);
 
         mSearchText = (EditText) findViewById(R.id.search_text);
         mSearchText.addTextChangedListener(new TextWatcher() {
@@ -227,7 +226,7 @@ public class SearchActivity extends AppCompatActivity {
         public void onClick(View view) {
             Snackbar.make(findViewById(R.id.settings_layout), mSearchResult.getTitle(), Snackbar.LENGTH_LONG).show();
             Intent intent = new Intent(SearchActivity.this, CreateBookActivity.class);
-            intent.putExtra("new_book", new Gson().toJson(mSearchResult));
+            intent.putExtra(Constants.ARG_NEW_BOOK, new Gson().toJson(mSearchResult));
             BookLab.get(SearchActivity.this).addBook(mSearchResult);
             startActivity(intent);
         }

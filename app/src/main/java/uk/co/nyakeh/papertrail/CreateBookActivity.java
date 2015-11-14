@@ -19,10 +19,6 @@ import java.util.Date;
 import java.util.UUID;
 
 public class CreateBookActivity extends AppCompatActivity implements DateDialogCallbackInterface {
-    private static final String ARG_NEW_BOOK = "new_book";
-    private static final String ARG_BOOK_ID = "book_id";
-    private static final String ARG_BOOK_STATUS = "book_status";
-
     private Book mBook;
     private EditText mTitleField;
     private EditText mAuthorField;
@@ -40,10 +36,10 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle extras = getIntent().getExtras();
-        String jsonBook = extras.getString(ARG_NEW_BOOK);
+        String jsonBook = extras.getString(Constants.ARG_NEW_BOOK);
         if (jsonBook == null) {
-            UUID mBookId = (UUID) extras.get(ARG_BOOK_ID);
-            String mBookStatus = extras.getString(ARG_BOOK_STATUS);
+            UUID mBookId = (UUID) extras.get(Constants.ARG_BOOK_ID);
+            String mBookStatus = extras.getString(Constants.ARG_BOOK_STATUS);
 
             mBook = BookLab.get(this).getBook(mBookId);
             if (mBook == null) {

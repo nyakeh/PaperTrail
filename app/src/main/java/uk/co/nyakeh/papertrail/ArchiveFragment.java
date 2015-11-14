@@ -97,7 +97,7 @@ public class ArchiveFragment extends Fragment {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getActivity(), BookActivity.class);
-            intent.putExtra("book_id", mBook.getId());
+            intent.putExtra(Constants.ARG_BOOK_ID, mBook.getId());
             startActivity(intent);
         }
     }

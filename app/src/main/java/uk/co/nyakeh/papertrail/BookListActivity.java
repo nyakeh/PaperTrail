@@ -91,8 +91,8 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
         Book book = new Book(Constants.READING);
         BookLab.get(this).addBook(book);
         Intent intent = new Intent(BookListActivity.this, CreateBookActivity.class);
-        intent.putExtra("book_id", book.getId());
-        intent.putExtra("book_status", Constants.READING);
+        intent.putExtra(Constants.ARG_BOOK_ID, book.getId());
+        intent.putExtra(Constants.ARG_BOOK_STATUS, Constants.READING);
         startActivity(intent);
     }
 
@@ -139,7 +139,7 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(BookListActivity.this, BookActivity.class);
-            intent.putExtra("book_id", mBook.getId());
+            intent.putExtra(Constants.ARG_BOOK_ID, mBook.getId());
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 String transitionName = getString(R.string.transition_book_cover);
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(BookListActivity.this, mImageView, transitionName);
@@ -191,7 +191,7 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
         switch (item.getItemId()) {
             case R.id.menu_item_add_search:
                 Intent intent = new Intent(BookListActivity.this, SearchActivity.class);
-                intent.putExtra("book_creation_status", Constants.READING);
+                intent.putExtra(Constants.ARG_BOOK_CREATION_STATUS, Constants.READING);
                 startActivity(intent);
                 return true;
             default:

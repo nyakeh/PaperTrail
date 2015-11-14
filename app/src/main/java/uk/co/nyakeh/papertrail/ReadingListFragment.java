@@ -52,8 +52,8 @@ public class ReadingListFragment extends Fragment {
         BookLab.get(getActivity()).addBook(book);
 
         Intent intent = new Intent(getActivity(), CreateBookActivity.class);
-        intent.putExtra("book_id", book.getId());
-        intent.putExtra("book_status", Constants.QUEUE);
+        intent.putExtra(Constants.ARG_BOOK_ID, book.getId());
+        intent.putExtra(Constants.ARG_BOOK_STATUS, Constants.QUEUE);
         startActivity(intent);
     }
 
@@ -106,7 +106,7 @@ public class ReadingListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(), BookActivity.class);
-            intent.putExtra("book_id", mBook.getId());
+            intent.putExtra(Constants.ARG_BOOK_ID, mBook.getId());
             startActivity(intent);
         }
     }
@@ -151,7 +151,7 @@ public class ReadingListFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_item_add_search:
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
-                intent.putExtra("book_creation_status", Constants.QUEUE);
+                intent.putExtra(Constants.ARG_BOOK_CREATION_STATUS, Constants.QUEUE);
                 startActivity(intent);
                 return true;
             default:

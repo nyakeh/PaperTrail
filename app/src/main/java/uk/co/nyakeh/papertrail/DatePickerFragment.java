@@ -17,13 +17,12 @@ import java.util.GregorianCalendar;
 
 public class DatePickerFragment extends DialogFragment {
     protected static final String EXTRA_DATE = "uk.co.nyakeh.papertrail.date";
-    private static final String ARG_DATE ="date";
 
     private DatePicker mDatePicker;
 
     public static DatePickerFragment newInstance(Date date){
         Bundle arguments = new Bundle();
-        arguments.putSerializable(ARG_DATE, date);
+        arguments.putSerializable(Constants.ARG_DATE, date);
 
         DatePickerFragment fragment = new DatePickerFragment();
         fragment.setArguments(arguments);
@@ -32,7 +31,7 @@ public class DatePickerFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Date date = (Date) getArguments().getSerializable(ARG_DATE);
+        Date date = (Date) getArguments().getSerializable(Constants.ARG_DATE);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
