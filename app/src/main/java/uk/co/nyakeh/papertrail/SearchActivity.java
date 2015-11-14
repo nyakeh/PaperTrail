@@ -131,21 +131,25 @@ public class SearchActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             TextView txt = (TextView) findViewById(R.id.search_output);
             Log.d("Raw results: ", result);
-            JSONObject resultObject;
-            try {
-                resultObject = new JSONObject(result);
-                txt.setText("Total books: " + resultObject.getString("totalItems"));
-                JSONArray bookArray = resultObject.getJSONArray("items");
+            if (result.equals("")) {
+                txt.setText("Sorry, we failed to retrieve any results.");
+            } else {
+                JSONObject resultObject;
+                try {
+                    resultObject = new JSONObject(result);
+                    txt.setText("Total books: " + resultObject.getString("totalItems"));
+                    JSONArray bookArray = resultObject.getJSONArray("items");
 
-                if (mSearchResultsAdapter == null) {
-                    mSearchResultsAdapter = new SearchResultsAdapter(bookArray);
-                    mSearchResultsRecyclerView.setAdapter(mSearchResultsAdapter);
-                } else {
-                    mSearchResultsAdapter.setBooks(bookArray);
-                    mSearchResultsAdapter.notifyDataSetChanged();
+                    if (mSearchResultsAdapter == null) {
+                        mSearchResultsAdapter = new SearchResultsAdapter(bookArray);
+                        mSearchResultsRecyclerView.setAdapter(mSearchResultsAdapter);
+                    } else {
+                        mSearchResultsAdapter.setBooks(bookArray);
+                        mSearchResultsAdapter.notifyDataSetChanged();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -177,7 +181,8 @@ public class SearchActivity extends AppCompatActivity {
 
                 try {
                     title = volumeObject.getString("title");
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
 
                 try {
                     JSONArray authorArray = volumeObject.getJSONArray("authors");
@@ -187,7 +192,8 @@ public class SearchActivity extends AppCompatActivity {
                         }
                         authorBuilder.append(authorArray.getString(i));
                     }
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
 
                 try {
                     JSONArray isbnArray = volumeObject.getJSONArray("industryIdentifiers");
@@ -197,22 +203,26 @@ public class SearchActivity extends AppCompatActivity {
                             isbn = isbnObject.getString("identifier");
                         }
                     }
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
 
                 try {
                     imageUrl = volumeObject.getJSONObject("imageLinks").getString("thumbnail");
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
 
                 try {
                     String pageCountString = volumeObject.getString("pageCount");
                     if (!pageCountString.isEmpty()) {
                         pageCount = Integer.parseInt(pageCountString);
                     }
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
 
                 try {
                     description = volumeObject.getString("description");
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                }
                 mSearchResult = new Book(mBookCreationStatus, title, authorBuilder.toString(), isbn, pageCount, imageUrl, description);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -227,7 +237,6 @@ public class SearchActivity extends AppCompatActivity {
             Snackbar.make(findViewById(R.id.settings_layout), mSearchResult.getTitle(), Snackbar.LENGTH_LONG).show();
             Intent intent = new Intent(SearchActivity.this, CreateBookActivity.class);
             intent.putExtra(Constants.ARG_NEW_BOOK, new Gson().toJson(mSearchResult));
-            //BookLab.get(SearchActivity.this).addBook(mSearchResult);
             startActivity(intent);
         }
     }

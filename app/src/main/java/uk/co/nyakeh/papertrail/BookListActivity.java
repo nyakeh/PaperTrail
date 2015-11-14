@@ -90,7 +90,6 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
 
     private void AddNewBook() {
         Book book = new Book(Constants.READING);
-        //BookLab.get(this).addBook(book);
         Intent intent = new Intent(BookListActivity.this, CreateBookActivity.class);
         intent.putExtra(Constants.ARG_NEW_BOOK, new Gson().toJson(book));
         startActivity(intent);

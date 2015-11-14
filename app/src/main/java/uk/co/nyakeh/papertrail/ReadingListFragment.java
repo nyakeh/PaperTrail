@@ -51,7 +51,6 @@ public class ReadingListFragment extends Fragment {
 
     private void AddNewBook() {
         Book book = new Book(Constants.QUEUE);
-        //BookLab.get(getActivity()).addBook(book);
         Intent intent = new Intent(getActivity(), CreateBookActivity.class);
         intent.putExtra(Constants.ARG_NEW_BOOK, new Gson().toJson(book));
         startActivity(intent);
