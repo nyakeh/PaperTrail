@@ -162,11 +162,27 @@ public class SearchActivity extends AppCompatActivity {
 
         private void bindSearchResult(JSONObject book) {
             mSearchResult = book;
+            StringBuilder authorBuilder = new StringBuilder("");
+            String isbn = "";
             try {
                 JSONObject volumeObject = book.getJSONObject("volumeInfo");
                 mTitleTextView.setText(volumeObject.getString("title"));
-                //mAuthorTextView.setText(String.valueOf(volumeObject.getJSONArray("authors").getJSONObject(0)));
-                //mIsbnTextView.setText(volumeObject.getJSONArray("industryIdentifiers").getJSONObject("title"));
+                JSONArray authorArray = volumeObject.getJSONArray("authors");
+                for (int i = 0; i < authorArray.length(); i++) {
+                    if (i > 0) {
+                        authorBuilder.append(", ");
+                    }
+                    authorBuilder.append(authorArray.getString(i));
+                }
+                mAuthorTextView.setText(authorBuilder.toString());
+                JSONArray isbnArray = volumeObject.getJSONArray("industryIdentifiers");
+                for (int i = 0; i < isbnArray.length(); i++) {
+                    JSONObject isbnObject = isbnArray.getJSONObject(i);
+                    if (isbnObject.getString("type").equals("ISBN_10")){
+                        isbn = isbnObject.getString("identifier");
+                    }
+                }
+                mIsbnTextView.setText(isbn);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
