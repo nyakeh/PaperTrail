@@ -35,8 +35,10 @@ public class BookLab {
     }
 
     public void addBook(Book book) {
-        ContentValues values = getBookContentValues(book);
-        mDatabase.insert(BookTable.NAME, null, values);
+        if (getBook(book.getId()) == null) {
+            ContentValues values = getBookContentValues(book);
+            mDatabase.insert(BookTable.NAME, null, values);
+        }
     }
 
     public void addNote(Note note) {

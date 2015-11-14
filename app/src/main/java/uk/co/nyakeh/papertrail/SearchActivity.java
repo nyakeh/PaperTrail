@@ -227,7 +227,7 @@ public class SearchActivity extends AppCompatActivity {
             Snackbar.make(findViewById(R.id.settings_layout), mSearchResult.getTitle(), Snackbar.LENGTH_LONG).show();
             Intent intent = new Intent(SearchActivity.this, CreateBookActivity.class);
             intent.putExtra(Constants.ARG_NEW_BOOK, new Gson().toJson(mSearchResult));
-            BookLab.get(SearchActivity.this).addBook(mSearchResult);
+            //BookLab.get(SearchActivity.this).addBook(mSearchResult);
             startActivity(intent);
         }
     }

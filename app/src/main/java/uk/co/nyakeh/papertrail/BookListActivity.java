@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -89,10 +90,9 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
 
     private void AddNewBook() {
         Book book = new Book(Constants.READING);
-        BookLab.get(this).addBook(book);
+        //BookLab.get(this).addBook(book);
         Intent intent = new Intent(BookListActivity.this, CreateBookActivity.class);
-        intent.putExtra(Constants.ARG_BOOK_ID, book.getId());
-        intent.putExtra(Constants.ARG_BOOK_STATUS, Constants.READING);
+        intent.putExtra(Constants.ARG_NEW_BOOK, new Gson().toJson(book));
         startActivity(intent);
     }
 

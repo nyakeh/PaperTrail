@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 public class ReadingListFragment extends Fragment {
@@ -49,11 +51,9 @@ public class ReadingListFragment extends Fragment {
 
     private void AddNewBook() {
         Book book = new Book(Constants.QUEUE);
-        BookLab.get(getActivity()).addBook(book);
-
+        //BookLab.get(getActivity()).addBook(book);
         Intent intent = new Intent(getActivity(), CreateBookActivity.class);
-        intent.putExtra(Constants.ARG_BOOK_ID, book.getId());
-        intent.putExtra(Constants.ARG_BOOK_STATUS, Constants.QUEUE);
+        intent.putExtra(Constants.ARG_NEW_BOOK, new Gson().toJson(book));
         startActivity(intent);
     }
 

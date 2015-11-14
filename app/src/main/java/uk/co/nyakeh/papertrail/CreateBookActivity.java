@@ -16,7 +16,6 @@ import android.widget.EditText;
 import com.google.gson.Gson;
 
 import java.util.Date;
-import java.util.UUID;
 
 public class CreateBookActivity extends AppCompatActivity implements DateDialogCallbackInterface {
     private Book mBook;
@@ -37,21 +36,8 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
 
         Bundle extras = getIntent().getExtras();
         String jsonBook = extras.getString(Constants.ARG_NEW_BOOK);
-        if (jsonBook == null) {
-            UUID mBookId = (UUID) extras.get(Constants.ARG_BOOK_ID);
-            String mBookStatus = extras.getString(Constants.ARG_BOOK_STATUS);
-
-            mBook = BookLab.get(this).getBook(mBookId);
-            if (mBook == null) {
-                mBook = new Book(mBookId);
-                mBook.setDateStarted(new Date());
-                mBook.setDateFinished(new Date(Long.MAX_VALUE));
-                mBook.setStatus(mBookStatus);
-                BookLab.get(this).addBook(mBook);
-            }
-        } else {
-            mBook = new Gson().fromJson(jsonBook, Book.class);
-        }
+        mBook = new Gson().fromJson(jsonBook, Book.class);
+        BookLab.get(this).addBook(mBook);
 
         mTitleField = (EditText) findViewById(R.id.book_title);
         mTitleField.setText(mBook.getTitle());
