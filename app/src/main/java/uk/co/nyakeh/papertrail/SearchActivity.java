@@ -86,7 +86,7 @@ public class SearchActivity extends AppCompatActivity {
             HttpURLConnection urlConnection = null;
             String queryString = params[0];
             try {
-                url = new URL("https://www.googleapis.com/books/v1/volumes?q=" + queryString + "&key=" + getString(R.string.google_books_api_key));
+                url = new URL("https://www.googleapis.com/books/v1/volumes?q=" + queryString + "&filter=ebooks&key=" + getString(R.string.google_books_api_key));
 
                 urlConnection = (HttpURLConnection) url.openConnection();
 
