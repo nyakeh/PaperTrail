@@ -152,7 +152,7 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
         }
     }
 
-    public class BookAdapter extends RecyclerView.Adapter<BookHolder> {
+    private class BookAdapter extends RecyclerView.Adapter<BookHolder> {
         private List<Book> mBooks;
 
         public BookAdapter(List<Book> books) {
