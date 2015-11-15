@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
         </LinearLayout>
+
         <TextView
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
@@ -44,8 +45,16 @@
             android:id="@+id/book_progress_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            />
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/book_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="5"
+            android:paddingTop="@dimen/list_item_separation"
+            android:scrollbars="vertical"
+            tools:text="Go facts series 2: plants 4 book set and teacher's guide (plants, flowers, trees, plants as food)"/>
 
         <TextView
             style="?android:listSeparatorTextViewStyle"

@@ -9,14 +9,17 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.format.DateFormat;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -28,6 +31,7 @@ public class ProgressFragment extends Fragment {
     private SeekBar mProgressSeekbarField;
     private Button mBookFinishedButton;
     private ImageView mBookImage;
+    private TextView mBookDescription;
 
     private Book mBook;
 
@@ -93,6 +97,11 @@ public class ProgressFragment extends Fragment {
                 dialog.show(manager, Constants.DIALOG_DATE);
             }
         });
+
+        mBookDescription = (TextView) view.findViewById(R.id.book_description);
+        mBookDescription.setText(mBook.getDescription());
+        mBookDescription.setMovementMethod(ScrollingMovementMethod.getInstance());
+
         updateDate();
         return view;
     }
