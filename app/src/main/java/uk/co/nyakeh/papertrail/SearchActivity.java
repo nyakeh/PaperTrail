@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +32,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SearchActivity extends AppCompatActivity {
     private String mBookCreationStatus;
@@ -40,6 +41,8 @@ public class SearchActivity extends AppCompatActivity {
     private Button mSearchClearTextButton;
     private RecyclerView mSearchResultsRecyclerView;
     private SearchResultsAdapter mSearchResultsAdapter;
+    private Timer timer = new Timer();
+    private final long DELAY = 700;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +58,29 @@ public class SearchActivity extends AppCompatActivity {
         mSearchText = (EditText) findViewById(R.id.search_text);
         mSearchText.addTextChangedListener(new TextWatcher() {
             @Override
+            public void afterTextChanged(final Editable s) {
+                timer.cancel();
+                timer = new Timer();
+                timer.schedule(
+                        new TimerTask() {
+                            @Override
+                            public void run() {
+                                String searchQuery = s.toString();
+                                if (!searchQuery.isEmpty()) {
+                                    new BookSearch().execute(searchQuery);
+                                }
+                            }
+                        },
+                        DELAY
+                );
+            }
+
+            @Override
             public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-                if (!inputChar.toString().isEmpty()) {
-                    new BookSearch().execute(inputChar.toString());
-                }
             }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
             }
         });
 
@@ -130,23 +144,22 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             TextView txt = (TextView) findViewById(R.id.search_output);
-            Log.d("Raw results: ", result);
+            //Log.d("Raw results: ", result);
+            if (mSearchResultsAdapter == null) {
+                mSearchResultsAdapter = new SearchResultsAdapter(new JSONArray());
+                mSearchResultsRecyclerView.setAdapter(mSearchResultsAdapter);
+            }
             if (result.equals("")) {
                 txt.setText("Sorry, we failed to retrieve any results.");
+                mSearchResultsAdapter.notifyDataSetChanged();
             } else {
                 JSONObject resultObject;
                 try {
                     resultObject = new JSONObject(result);
                     txt.setText("Total books: " + resultObject.getString("totalItems"));
                     JSONArray bookArray = resultObject.getJSONArray("items");
-
-                    if (mSearchResultsAdapter == null) {
-                        mSearchResultsAdapter = new SearchResultsAdapter(bookArray);
-                        mSearchResultsRecyclerView.setAdapter(mSearchResultsAdapter);
-                    } else {
-                        mSearchResultsAdapter.setBooks(bookArray);
-                        mSearchResultsAdapter.notifyDataSetChanged();
-                    }
+                    mSearchResultsAdapter.setBooks(bookArray);
+                    mSearchResultsAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
