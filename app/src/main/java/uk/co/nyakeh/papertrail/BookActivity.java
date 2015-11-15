@@ -1,5 +1,7 @@
 package uk.co.nyakeh.papertrail;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -99,6 +101,10 @@ public class BookActivity extends AppCompatActivity {
                 CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
                 intentBuilder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
                 intentBuilder.setShowTitle(true);
+                Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_chrome);
+                intentBuilder.setCloseButtonIcon(icon);
+                intentBuilder.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left);
+                intentBuilder.setExitAnimations(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 CustomTabActivityHelper.openCustomTab(BookActivity.this, intentBuilder.build(), uri, new WebviewFallback());
                 return true;
             default:
