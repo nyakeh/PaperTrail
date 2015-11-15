@@ -83,7 +83,12 @@ public class ProgressFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
-                DatePickerFragment dialog = DatePickerFragment.newInstance(new Date());
+                Date preSelectedFinishedDate = mBook.getDateFinished();
+                SimpleDateFormat day = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
+                if (day.format(preSelectedFinishedDate).equals(day.format(new Date(Long.MAX_VALUE)))) {
+                    preSelectedFinishedDate = new Date();
+                }
+                DatePickerFragment dialog = DatePickerFragment.newInstance(preSelectedFinishedDate);
                 dialog.setTargetFragment(ProgressFragment.this, Constants.REQUEST_DATE_FINISHED);
                 dialog.show(manager, Constants.DIALOG_DATE);
             }
