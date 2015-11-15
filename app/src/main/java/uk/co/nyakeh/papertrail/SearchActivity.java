@@ -143,20 +143,20 @@ public class SearchActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            TextView txt = (TextView) findViewById(R.id.search_output);
             //Log.d("Raw results: ", result);
             if (mSearchResultsAdapter == null) {
                 mSearchResultsAdapter = new SearchResultsAdapter(new JSONArray());
                 mSearchResultsRecyclerView.setAdapter(mSearchResultsAdapter);
             }
             if (result.equals("")) {
-                txt.setText("Sorry, we failed to retrieve any results.");
+                getSupportActionBar().setSubtitle("Sorry, we failed to retrieve any results.");
+                mSearchResultsAdapter.setBooks(new JSONArray());
                 mSearchResultsAdapter.notifyDataSetChanged();
             } else {
                 JSONObject resultObject;
                 try {
                     resultObject = new JSONObject(result);
-                    txt.setText("Total books: " + resultObject.getString("totalItems"));
+                    getSupportActionBar().setSubtitle("Books found: " + resultObject.getString("totalItems"));
                     JSONArray bookArray = resultObject.getJSONArray("items");
                     mSearchResultsAdapter.setBooks(bookArray);
                     mSearchResultsAdapter.notifyDataSetChanged();
@@ -247,7 +247,6 @@ public class SearchActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            Snackbar.make(findViewById(R.id.settings_layout), mSearchResult.getTitle(), Snackbar.LENGTH_LONG).show();
             Intent intent = new Intent(SearchActivity.this, CreateBookActivity.class);
             intent.putExtra(Constants.ARG_NEW_BOOK, new Gson().toJson(mSearchResult));
             startActivity(intent);
