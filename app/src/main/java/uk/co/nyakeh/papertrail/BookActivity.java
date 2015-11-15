@@ -1,8 +1,9 @@
 package uk.co.nyakeh.papertrail;
 
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +15,11 @@ import android.widget.Switch;
 
 import java.util.UUID;
 
+import uk.co.nyakeh.papertrail.chrome.CustomTabActivityHelper;
+import uk.co.nyakeh.papertrail.chrome.WebviewFallback;
+
 public class BookActivity extends AppCompatActivity {
-    private static final String ARG_BOOK_ID = "book_id";
+    private static final String EXTRA_CUSTOM_TABS_SESSION = "android.support.customtabs.extra.SESSION";
 
     private ViewPager mViewPager;
     private Book mBook;
@@ -33,7 +37,7 @@ public class BookActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle extras = getIntent().getExtras();
-        UUID bookId = (UUID) extras.get(ARG_BOOK_ID);
+        UUID bookId = (UUID) extras.get(Constants.ARG_BOOK_ID);
         mBook = BookLab.get(this).getBook(bookId);
         getSupportActionBar().setTitle(mBook.getTitle());
 
@@ -87,7 +91,11 @@ public class BookActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.menu_item_book_link:
-                // open url
+                Uri uri = Uri.parse("https://www.goodreads.com/book/isbn/0590353403");
+                CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
+                intentBuilder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+                intentBuilder.setShowTitle(true);
+                CustomTabActivityHelper.openCustomTab(BookActivity.this, intentBuilder.build(), uri, new WebviewFallback());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -108,7 +116,7 @@ public class BookActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-    public static void updateStatusSwitch(boolean isChecked){
+    public static void updateStatusSwitch(boolean isChecked) {
         mSwitch_status.setChecked(isChecked);
     }
 }
