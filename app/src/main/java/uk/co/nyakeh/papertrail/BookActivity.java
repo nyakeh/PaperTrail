@@ -2,6 +2,7 @@ package uk.co.nyakeh.papertrail;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -84,6 +85,9 @@ public class BookActivity extends AppCompatActivity {
             case R.id.menu_item_delete_book:
                 BookLab.get(this).deleteBook(mBook.getId());
                 finish();
+                return true;
+            case R.id.menu_item_book_link:
+                // open url
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

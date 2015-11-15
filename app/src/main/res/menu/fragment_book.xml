@@ -7,6 +7,11 @@
         app:showAsAction="ifRoom|withText"
         app:actionLayout="@layout/switch_layout"/>
     <item
+        android:id="@+id/menu_item_book_link"
+        android:title="@string/goodreads"
+        android:icon="@drawable/ic_action_chrome"
+        app:showAsAction="ifRoom|withText"/>
+    <item
         android:id="@+id/menu_item_delete_book"
         android:title="@string/delete_book"
         android:icon="@drawable/ic_action_delete"

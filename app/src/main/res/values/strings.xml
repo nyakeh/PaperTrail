@@ -47,4 +47,5 @@
     <string name="backup_summary">Backup your reading data to CSV file format</string>
     <string name="backup">Backup</string>
     <string name="search">Search</string>
+    <string name="goodreads">Goodreads</string>
 </resources>
