@@ -1,5 +1,6 @@
 package uk.co.nyakeh.papertrail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -164,7 +165,15 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
                 return true;
             case R.id.menu_item_save_book:
                 BookLab.get(this).updateBook(mBook);
-                finish();
+                if (mBook.getStatus().equals(Constants.READING)) {
+                    Intent intent = new Intent(CreateBookActivity.this, BookListActivity.class);
+                    startActivity(intent);
+                } else if (mBook.getStatus().equals(Constants.QUEUE)) {
+                    Intent intent = new Intent(CreateBookActivity.this, ReadingListActivity.class);
+                    startActivity(intent);
+                } else {
+                    finish();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
