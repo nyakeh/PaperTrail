@@ -77,6 +77,10 @@ public class BookActivity extends AppCompatActivity {
             }
         });
 
+        if (mBook.getISBN() == null || mBook.getISBN().isEmpty()){
+            MenuItem book_link = menu.findItem(R.id.menu_item_book_link);
+            book_link.setVisible(false);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -91,7 +95,7 @@ public class BookActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.menu_item_book_link:
-                Uri uri = Uri.parse("https://www.goodreads.com/book/isbn/0590353403");
+                Uri uri = Uri.parse("https://www.goodreads.com/book/isbn/" + mBook.getISBN());
                 CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
                 intentBuilder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
                 intentBuilder.setShowTitle(true);
