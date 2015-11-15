@@ -64,7 +64,8 @@ public class BookCursorWrapper extends CursorWrapper {
         String description = getString(getColumnIndex(BookTable.Cols.DESCRIPTION));
 
         String finishedString = "";
-        if (!dateFinished.equals(new Date(Long.MAX_VALUE))) {
+        SimpleDateFormat day = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
+        if (!day.format(dateFinished).equals(day.format(new Date(Long.MAX_VALUE)))) {
             finishedString = DATE_FORMAT.format(dateFinished);
         }
 
