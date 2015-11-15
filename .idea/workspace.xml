@@ -72,9 +72,18 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1072b254-b144-439c-885e-f6e110fb9921" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/anim/slide_in_right.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/anim/slide_out_left.xml" />
+    <list default="true" id="1072b254-b144-439c-885e-f6e110fb9921" name="Default" comment="Use GoodReads to dynamically generate url from isbn.&#10;Styling the custom webview.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_action_chrome.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_action_chrome.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_action_chrome.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_action_chrome.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_action_chrome.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_arrow_back_white_24dp.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_arrow_back_white_24dp.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_arrow_back_white_24dp.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_arrow_back_white_24dp.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/ic_arrow_back_white_24dp.png" />
+      <change type="DELETED" beforePath="C:\Users\Nyakeh\Documents\GitHub\PaperTrail\app\src\main\res\drawable-hdpi\logo.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/BookActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/BookActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -104,25 +113,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ProgressFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/ProgressFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="100" column="79" selection-start-line="100" selection-start-column="79" selection-end-line="100" selection-end-column="79" />
-              <folding>
-                <element signature="e#3413#4196#0" expanded="true" />
-                <element signature="e#4195#4196#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BookActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/BookActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.79153097">
-              <caret line="108" column="28" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
-              <folding />
+            <state vertical-scroll-proportion="0.2931596">
+              <caret line="90" column="35" selection-start-line="90" selection-start-column="35" selection-end-line="90" selection-end-column="35" />
+              <folding>
+                <element signature="e#5180#5204#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1842,6 +1840,24 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PaperTrail" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
@@ -2350,12 +2366,6 @@
       <option name="number" value="Default" />
       <updated>1442948016145</updated>
     </task>
-    <task id="LOCAL-00075" summary="Replaced CreateNote fragment with Activity. I'm hoping using purer activities will enable smoother more perfomant animations between pages.">
-      <created>1446929570602</created>
-      <option name="number" value="00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1446929570602</updated>
-    </task>
     <task id="LOCAL-00076" summary="Put back initialisation of new note edittext as Its used to get the contents of the 'quicknote' to pass through to the createNoteActivity.">
       <created>1446930258879</created>
       <option name="number" value="00076" />
@@ -2644,7 +2654,13 @@
       <option name="project" value="LOCAL" />
       <updated>1447550646333</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="Use GoodReads to dynamically generate url from isbn.&#10;Styling the custom webview.">
+      <created>1447551612554</created>
+      <option name="number" value="00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1447551612554</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2663,19 +2679,19 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20202559" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32800853" sideWeight="0.49573562" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32800853" sideWeight="0.4936034" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31629393" sideWeight="0.4936034" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31629393" sideWeight="0.4914712" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39510116" sideWeight="0.49573562" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32800853" sideWeight="0.5042644" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32800853" sideWeight="0.5063966" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32694355" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.314164" sideWeight="0.5063966" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31629393" sideWeight="0.50852877" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32374868" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32374868" sideWeight="0.4978678" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2489339" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2705,7 +2721,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
-    <MESSAGE value="Send through the intended status of the new book to be added." />
     <MESSAGE value="Edit db schema to include ISBN, Description - I'm planning to integrate a few api's to retrieve/navigate user towards more book data on the web, so i need to save the ISBN &amp; i'm considering adding the description to the progress view (since i'll have one from Google Books)." />
     <MESSAGE value="Perform an async task when typing in the search bo, this will house the books api HTTP GET" />
     <MESSAGE value="Using Google Books api for search." />
@@ -2730,7 +2745,8 @@
     <MESSAGE value="Added button to the navbar to house the goodreads link." />
     <MESSAGE value="Open link in  a chrome webview (it offers speed benefits over opening the browser)." />
     <MESSAGE value="If a book doesn't have an ISBN stored, don't display the book link as it wont work." />
-    <option name="LAST_COMMIT_MESSAGE" value="If a book doesn't have an ISBN stored, don't display the book link as it wont work." />
+    <MESSAGE value="Use GoodReads to dynamically generate url from isbn.&#10;Styling the custom webview." />
+    <option name="LAST_COMMIT_MESSAGE" value="Use GoodReads to dynamically generate url from isbn.&#10;Styling the custom webview." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2747,14 +2763,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/os/AsyncTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="647" column="28" selection-start-line="647" selection-start-column="28" selection-end-line="647" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/recyclerview-v7/23.1.0/recyclerview-v7-23.1.0-sources.jar!/android/support/v7/widget/RecyclerView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2931596">
@@ -3172,9 +3180,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/co/nyakeh/papertrail/BookActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79153097">
-          <caret line="108" column="28" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
-          <folding />
+        <state vertical-scroll-proportion="0.2931596">
+          <caret line="90" column="35" selection-start-line="90" selection-start-column="35" selection-end-line="90" selection-end-column="35" />
+          <folding>
+            <element signature="e#5180#5204#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -101,7 +101,7 @@ public class BookActivity extends AppCompatActivity {
                 CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
                 intentBuilder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
                 intentBuilder.setShowTitle(true);
-                Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_chrome);
+                Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_arrow_back_white_24dp);
                 intentBuilder.setCloseButtonIcon(icon);
                 intentBuilder.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left);
                 intentBuilder.setExitAnimations(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
