@@ -55,7 +55,7 @@ public class BookActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.fragment_book, menu);
+        getMenuInflater().inflate(R.menu.book, menu);
 
         MenuItem item = menu.findItem(R.id.status_switch_item);
         item.setActionView(R.layout.switch_layout);

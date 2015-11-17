@@ -141,7 +141,7 @@ public class ReadingListFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.fragment_book_search, menu);
+        inflater.inflate(R.menu.book_search, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

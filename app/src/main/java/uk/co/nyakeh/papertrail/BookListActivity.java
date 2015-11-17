@@ -181,7 +181,7 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.fragment_book_search, menu);
+        getMenuInflater().inflate(R.menu.book_search, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

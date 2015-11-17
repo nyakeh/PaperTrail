@@ -148,7 +148,7 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.fragment_create_book, menu);
+        getMenuInflater().inflate(R.menu.create_book, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
