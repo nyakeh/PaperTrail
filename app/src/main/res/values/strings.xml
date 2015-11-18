@@ -49,7 +49,7 @@
     <string name="backup">Backup</string>
     <string name="search">Search</string>
     <string name="goodreads">Goodreads</string>
-    <string name="search_hint">Search by book name or author</string>
+    <string name="search_hint">Search by title or author</string>
     <string name="clear_search_summary">Delete your book search history</string>
     <string name="clear_search_title">Clear search history</string>
 </resources>

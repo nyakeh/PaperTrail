@@ -26,6 +26,7 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
     private Button mDateStartedButton;
     private EditText mImageUrlField;
     private EditText mCategoryField;
+    private EditText mISBNField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +132,23 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
             @Override
             public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
                 mBook.setCategory(inputChar.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        mISBNField = (EditText) findViewById(R.id.book_isbn);
+        mISBNField.setText(mBook.getISBN());
+        mISBNField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
+                mBook.setISBN(inputChar.toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override

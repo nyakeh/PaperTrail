@@ -24,6 +24,7 @@ public class MetaDataFragment extends Fragment {
     private Button mDateStartedButton;
     private EditText mImageUrlField;
     private EditText mCategoryField;
+    private EditText mISBNField;
 
     private Book mBook;
 
@@ -126,6 +127,23 @@ public class MetaDataFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
                 mBook.setCategory(inputChar.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        mISBNField = (EditText) view.findViewById(R.id.book_isbn);
+        mISBNField.setText(mBook.getISBN());
+        mISBNField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
+                mBook.setISBN(inputChar.toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
