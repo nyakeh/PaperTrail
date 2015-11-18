@@ -27,34 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="@dimen/auxiliary_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/auxiliary_margin"
-            android:paddingRight="@dimen/auxiliary_margin">
-
-            <EditText
-                android:id="@+id/search_text"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="Type a book name or author"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingRight="40dp"/>
-
-            <Button
-                android:id="@+id/search_clear_text"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_gravity="right"
-                android:layout_marginRight="4dp"
-                android:background="@drawable/ic_cross"/>
-
-        </FrameLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/search_results"

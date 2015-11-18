@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.provider.SearchRecentSuggestions;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -34,7 +35,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
     }
 
 
-    public static class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+    public static class SettingsFragment extends PreferenceFragment {
         public SettingsFragment() {
         }
 
@@ -43,14 +44,19 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_prefs);
 
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            sp.registerOnSharedPreferenceChangeListener(this);
-
-            Preference button = findPreference(getString(R.string.backupButton));
-            button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            Preference backup_button = findPreference(getString(R.string.settings_backup));
+            backup_button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     backupBookData();
+                    return true;
+                }
+            });
+            Preference clear_search_button = findPreference(getString(R.string.settings_clear_search_history));
+            clear_search_button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    clearSearchHistory();
                     return true;
                 }
             });
@@ -65,15 +71,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", readingDataHtml);
             clipboard.setPrimaryClip(clip);
 
-            Snackbar.make(getView(), "Data copied to your clipboard", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(getView(), "Data copied to your clipboard.", Snackbar.LENGTH_LONG).show();
         }
 
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (key.equals("pref_local_times"))
-                Log.d("onSharedPreference:", key + " ");
+        private void clearSearchHistory() {
+            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity(), SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
+            suggestions.clearHistory();
+            Snackbar.make(getView(), "Book search history cleared.", Snackbar.LENGTH_LONG).show();
         }
-
     }
 
     @Override

@@ -1,21 +1,21 @@
 package uk.co.nyakeh.papertrail;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
+import android.provider.SearchRecentSuggestions;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -32,17 +32,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class SearchActivity extends AppCompatActivity {
     private String mBookCreationStatus;
-    private EditText mSearchText;
-    private Button mSearchClearTextButton;
     private RecyclerView mSearchResultsRecyclerView;
     private SearchResultsAdapter mSearchResultsAdapter;
-    private Timer timer = new Timer();
-    private final long DELAY = 700;
+    private SearchRecentSuggestions mRecentSuggestions = new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,50 +46,43 @@ public class SearchActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        handleIntent(getIntent());
 
         Bundle extras = getIntent().getExtras();
         mBookCreationStatus = extras.getString(Constants.ARG_BOOK_CREATION_STATUS);
-
-        mSearchText = (EditText) findViewById(R.id.search_text);
-        mSearchText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(final Editable s) {
-                timer.cancel();
-                timer = new Timer();
-                timer.schedule(
-                        new TimerTask() {
-                            @Override
-                            public void run() {
-                                String searchQuery = s.toString();
-                                if (!searchQuery.isEmpty()) {
-                                    new BookSearch().execute(searchQuery);
-                                }
-                            }
-                        },
-                        DELAY
-                );
-            }
-
-            @Override
-            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-        });
-
-        mSearchClearTextButton = (Button) findViewById(R.id.search_clear_text);
-        mSearchClearTextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSearchText.setText("");
-                mSearchText.requestFocus();
-            }
-        });
-
         mSearchResultsRecyclerView = (RecyclerView) findViewById(R.id.search_results);
         mSearchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        if (mSearchResultsAdapter == null) {
+            mSearchResultsAdapter = new SearchResultsAdapter(new JSONArray());
+            mSearchResultsRecyclerView.setAdapter(mSearchResultsAdapter);
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            new BookSearch().execute(query);
+            mRecentSuggestions.saveRecentQuery(query, null);
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.menu_item_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSubmitButtonEnabled(true);
+        return true;
     }
 
     @Override
@@ -144,10 +132,6 @@ public class SearchActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             //Log.d("Raw results: ", result);
-            if (mSearchResultsAdapter == null) {
-                mSearchResultsAdapter = new SearchResultsAdapter(new JSONArray());
-                mSearchResultsRecyclerView.setAdapter(mSearchResultsAdapter);
-            }
             if (result.equals("")) {
                 getSupportActionBar().setSubtitle("Sorry, we failed to retrieve any results.");
                 mSearchResultsAdapter.setBooks(new JSONArray());

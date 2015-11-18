@@ -53,8 +53,16 @@
         <activity
             android:name=".SearchActivity"
             android:label="@string/search"
+            android:launchMode="singleTop"
             android:parentActivityName=".BookListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/searchable"/>
         </activity>
+        <provider android:name=".SuggestionProvider"
+                  android:authorities="uk.co.nyakeh.papertrail.SuggestionProvider" />
     </application>
 
 </manifest>
