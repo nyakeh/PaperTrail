@@ -88,7 +88,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             Log.d("backupBookData:", readingDataHtml);
 
             android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", readingDataHtml);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("Book back up data", readingDataHtml);
             clipboard.setPrimaryClip(clip);
 
             Snackbar.make(getView(), "Data copied to your clipboard.", Snackbar.LENGTH_LONG).show();

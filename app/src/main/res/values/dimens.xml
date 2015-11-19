@@ -8,4 +8,5 @@
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="auxiliary_margin">16dp</dimen>
     <dimen name="list_item_separation">8dp</dimen>
+    <dimen name="elevation">6dp</dimen>
 </resources>
