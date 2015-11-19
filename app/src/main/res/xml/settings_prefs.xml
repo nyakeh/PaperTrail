@@ -5,6 +5,10 @@
         android:summary="@string/backup_summary"
         android:title="@string/backup"/>
     <Preference
+        android:key="@string/settings_restore"
+        android:summary="@string/restore_summary"
+        android:title="@string/restore"/>
+    <Preference
         android:key="@string/settings_clear_search_history"
         android:summary="@string/clear_search_summary"
         android:title="@string/clear_search_title"/>

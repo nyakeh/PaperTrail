@@ -60,6 +60,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
                     return true;
                 }
             });
+            Preference restore_button = findPreference(getString(R.string.settings_restore));
+            restore_button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    importBookData();
+                    return true;
+                }
+            });
         }
 
         private void backupBookData() {
@@ -78,6 +86,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity(), SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
             suggestions.clearHistory();
             Snackbar.make(getView(), "Book search history cleared.", Snackbar.LENGTH_LONG).show();
+        }
+
+        private void importBookData() {
+            Snackbar.make(getView(), "Book data successfully imported.", Snackbar.LENGTH_LONG).show(); //TODO: add import details (eg. count of books imported)
         }
     }
 

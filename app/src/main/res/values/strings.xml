@@ -20,7 +20,6 @@
     <string name="ok">OK</string>
     <string name="save_book">Save book</string>
     <string name="title_activity_base">BaseActivity</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="reading_list">Reading List</string>
@@ -39,17 +38,18 @@
     <string name="delete">Delete</string>
     <string name="note_title">note_title</string>
     <string name="note_content">note_content</string>
-    <string name="transition_book_cover">Transition Book Cover</string>
-    <string name="title_activity_template">TemplateActivity</string>
+    <string name="transition_book_cover">transition_book_cover</string>
     <string name="title_activity_settings">Settings</string>
-    <string name="pref_title_system_sync_settings">System sync settings</string>
+    <string name="search_hint">Search by title or author</string>
+    <string name="clear_search_title">Clear search history</string>
+    <string name="backup">Backup</string>
+    <string name="restore">Restore</string>
+    <string name="search">Search</string>
     <string name="settings_backup">settings_backup</string>
     <string name="settings_clear_search_history">settings_clear_search_history</string>
+    <string name="settings_restore">settings_restore</string>
     <string name="backup_summary">Backup your reading data to CSV file format</string>
-    <string name="backup">Backup</string>
-    <string name="search">Search</string>
-    <string name="goodreads">Goodreads</string>
-    <string name="search_hint">Search by title or author</string>
+    <string name="restore_summary">Import book data from a CSV</string>
     <string name="clear_search_summary">Delete your book search history</string>
-    <string name="clear_search_title">Clear search history</string>
+    <string name="goodreads">Goodreads</string>
 </resources>
