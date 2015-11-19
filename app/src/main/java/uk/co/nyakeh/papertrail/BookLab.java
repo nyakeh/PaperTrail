@@ -38,6 +38,8 @@ public class BookLab {
         if (getBook(book.getId()) == null) {
             ContentValues values = getBookContentValues(book);
             mDatabase.insert(BookTable.NAME, null, values);
+        } else {
+            updateBook(book);
         }
     }
 
