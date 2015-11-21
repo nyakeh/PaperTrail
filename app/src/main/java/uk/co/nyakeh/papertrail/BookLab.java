@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -83,6 +85,19 @@ public class BookLab {
         } finally {
             cursor.close();
         }
+
+        Comparator<Book> comparator = new Comparator<Book>() {
+            public int compare(Book book1, Book book2) {
+                if (book2.getDateFinished().before(book1.getDateFinished())){
+                    return -1;
+                } else if (book2.getDateFinished().equals(book1.getDateFinished())) {
+                    return 0;
+                }
+                return 1;
+            }
+        };
+        Collections.sort(books, comparator);
+
         return books;
     }
 
