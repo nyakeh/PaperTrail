@@ -176,6 +176,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             if (!tokens[6].isEmpty()) {
                 progress = Integer.parseInt(tokens[6]);
             }
+            String isbn = tokens[9];
+            if (isbn.length() == 9){
+                isbn = "0" + isbn;
+            }
 
             Book book = new Book(UUID.randomUUID());
             try {
@@ -188,14 +192,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             book.setStatus(tokens[5]);
             book.setTitle(tokens[2]);
             book.setAuthor(tokens[3]);
-            book.setISBN(tokens[9]);
+            book.setISBN(isbn);
             book.setLength(pageCount);
+            book.setProgress(progress);
             book.setImageUrl(tokens[10]);
             book.setDescription(tokens[8]);
+            book.setCategory(tokens[4]);
             book.setDateStarted(started);
             book.setDateFinished(finished);
-            book.setCategory(tokens[4]);
-            book.setProgress(progress);
             return book;
         }
     }
