@@ -1,5 +1,7 @@
 package uk.co.nyakeh.papertrail;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -105,11 +107,20 @@ public class BookActivity extends AppCompatActivity {
                 intentBuilder.setCloseButtonIcon(icon);
                 intentBuilder.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left);
                 intentBuilder.setExitAnimations(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                intentBuilder.addMenuItem("Share", createShareMenuIntent());
                 CustomTabActivityHelper.openCustomTab(BookActivity.this, intentBuilder.build(), uri, new WebviewFallback());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private PendingIntent createShareMenuIntent() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Goodreads: " + mBook.getTitle());
+        shareIntent.putExtra(Intent.EXTRA_TEXT, ("https://www.goodreads.com/book/isbn/" + mBook.getISBN()));
+        return PendingIntent.getActivity(this, 0, shareIntent, 0);
     }
 
     @Override
