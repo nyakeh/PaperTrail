@@ -52,4 +52,6 @@
     <string name="restore_summary">Import book data from a CSV</string>
     <string name="clear_search_summary">Delete your book search history</string>
     <string name="goodreads">Goodreads</string>
+    <string name="delete_note">Delete note</string>
+    <string name="save_note">Save note</string>
 </resources>

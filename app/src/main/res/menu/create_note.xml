@@ -3,12 +3,12 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_item_delete_note"
-        android:title="@string/delete_book"
+        android:title="@string/delete_note"
         android:icon="@drawable/ic_action_delete"
         app:showAsAction="never"/>
     <item
         android:id="@+id/menu_item_save_note"
-        android:title="@string/save_book"
+        android:title="@string/save_note"
         android:icon="@drawable/ic_action_tick"
         app:showAsAction="ifRoom|withText"/>
 </menu>
