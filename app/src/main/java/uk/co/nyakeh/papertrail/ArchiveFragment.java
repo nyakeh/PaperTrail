@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 public class ArchiveFragment extends Fragment {
     private static final int TYPE_HEADER = 0;
@@ -21,7 +22,7 @@ public class ArchiveFragment extends Fragment {
     private RecyclerView mBookRecyclerView;
     private ArchivedBookAdapter mArchivedBookAdapter;
     private TextView mBookListEmptyMessageView;
-    private List<Integer> headerPositionList;
+    private List<Integer> headerPositionList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,6 @@ public class ArchiveFragment extends Fragment {
         List<Book> books = bookLab.getArchivedBooks();
 
         List<Book> bookList = new ArrayList<>();
-        headerPositionList = new ArrayList<>();
 
         if (!books.isEmpty()) {
             int position = 1;
@@ -63,7 +63,7 @@ public class ArchiveFragment extends Fragment {
                 String bookMonth = DateFormat.format(Constants.MONTH_DATE_FORMAT, book.getDateFinished()).toString();
                 if (!bookMonth.equals(currentMonth)){
                     currentMonth = bookMonth;
-                    Book bookHeader = new Book("");
+                    Book bookHeader = new Book(UUID.randomUUID());
                     bookHeader.setTitle(bookMonth);
                     bookList.add(bookHeader);
                     headerPositionList.add(position);
@@ -73,6 +73,7 @@ public class ArchiveFragment extends Fragment {
                 position++;
             }
         }
+
         if (mArchivedBookAdapter == null) {
             mArchivedBookAdapter = new ArchivedBookAdapter(bookList);
             mBookRecyclerView.setAdapter(mArchivedBookAdapter);
@@ -157,7 +158,7 @@ public class ArchiveFragment extends Fragment {
             Book book = mBooks.get(position);
             if (holder instanceof VHHeader) {
                 VHHeader VHheader = (VHHeader) holder;
-                VHheader.mHeading.setText("hello");
+                VHheader.mHeading.setText(book.getTitle());
             } else if (holder instanceof ArchivedBookHolder) {
                 ArchivedBookHolder archivedBookHolder = (ArchivedBookHolder) holder;
                 archivedBookHolder.bindBook(book);
