@@ -6,12 +6,10 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -48,18 +46,18 @@ public class ArchiveFragment extends Fragment {
 
     private void updateUI() {
         BookLab bookLab = BookLab.get(getActivity());
-        List<Book> books = bookLab.getArchivedBooks();
+        List<Book> archivedBooks = bookLab.getArchivedBooks();
 
         List<Book> bookList = new ArrayList<>();
         headerPositionList = new ArrayList<>();
-        if (!books.isEmpty()) {
+        if (!archivedBooks.isEmpty()) {
             int position = 1;
-            String currentMonth = DateFormat.format(Constants.MONTH_DATE_FORMAT, books.get(0).getDateFinished()).toString();
+            String currentMonth = DateFormat.format(Constants.MONTH_DATE_FORMAT, archivedBooks.get(0).getDateFinished()).toString();
             Book book1 = new Book("");
             book1.setTitle(currentMonth);
             bookList.add(book1);
             headerPositionList.add(0);
-            for (Iterator<Book> i = books.iterator(); i.hasNext(); ) {
+            for (Iterator<Book> i = archivedBooks.iterator(); i.hasNext(); ) {
                 Book book = i.next();
                 String bookMonth = DateFormat.format(Constants.MONTH_DATE_FORMAT, book.getDateFinished()).toString();
                 if (!bookMonth.equals(currentMonth)){
@@ -83,7 +81,7 @@ public class ArchiveFragment extends Fragment {
             mArchivedBookAdapter.notifyDataSetChanged();
         }
 
-        if (books.isEmpty()) {
+        if (archivedBooks.isEmpty()) {
             mBookRecyclerView.setVisibility(View.GONE);
             mBookListEmptyMessageView.setVisibility(View.VISIBLE);
         } else {
