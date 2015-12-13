@@ -20,61 +20,22 @@
         android:textSize="24sp"/>
 
     <TextView
-        android:id="@+id/list_item_book_title_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/list_item_book_letter"
-        android:padding="2dp"
-        android:text="Title:"
-        android:textColor="@color/colorPrimaryDark"/>
-
-    <TextView
         android:id="@+id/list_item_book_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/list_item_book_title_label"
-        android:padding="2dp"
-        android:textStyle="bold"
-        tools:text="The Lean Startup"/>
-
-    <TextView
-        android:id="@+id/list_item_book_author_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/list_item_book_title"
         android:layout_toRightOf="@+id/list_item_book_letter"
         android:padding="2dp"
-        android:text="Author:"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        tools:text="The Lean Startup"/>
 
     <TextView
         android:id="@+id/list_item_book_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_book_title"
-        android:layout_toRightOf="@+id/list_item_book_author_label"
-        android:padding="2dp"
-        android:textStyle="bold"
-        tools:text="Eric Ries"/>
-
-    <TextView
-        android:id="@+id/list_item_book_finished_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/list_item_book_author"
         android:layout_toRightOf="@+id/list_item_book_letter"
         android:padding="2dp"
-        android:text="Finished:"
-        android:textColor="@color/colorPrimaryDark"/>
-
-    <TextView
-        android:id="@+id/list_item_book_date_finished"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/list_item_book_author"
-        android:layout_toRightOf="@+id/list_item_book_finished_label"
-        android:padding="2dp"
-        android:textStyle="bold"
-        tools:text="MONDAY, OCT 19, 2005"/>
+        tools:text="Eric Ries"/>
 
 </RelativeLayout>

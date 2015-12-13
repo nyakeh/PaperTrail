@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class ArchiveFragment extends Fragment {
         List<Book> books = bookLab.getArchivedBooks();
 
         List<Book> bookList = new ArrayList<>();
-
+        headerPositionList = new ArrayList<>();
         if (!books.isEmpty()) {
             int position = 1;
             String currentMonth = DateFormat.format(Constants.MONTH_DATE_FORMAT, books.get(0).getDateFinished()).toString();
@@ -103,7 +104,6 @@ public class ArchiveFragment extends Fragment {
         private TextView mLetterTextView;
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
-        private TextView mDateFinishedTextView;
 
         public ArchivedBookHolder(View itemView) {
             super(itemView);
@@ -112,7 +112,6 @@ public class ArchiveFragment extends Fragment {
             mLetterTextView = (TextView) itemView.findViewById(R.id.list_item_book_letter);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title);
             mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author);
-            mDateFinishedTextView = (TextView) itemView.findViewById(R.id.list_item_book_date_finished);
         }
 
         private void bindBook(Book book) {
@@ -121,8 +120,6 @@ public class ArchiveFragment extends Fragment {
             mLetterTextView.setText(letter);
             mTitleTextView.setText(book.getTitle());
             mAuthorTextView.setText(book.getAuthor());
-            String formattedFinishedDate = DateFormat.format(Constants.DISPLAY_DATE_FORMAT, mBook.getDateFinished()).toString();
-            mDateFinishedTextView.setText(formattedFinishedDate);
         }
 
         @Override
