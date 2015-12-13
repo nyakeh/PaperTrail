@@ -2,14 +2,14 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <Preference
         android:key="@string/settings_backup"
-        android:summary="@string/backup_summary"
-        android:title="@string/backup"/>
+        android:title="@string/backup"
+        android:summary="@string/backup_summary"/>
     <Preference
         android:key="@string/settings_restore"
-        android:summary="@string/restore_summary"
-        android:title="@string/restore"/>
+        android:title="@string/restore"
+        android:summary="@string/restore_summary"/>
     <Preference
         android:key="@string/settings_clear_search_history"
-        android:summary="@string/clear_search_summary"
-        android:title="@string/clear_search_title"/>
+        android:title="@string/clear_search_title"
+        android:summary="@string/clear_search_summary"/>
 </PreferenceScreen>
