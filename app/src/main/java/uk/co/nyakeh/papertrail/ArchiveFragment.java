@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ArchiveFragment extends Fragment {
@@ -19,6 +21,7 @@ public class ArchiveFragment extends Fragment {
     private RecyclerView mBookRecyclerView;
     private ArchivedBookAdapter mArchivedBookAdapter;
     private TextView mBookListEmptyMessageView;
+    private List<Integer> headerPositionList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,11 +48,36 @@ public class ArchiveFragment extends Fragment {
         BookLab bookLab = BookLab.get(getActivity());
         List<Book> books = bookLab.getArchivedBooks();
 
+        List<Book> bookList = new ArrayList<>();
+        headerPositionList = new ArrayList<>();
+
+        if (!books.isEmpty()) {
+            int position = 1;
+            String currentMonth = DateFormat.format(Constants.MONTH_DATE_FORMAT, books.get(0).getDateFinished()).toString();
+            Book book1 = new Book("");
+            book1.setTitle(currentMonth);
+            bookList.add(book1);
+            headerPositionList.add(0);
+            for (Iterator<Book> i = books.iterator(); i.hasNext(); ) {
+                Book book = i.next();
+                String bookMonth = DateFormat.format(Constants.MONTH_DATE_FORMAT, book.getDateFinished()).toString();
+                if (!bookMonth.equals(currentMonth)){
+                    currentMonth = bookMonth;
+                    Book bookHeader = new Book("");
+                    bookHeader.setTitle(bookMonth);
+                    bookList.add(bookHeader);
+                    headerPositionList.add(position);
+                    position++;
+                }
+                bookList.add(book);
+                position++;
+            }
+        }
         if (mArchivedBookAdapter == null) {
-            mArchivedBookAdapter = new ArchivedBookAdapter(books);
+            mArchivedBookAdapter = new ArchivedBookAdapter(bookList);
             mBookRecyclerView.setAdapter(mArchivedBookAdapter);
         } else {
-            mArchivedBookAdapter.setBooks(books);
+            mArchivedBookAdapter.setBooks(bookList);
             mArchivedBookAdapter.notifyDataSetChanged();
         }
 
@@ -87,19 +115,13 @@ public class ArchiveFragment extends Fragment {
         }
 
         private void bindBook(Book book) {
-
-            if (book.getTitle().startsWith("e")) {
-
-
-            } else {
-                mBook = book;
-                String letter = (book.getCategory().isEmpty()) ? "" : book.getCategory().substring(0, 1);
-                mLetterTextView.setText(letter);
-                mTitleTextView.setText(book.getTitle());
-                mAuthorTextView.setText(book.getAuthor());
-                String formattedFinishedDate = DateFormat.format(Constants.DISPLAY_DATE_FORMAT, mBook.getDateFinished()).toString();
-                mDateFinishedTextView.setText(formattedFinishedDate);
-            }
+            mBook = book;
+            String letter = (book.getCategory().isEmpty()) ? "" : book.getCategory().substring(0, 1);
+            mLetterTextView.setText(letter);
+            mTitleTextView.setText(book.getTitle());
+            mAuthorTextView.setText(book.getAuthor());
+            String formattedFinishedDate = DateFormat.format(Constants.DISPLAY_DATE_FORMAT, mBook.getDateFinished()).toString();
+            mDateFinishedTextView.setText(formattedFinishedDate);
         }
 
         @Override
@@ -134,9 +156,9 @@ public class ArchiveFragment extends Fragment {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             Book book = mBooks.get(position);
             if (holder instanceof VHHeader) {
-                VHHeader VHheader = (VHHeader)holder;
-                VHheader.txtTitle.setText("hello");
-            } else {
+                VHHeader VHheader = (VHHeader) holder;
+                VHheader.mHeading.setText("hello");
+            } else if (holder instanceof ArchivedBookHolder) {
                 ArchivedBookHolder archivedBookHolder = (ArchivedBookHolder) holder;
                 archivedBookHolder.bindBook(book);
             }
@@ -159,15 +181,15 @@ public class ArchiveFragment extends Fragment {
         }
 
         private boolean isPositionHeader(int position) {
-            return position == 2;
+            return headerPositionList.contains(position);
         }
 
         class VHHeader extends RecyclerView.ViewHolder {
-            TextView txtTitle;
+            TextView mHeading;
 
             public VHHeader(View itemView) {
                 super(itemView);
-                this.txtTitle = (TextView) itemView.findViewById(R.id.textSeparator);
+                this.mHeading = (TextView) itemView.findViewById(R.id.list_item_archive_heading);
             }
         }
     }

@@ -7,6 +7,7 @@ public class Constants {
 
     public static final String EXPORT_DATE_FORMAT = "dd/MM/yyyy";
     public static final String DISPLAY_DATE_FORMAT = "EEEE, MMM dd, yyyy";
+    public static final String MONTH_DATE_FORMAT = "MMM";
 
     public static final String ARG_NEW_BOOK = "new_book";
     public static final String ARG_BOOK_ID = "book_id";
