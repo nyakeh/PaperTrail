@@ -14,6 +14,8 @@ import android.widget.TextView;
 import java.util.List;
 
 public class ArchiveFragment extends Fragment {
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_ITEM = 1;
     private RecyclerView mBookRecyclerView;
     private ArchivedBookAdapter mArchivedBookAdapter;
     private TextView mBookListEmptyMessageView;
@@ -85,13 +87,19 @@ public class ArchiveFragment extends Fragment {
         }
 
         private void bindBook(Book book) {
-            mBook = book;
-            String letter = (book.getCategory().isEmpty()) ? "" : book.getCategory().substring(0,1);
-            mLetterTextView.setText(letter);
-            mTitleTextView.setText(book.getTitle());
-            mAuthorTextView.setText(book.getAuthor());
-            String formattedFinishedDate = DateFormat.format(Constants.DISPLAY_DATE_FORMAT, mBook.getDateFinished()).toString();
-            mDateFinishedTextView.setText(formattedFinishedDate);
+
+            if (book.getTitle().startsWith("e")) {
+
+
+            } else {
+                mBook = book;
+                String letter = (book.getCategory().isEmpty()) ? "" : book.getCategory().substring(0, 1);
+                mLetterTextView.setText(letter);
+                mTitleTextView.setText(book.getTitle());
+                mAuthorTextView.setText(book.getAuthor());
+                String formattedFinishedDate = DateFormat.format(Constants.DISPLAY_DATE_FORMAT, mBook.getDateFinished()).toString();
+                mDateFinishedTextView.setText(formattedFinishedDate);
+            }
         }
 
         @Override
@@ -102,7 +110,7 @@ public class ArchiveFragment extends Fragment {
         }
     }
 
-    private class ArchivedBookAdapter extends RecyclerView.Adapter<ArchivedBookHolder> {
+    private class ArchivedBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private List<Book> mBooks;
 
@@ -111,16 +119,27 @@ public class ArchiveFragment extends Fragment {
         }
 
         @Override
-        public ArchivedBookHolder onCreateViewHolder(ViewGroup parent, int i) {
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(R.layout.list_item_book_archived, parent, false);
-            return new ArchivedBookHolder(view);
+            if (viewType == TYPE_HEADER) {
+                View view = layoutInflater.from(parent.getContext()).inflate(R.layout.list_item_archive_heading, parent, false);
+                return new VHHeader(view);
+            } else {
+                View view = layoutInflater.inflate(R.layout.list_item_book_archived, parent, false);
+                return new ArchivedBookHolder(view);
+            }
         }
 
         @Override
-        public void onBindViewHolder(ArchivedBookHolder archivedBookHolder, int position) {
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             Book book = mBooks.get(position);
-            archivedBookHolder.bindBook(book);
+            if (holder instanceof VHHeader) {
+                VHHeader VHheader = (VHHeader)holder;
+                VHheader.txtTitle.setText("hello");
+            } else {
+                ArchivedBookHolder archivedBookHolder = (ArchivedBookHolder) holder;
+                archivedBookHolder.bindBook(book);
+            }
         }
 
         @Override
@@ -130,6 +149,26 @@ public class ArchiveFragment extends Fragment {
 
         public void setBooks(List<Book> books) {
             mBooks = books;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if (isPositionHeader(position))
+                return TYPE_HEADER;
+            return TYPE_ITEM;
+        }
+
+        private boolean isPositionHeader(int position) {
+            return position == 2;
+        }
+
+        class VHHeader extends RecyclerView.ViewHolder {
+            TextView txtTitle;
+
+            public VHHeader(View itemView) {
+                super(itemView);
+                this.txtTitle = (TextView) itemView.findViewById(R.id.textSeparator);
+            }
         }
     }
 }
