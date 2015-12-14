@@ -34,7 +34,9 @@
             android:layout_height="40dp"
             android:id="@+id/search_manual_add"
             android:text="@string/manual_create"
-            style="@style/Widget.AppCompat.ActionButton"/>
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            android:background="@color/colorPrimaryLight"
+            android:textColor="@color/cardview_light_background"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/search_results"
