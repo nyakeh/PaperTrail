@@ -50,14 +50,6 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
         mBookRecyclerView = (RecyclerView) findViewById(R.id.book_recycler_view);
         mBookRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddNewBook();
-            }
-        });
-
         updateUI();
     }
 
@@ -86,13 +78,6 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
     public void onResume() {
         super.onResume();
         updateUI();
-    }
-
-    private void AddNewBook() {
-        Book book = new Book(Constants.READING);
-        Intent intent = new Intent(BookListActivity.this, CreateBookActivity.class);
-        intent.putExtra(Constants.ARG_NEW_BOOK, new Gson().toJson(book));
-        startActivity(intent);
     }
 
     private class BookHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
