@@ -190,8 +190,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             }
 
             book.setStatus(tokens[5]);
-            book.setTitle(tokens[2]);
-            book.setAuthor(tokens[3]);
+            book.setTitle(tokens[2].replace("\"",""));
+            book.setAuthor(tokens[3].replace("\"",""));
             book.setISBN(isbn);
             book.setLength(pageCount);
             book.setProgress(progress);
