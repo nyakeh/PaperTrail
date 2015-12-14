@@ -54,4 +54,5 @@
     <string name="goodreads">Goodreads</string>
     <string name="delete_note">Delete note</string>
     <string name="save_note">Save note</string>
+    <string name="manual_create">Add new book manually</string>
 </resources>

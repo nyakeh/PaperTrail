@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -58,6 +60,17 @@ public class SearchActivity extends AppCompatActivity {
             mSearchResultsAdapter = new SearchResultsAdapter(new JSONArray());
             mSearchResultsRecyclerView.setAdapter(mSearchResultsAdapter);
         }
+
+        Button manualAddBookButton = (Button) findViewById(R.id.search_manual_add);
+        manualAddBookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Book book = new Book(mBookCreationStatus);
+                Intent intent = new Intent(SearchActivity.this, CreateBookActivity.class);
+                intent.putExtra(Constants.ARG_NEW_BOOK, new Gson().toJson(book));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
