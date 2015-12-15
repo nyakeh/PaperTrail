@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.provider.SearchRecentSuggestions;
@@ -16,10 +15,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
@@ -84,14 +82,31 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
 
         private void backupBookData() {
             BookLab bookLab = BookLab.get(getActivity());
-            String readingDataHtml = bookLab.getBackupData();
-            Log.d("backupBookData:", readingDataHtml);
+            final String bookDataHtml = bookLab.getBackupData();
+            Log.d("backupBookData:", bookDataHtml);
 
             android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText("Book back up data", readingDataHtml);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("Book back up data", bookDataHtml);
             clipboard.setPrimaryClip(clip);
 
-            Snackbar.make(getView(), "Data copied to your clipboard.", Snackbar.LENGTH_LONG).show();
+            Snackbar
+                    .make(getView(), "Data copied to your clipboard.", Snackbar.LENGTH_LONG)
+                    .setAction("Share", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            shareBookData(bookDataHtml);
+                        }
+
+                    })
+                    .show();
+        }
+
+        private void shareBookData(String bookDataHtml) {
+            Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Paper Trail book data backup");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, bookDataHtml);
+            startActivity(Intent.createChooser(shareIntent, "Share book data backup"));
         }
 
         private void clearSearchHistory() {
@@ -139,7 +154,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
                     Book book = extractBook(line);
                     bookLab.addBook(book);
                 }
-                inputStream .close();
+                inputStream.close();
             } catch (Exception e) {
                 e.printStackTrace();
                 Snackbar.make(getView(), "Book CSV import failed.", Snackbar.LENGTH_LONG).show();
@@ -177,7 +192,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
                 progress = Integer.parseInt(tokens[6]);
             }
             String isbn = tokens[9];
-            if (isbn.length() == 9){
+            if (isbn.length() == 9) {
                 isbn = "0" + isbn;
             }
 
@@ -190,8 +205,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             }
 
             book.setStatus(tokens[5]);
-            book.setTitle(tokens[2].replace("\"",""));
-            book.setAuthor(tokens[3].replace("\"",""));
+            book.setTitle(tokens[2].replace("\"", ""));
+            book.setAuthor(tokens[3].replace("\"", ""));
             book.setISBN(isbn);
             book.setLength(pageCount);
             book.setProgress(progress);
