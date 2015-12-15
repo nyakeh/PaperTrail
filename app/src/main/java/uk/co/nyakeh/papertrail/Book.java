@@ -10,8 +10,8 @@ public class Book {
     private String mAuthor = "";
     private int mProgress = 0;
     private int mLength = 100;
-    private Date mDateStarted;
-    private Date mDateFinished;
+    private Date mDateStarted = new Date();
+    private Date mDateFinished = DATE_MAX;
     private String mImageUrl = "";
     private String mCategory = "";
     private String mStatus = "";
@@ -19,6 +19,7 @@ public class Book {
     private String mDescription = "";
 
     private static final Date DATE_MAX = new Date(Long.MAX_VALUE);
+    private SimpleDateFormat mDayDateFormat = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
 
     public Book(UUID id) {
         mId = id;
@@ -31,7 +32,7 @@ public class Book {
         mStatus = status;
     }
 
-    public Book(String status,String title,String author,String isbn,Integer pageCount,String imageUrl,String description) {
+    public Book(String status, String title, String author, String isbn, Integer pageCount, String imageUrl, String description) {
         this(UUID.randomUUID());
         mDateStarted = new Date();
         mDateFinished = DATE_MAX;
@@ -80,21 +81,25 @@ public class Book {
         mAuthor = author;
     }
 
-    public int getProgress() { return mProgress; }
+    public int getProgress() {
+        return mProgress;
+    }
 
     public void setProgress(int progress) {
-        if (progress == mProgress){ return; }
+        if (progress == mProgress) {
+            return;
+        }
 
-        if (mProgress == 0 && progress != 0){
+        if (mProgress == 0 && progress != 0) {
             setDateStarted(new Date());
         }
         mProgress = progress;
-        if (isFinished())
-        {
-            setDateFinished(new Date());
+        if (isFinished()) {
+            if (mDayDateFormat.format(mDateFinished).equals(mDayDateFormat.format(DATE_MAX))) {
+                setDateFinished(new Date());
+            }
             setStatus(Constants.ARCHIVE);
-        }else
-        {
+        } else {
             setDateFinished(DATE_MAX);
             setStatus(Constants.READING);
         }
@@ -104,32 +109,53 @@ public class Book {
         return mLength;
     }
 
-    public void setLength(int length) { mLength = length; }
+    public void setLength(int length) {
+        mLength = length;
+    }
 
-    public String getImageUrl() { return mImageUrl; }
+    public String getImageUrl() {
+        return mImageUrl;
+    }
 
-    public void setImageUrl(String imageUrl) { mImageUrl = imageUrl; }
+    public void setImageUrl(String imageUrl) {
+        mImageUrl = imageUrl;
+    }
 
-    public String getCategory() { return mCategory; }
+    public String getCategory() {
+        return mCategory;
+    }
 
-    public void setCategory(String category) { mCategory = category; }
+    public void setCategory(String category) {
+        mCategory = category;
+    }
 
-    public String getStatus() { return mStatus; }
+    public String getStatus() {
+        return mStatus;
+    }
 
-    public void setStatus(String status) { mStatus = status; }
+    public void setStatus(String status) {
+        mStatus = status;
+    }
 
-    public String getISBN() { return mISBN; }
+    public String getISBN() {
+        return mISBN;
+    }
 
-    public void setISBN(String ISBN) { mISBN = ISBN; }
+    public void setISBN(String ISBN) {
+        mISBN = ISBN;
+    }
 
-    public String getDescription() { return mDescription; }
+    public String getDescription() {
+        return mDescription;
+    }
 
-    public void setDescription(String description) {  mDescription = description; }
+    public void setDescription(String description) {
+        mDescription = description;
+    }
 
     public boolean isEmpty() {
-        SimpleDateFormat day = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
-        boolean startedToday = day.format(mDateStarted).equals(day.format(new Date()));
-        boolean notFinished = day.format(mDateFinished).equals(day.format(DATE_MAX));
+        boolean startedToday = mDayDateFormat.format(mDateStarted).equals(mDayDateFormat.format(new Date()));
+        boolean notFinished = mDayDateFormat.format(mDateFinished).equals(mDayDateFormat.format(DATE_MAX));
 
         if (mTitle.isEmpty() && mAuthor.isEmpty() && mProgress == 0 && mLength == 100 && mImageUrl.isEmpty() && startedToday && notFinished) {
             return true;

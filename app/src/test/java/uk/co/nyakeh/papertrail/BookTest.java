@@ -61,4 +61,17 @@ public class BookTest {
         assertEquals(true, day.format(mBook.getDateStarted()).equals(day.format(new Date())));
         assertEquals(true, day.format(mBook.getDateFinished()).equals(day.format(new Date(Long.MAX_VALUE))));
     }
+
+    @Test
+    public void whenTheFinishedDateIsAlreadySetAndTheProgressIsUpdatedToOneHundredPercentThenTheDateFinishedIsNotOverriddenAndTheCurrentStatusIsArchive() throws Exception {
+        SimpleDateFormat dateFormat =  new SimpleDateFormat("yyyy, MM, dd");
+        Date date = dateFormat.parse("2015, 12, 3");
+        mBook.setDateFinished(date);
+        mBook.setProgress(100);
+
+        assertEquals(100, mBook.getProgress());
+        assertEquals(true, mBook.isFinished());
+        assertEquals(Constants.ARCHIVE, mBook.getStatus());
+        assertEquals(true, dateFormat.format(mBook.getDateFinished()).equals(dateFormat.format(date)));
+    }
 }
