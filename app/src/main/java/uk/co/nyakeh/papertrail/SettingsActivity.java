@@ -54,24 +54,24 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_prefs);
 
-            Preference backup_button = findPreference(getString(R.string.settings_backup));
-            backup_button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            Preference backupPreference = findPreference(getString(R.string.settings_backup));
+            backupPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     backupBookData();
                     return true;
                 }
             });
-            Preference clear_search_button = findPreference(getString(R.string.settings_clear_search_history));
-            clear_search_button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            Preference clearSearchPreference = findPreference(getString(R.string.settings_clear_search_history));
+            clearSearchPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     clearSearchHistory();
                     return true;
                 }
             });
-            Preference restore_button = findPreference(getString(R.string.settings_restore));
-            restore_button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            Preference restorePreference = findPreference(getString(R.string.settings_restore));
+            restorePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     importBookData();

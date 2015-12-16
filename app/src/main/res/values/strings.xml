@@ -55,5 +55,6 @@
     <string name="delete_note">Delete note</string>
     <string name="save_note">Save note</string>
     <string name="manual_create">Add new book manually</string>
-    <string name="quote_text">\'Always make the other person feel important\'</string>
+    <string name="quote_text">Always make the other person feel important</string>
+    <string name="quote_source">How to win friends and influence people</string>
 </resources>
