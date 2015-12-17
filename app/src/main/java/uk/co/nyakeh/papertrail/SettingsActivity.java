@@ -151,8 +151,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
                 reader.readLine();
                 while ((line = reader.readLine()) != null) {
                     Log.d("CSV line: ", line);
-                    Book book = extractBook(line);
-                    bookLab.addBook(book);
+                    String[] tokens = line.split(",(?=(?:[^\"]|\"[^\"]*\")*$)");
+                    if (tokens.length == 13) {
+                        Book book = extractBook(tokens);
+                        bookLab.addBook(book);
+                    } else {
+                        Log.d("Invalid line", String.valueOf(tokens.length) + " tokens");
+                    }
                 }
                 inputStream.close();
             } catch (Exception e) {
@@ -163,8 +168,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             Snackbar.make(getView(), "Book CSV import successful.", Snackbar.LENGTH_LONG).show();
         }
 
-        private Book extractBook(String line) {
-            String[] tokens = line.split(",(?=(?:[^\"]|\"[^\"]*\")*$)");
+        private Book extractBook(String[] tokens) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
             Date started = new Date();
