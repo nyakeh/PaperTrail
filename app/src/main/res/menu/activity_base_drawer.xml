@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/actions_section" android:checkableBehavior="all">
         <item
             android:id="@+id/nav_archive"
             android:icon="@drawable/ic_archive"
@@ -15,7 +15,7 @@
             android:icon="@drawable/ic_format_list"
             android:title="@string/reading_list"/>
     </group>
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/settings_section" android:checkableBehavior="all">
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"
