@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 
 import com.google.gson.Gson;
 
@@ -27,6 +28,7 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
     private EditText mImageUrlField;
     private EditText mCategoryField;
     private EditText mISBNField;
+    private RatingBar mRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,6 +155,15 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
 
             @Override
             public void afterTextChanged(Editable s) {
+            }
+        });
+
+        mRating = (RatingBar) findViewById(R.id.book_rating);
+        mRating.setRating(mBook.getRating());
+        mRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                mBook.setRating(rating);
             }
         });
 

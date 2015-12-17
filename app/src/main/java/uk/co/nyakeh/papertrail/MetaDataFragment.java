@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 
 import java.util.Date;
 
@@ -25,6 +26,7 @@ public class MetaDataFragment extends Fragment {
     private EditText mImageUrlField;
     private EditText mCategoryField;
     private EditText mISBNField;
+    private RatingBar mRating;
 
     private Book mBook;
 
@@ -148,6 +150,15 @@ public class MetaDataFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+            }
+        });
+
+        mRating = (RatingBar) view.findViewById(R.id.book_rating);
+        mRating.setRating(mBook.getRating());
+        mRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                mBook.setRating(rating);
             }
         });
 

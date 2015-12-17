@@ -184,22 +184,26 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
                 }
             }
             int pageCount = 100;
-            if (!tokens[7].isEmpty()) {
-                pageCount = Integer.parseInt(tokens[7]);
+            if (!tokens[8].isEmpty()) {
+                pageCount = Integer.parseInt(tokens[8]);
             }
             int progress = 100;
-            if (!tokens[6].isEmpty()) {
-                progress = Integer.parseInt(tokens[6]);
+            if (!tokens[7].isEmpty()) {
+                progress = Integer.parseInt(tokens[7]);
             }
-            String isbn = tokens[9];
-            if (isbn.length() == 9) {
+            Float rating = 0f;
+            if (!tokens[6].isEmpty()) {
+                rating = Float.parseFloat(tokens[6]);
+            }
+            String isbn = tokens[10];
+            if (isbn.length() == 10) {
                 isbn = "0" + isbn;
             }
 
             Book book = new Book(UUID.randomUUID());
             try {
                 if (!tokens[11].isEmpty()) {
-                    book = new Book(UUID.fromString(tokens[11]));
+                    book = new Book(UUID.fromString(tokens[12]));
                 }
             } catch (Exception e) {
             }
@@ -210,8 +214,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             book.setISBN(isbn);
             book.setLength(pageCount);
             book.setProgress(progress);
-            book.setImageUrl(tokens[10]);
-            book.setDescription(tokens[8]);
+            book.setRating(rating);
+            book.setImageUrl(tokens[11]);
+            book.setDescription(tokens[9]);
             book.setCategory(tokens[4]);
             book.setDateStarted(started);
             book.setDateFinished(finished);

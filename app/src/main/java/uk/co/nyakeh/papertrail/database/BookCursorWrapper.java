@@ -33,6 +33,7 @@ public class BookCursorWrapper extends CursorWrapper {
         String status = getString(getColumnIndex(BookTable.Cols.STATUS));
         String isbn = getString(getColumnIndex(BookTable.Cols.ISBN));
         String description = getString(getColumnIndex(BookTable.Cols.DESCRIPTION));
+        float rating = getFloat(getColumnIndex(BookTable.Cols.RATING));
 
         Book book = new Book(UUID.fromString(id));
         book.setTitle(title);
@@ -46,6 +47,7 @@ public class BookCursorWrapper extends CursorWrapper {
         book.setStatus(status);
         book.setISBN(isbn);
         book.setDescription(description);
+        book.setRating(rating);
         return book;
     }
 
@@ -62,6 +64,7 @@ public class BookCursorWrapper extends CursorWrapper {
         String status = getString(getColumnIndex(BookTable.Cols.STATUS));
         String isbn = getString(getColumnIndex(BookTable.Cols.ISBN));
         String description = getString(getColumnIndex(BookTable.Cols.DESCRIPTION));
+        String rating = getString(getColumnIndex(BookTable.Cols.RATING));
 
         String finishedString = "";
         SimpleDateFormat day = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
@@ -76,6 +79,7 @@ public class BookCursorWrapper extends CursorWrapper {
         bookAsString += author + "</td><td>";
         bookAsString += category + "</td><td>";
         bookAsString += status + "</td><td>";
+        bookAsString += rating + "</td><td>";
         bookAsString += progress + "</td><td>";
         bookAsString += length + "</td><td>";
         bookAsString += description + "</td><td>";

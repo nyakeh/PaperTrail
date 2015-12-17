@@ -8,8 +8,8 @@ public class Book {
     private UUID mId;
     private String mTitle = "";
     private String mAuthor = "";
-    private int mProgress = 0;
-    private int mLength = 100;
+    private Integer mProgress = 0;
+    private Integer mLength = 100;
     private Date mDateStarted = new Date();
     private Date mDateFinished = DATE_MAX;
     private String mImageUrl = "";
@@ -17,6 +17,7 @@ public class Book {
     private String mStatus = "";
     private String mISBN = "";
     private String mDescription = "";
+    private Float mRating = 0f;
 
     private static final Date DATE_MAX = new Date(Long.MAX_VALUE);
     private SimpleDateFormat mDayDateFormat = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
@@ -81,11 +82,11 @@ public class Book {
         mAuthor = author;
     }
 
-    public int getProgress() {
+    public Integer getProgress() {
         return mProgress;
     }
 
-    public void setProgress(int progress) {
+    public void setProgress(Integer progress) {
         if (progress == mProgress) {
             return;
         }
@@ -105,11 +106,11 @@ public class Book {
         }
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return mLength;
     }
 
-    public void setLength(int length) {
+    public void setLength(Integer length) {
         mLength = length;
     }
 
@@ -152,6 +153,10 @@ public class Book {
     public void setDescription(String description) {
         mDescription = description;
     }
+
+    public Float getRating() { return mRating; }
+
+    public void setRating(Float rating) { mRating = rating; }
 
     public boolean isEmpty() {
         boolean startedToday = mDayDateFormat.format(mDateStarted).equals(mDayDateFormat.format(new Date()));
