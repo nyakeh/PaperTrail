@@ -97,11 +97,11 @@ public class ArchiveFragment extends Fragment {
     }
 
     private class ArchivedBookHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         private Book mBook;
         private TextView mLetterTextView;
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
+        private TextView mRatingTextView;
 
         public ArchivedBookHolder(View itemView) {
             super(itemView);
@@ -110,6 +110,7 @@ public class ArchiveFragment extends Fragment {
             mLetterTextView = (TextView) itemView.findViewById(R.id.list_item_book_letter);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title);
             mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author);
+            mRatingTextView = (TextView) itemView.findViewById(R.id.list_item_book_rating);
         }
 
         private void bindBook(Book book) {
@@ -118,6 +119,9 @@ public class ArchiveFragment extends Fragment {
             mLetterTextView.setText(letter);
             mTitleTextView.setText(book.getTitle());
             mAuthorTextView.setText(book.getAuthor());
+            if (book.getRating() > 0){
+                mRatingTextView.setText(String.valueOf(book.getRating()));
+            }
         }
 
         @Override

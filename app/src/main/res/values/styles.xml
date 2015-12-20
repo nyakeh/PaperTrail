@@ -25,6 +25,7 @@
         <item name="android:textColor">#e1e1e1</item>
         <item name="textAllCaps">true</item>
     </style>
+
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/colorPrimaryLight</item>
         <item name="colorControlActivated">@color/colorAccent</item>
