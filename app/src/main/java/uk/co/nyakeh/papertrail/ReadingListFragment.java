@@ -50,9 +50,8 @@ public class ReadingListFragment extends Fragment {
     }
 
     private void AddNewBook() {
-        Book book = new Book(Constants.QUEUE);
-        Intent intent = new Intent(getActivity(), CreateBookActivity.class);
-        intent.putExtra(Constants.ARG_NEW_BOOK, new Gson().toJson(book));
+        Intent intent = new Intent(getActivity(), SearchActivity.class);
+        intent.putExtra(Constants.ARG_BOOK_CREATION_STATUS, Constants.QUEUE);
         startActivity(intent);
     }
 
@@ -149,9 +148,7 @@ public class ReadingListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_add_search:
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                intent.putExtra(Constants.ARG_BOOK_CREATION_STATUS, Constants.QUEUE);
-                startActivity(intent);
+                AddNewBook();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
