@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -61,7 +60,7 @@ public class ArchiveFragment extends Fragment {
             for (Iterator<Book> i = archivedBooks.iterator(); i.hasNext(); ) {
                 Book book = i.next();
                 String bookMonth = DateFormat.format(Constants.MONTH_DATE_FORMAT, book.getDateFinished()).toString();
-                if (!bookMonth.equals(currentMonth)) {
+                if (!bookMonth.equals(currentMonth)){
                     currentMonth = bookMonth;
                     Book bookHeader = new Book(UUID.randomUUID());
                     bookHeader.setTitle(bookMonth);
@@ -99,7 +98,7 @@ public class ArchiveFragment extends Fragment {
 
     private class ArchivedBookHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Book mBook;
-        private TextView mCategoryTextView;
+        private TextView mLetterTextView;
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
         private TextView mRatingTextView;
@@ -108,7 +107,7 @@ public class ArchiveFragment extends Fragment {
             super(itemView);
             itemView.setOnClickListener(this);
 
-            mCategoryTextView = (TextView) itemView.findViewById(R.id.list_item_book_letter);
+            mLetterTextView = (TextView) itemView.findViewById(R.id.list_item_book_letter);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title);
             mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author);
             mRatingTextView = (TextView) itemView.findViewById(R.id.list_item_book_rating);
@@ -116,12 +115,13 @@ public class ArchiveFragment extends Fragment {
 
         private void bindBook(Book book) {
             mBook = book;
-            String category = (book.getCategory().isEmpty()) ? "" : book.getCategory().substring(0, 1);
-            mCategoryTextView.setText(category);
+            String letter = (book.getCategory().isEmpty()) ? "" : book.getCategory().substring(0, 1);
+            mLetterTextView.setText(letter);
             mTitleTextView.setText(book.getTitle());
             mAuthorTextView.setText(book.getAuthor());
-            String rating = (book.getRating() <= 0) ? "" : String.valueOf(book.getRating());
-            mRatingTextView.setText(rating);
+            if (book.getRating() > 0){
+                mRatingTextView.setText(String.valueOf(book.getRating()));
+            }
         }
 
         @Override
