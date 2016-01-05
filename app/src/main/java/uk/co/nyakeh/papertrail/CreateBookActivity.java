@@ -158,15 +158,6 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
             }
         });
 
-        mRating = (RatingBar) findViewById(R.id.book_rating);
-        mRating.setRating(mBook.getRating());
-        mRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                mBook.setRating(rating);
-            }
-        });
-
         updateDate();
     }
 

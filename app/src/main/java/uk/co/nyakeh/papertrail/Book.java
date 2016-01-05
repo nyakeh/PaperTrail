@@ -17,10 +17,9 @@ public class Book {
     private String mStatus = "";
     private String mISBN = "";
     private String mDescription = "";
-    private float mRating = 0f;
+    private float mRating = 0.0f;
 
     private static final Date DATE_MAX = new Date(Long.MAX_VALUE);
-    private SimpleDateFormat mDayDateFormat = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
 
     public Book(UUID id) {
         mId = id;
@@ -96,6 +95,7 @@ public class Book {
         }
         mProgress = progress;
         if (isFinished()) {
+            SimpleDateFormat mDayDateFormat = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
             if (mDayDateFormat.format(mDateFinished).equals(mDayDateFormat.format(DATE_MAX))) {
                 setDateFinished(new Date());
             }
@@ -154,11 +154,16 @@ public class Book {
         mDescription = description;
     }
 
-    public float getRating() { return mRating; }
+    public float getRating() {
+        return mRating;
+    }
 
-    public void setRating(float rating) { mRating = rating; }
+    public void setRating(float rating) {
+        mRating = rating;
+    }
 
     public boolean isEmpty() {
+        SimpleDateFormat mDayDateFormat = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
         boolean startedToday = mDayDateFormat.format(mDateStarted).equals(mDayDateFormat.format(new Date()));
         boolean notFinished = mDayDateFormat.format(mDateFinished).equals(mDayDateFormat.format(DATE_MAX));
 
