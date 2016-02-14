@@ -14,7 +14,7 @@
     <string name="book_image_url_label">Image Url</string>
     <string name="book_finished_label">Finished</string>
     <string name="track_new_book">Track a new book</string>
-    <string name="book_progress_label">Current Progress</string>
+    <string name="book_progress_label">Current Progress:   </string>
     <string name="book">Book</string>
     <string name="cancel">CANCEL</string>
     <string name="ok">OK</string>

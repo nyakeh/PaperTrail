@@ -62,8 +62,7 @@
             android:layout_toRightOf="@+id/list_item_book_progress"
             android:gravity="bottom"
             android:paddingTop="4dp"
-            android:text="%"
-            android:textStyle="italic"/>
+            android:text="%"/>
 
         <ProgressBar
             android:id="@+id/list_item_book_progress_bar"

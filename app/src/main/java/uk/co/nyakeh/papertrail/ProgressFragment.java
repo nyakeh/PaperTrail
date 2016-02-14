@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.SeekBar;
@@ -32,6 +31,7 @@ public class ProgressFragment extends Fragment {
     private Button mBookFinishedButton;
     private ImageView mBookImage;
     private TextView mBookDescription;
+    private TextView mBookProgressPercentage;
 
     private Book mBook;
 
@@ -102,6 +102,11 @@ public class ProgressFragment extends Fragment {
         mBookDescription.setText(mBook.getDescription());
         mBookDescription.setMovementMethod(ScrollingMovementMethod.getInstance());
 
+        mBookProgressPercentage = (TextView) view.findViewById(R.id.book_progress_percentage);
+        float progressAsPercentage = (float) mBook.getProgress() / mBook.getLength();
+        String progressAsPercentageString = String.format("%.0f", (progressAsPercentage * 100));
+        mBookProgressPercentage.setText(progressAsPercentageString);
+
         updateDate();
         return view;
     }
@@ -118,6 +123,9 @@ public class ProgressFragment extends Fragment {
 
     public void updateProgress(int progress) {
         mBook.setProgress(progress);
+        float progressAsPercentage = (float) mBook.getProgress() / mBook.getLength();
+        String progressAsPercentageString = String.format("%.0f", (progressAsPercentage * 100));
+        mBookProgressPercentage.setText(progressAsPercentageString);
         if (mBook.getStatus().equals(Constants.ARCHIVE)) {
             BookActivity.updateStatusSwitch(false);
         }

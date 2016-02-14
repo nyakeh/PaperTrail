@@ -2,7 +2,6 @@ package uk.co.nyakeh.papertrail;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
@@ -21,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -106,8 +104,8 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
             mAuthorTextView.setText(book.getAuthor());
 
             float progressAsPercentage = (float) book.getProgress() / book.getLength();
-            String s = String.format("%.0f", (progressAsPercentage * 100));
-            mProgressTextView.setText(s);
+            String progressAsPercentageString = String.format("%.0f", (progressAsPercentage * 100));
+            mProgressTextView.setText(progressAsPercentageString);
 
             String safePicassoImageUrl = (book.getImageUrl().isEmpty()) ? "fail_gracefully_pls" : book.getImageUrl();
             Picasso.with(BookListActivity.this)

@@ -27,7 +27,6 @@ public class MetaDataFragment extends Fragment {
     private EditText mCategoryField;
     private EditText mISBNField;
     private RatingBar mRating;
-
     private Book mBook;
 
     @Override

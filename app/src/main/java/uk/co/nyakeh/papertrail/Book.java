@@ -32,7 +32,7 @@ public class Book {
         mStatus = status;
     }
 
-    public Book(String status, String title, String author, String isbn, Integer pageCount, String imageUrl, String description) {
+    public Book(String status, String title, String author, String isbn, int pageCount, String imageUrl, String description) {
         this(UUID.randomUUID());
         mDateStarted = new Date();
         mDateFinished = DATE_MAX;
@@ -106,11 +106,11 @@ public class Book {
         }
     }
 
-    public Integer getLength() {
+    public int getLength() {
         return mLength;
     }
 
-    public void setLength(Integer length) {
+    public void setLength(int length) {
         mLength = length;
     }
 
