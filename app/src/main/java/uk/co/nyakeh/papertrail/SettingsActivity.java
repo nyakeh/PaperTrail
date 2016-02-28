@@ -103,9 +103,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
         }
 
         private void shareBookData(String bookDataHtml) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
+            String formattedDate = dateFormat.format(new Date());
+
             Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Paper Trail book data backup");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, formattedDate + " : Paper Trail book data backup");
             shareIntent.putExtra(Intent.EXTRA_TEXT, bookDataHtml);
             startActivity(Intent.createChooser(shareIntent, "Share book data backup"));
         }
@@ -170,7 +173,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
         }
 
         private Book extractBook(String[] tokens) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.EXPORT_DATE_FORMAT);
 
             Date started = new Date();
             if (!tokens[0].isEmpty()) {

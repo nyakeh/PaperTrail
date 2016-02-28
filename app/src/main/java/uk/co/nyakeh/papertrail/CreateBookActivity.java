@@ -28,7 +28,6 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
     private EditText mImageUrlField;
     private EditText mCategoryField;
     private EditText mISBNField;
-    private RatingBar mRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
