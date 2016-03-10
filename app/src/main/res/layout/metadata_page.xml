@@ -12,6 +12,41 @@
         android:paddingRight="@dimen/auxiliary_margin"
         android:paddingTop="@dimen/auxiliary_margin">
 
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/book_started_label"/>
+
+        <Button
+            android:id="@+id/book_started_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/auxiliary_margin"
+            android:layout_marginRight="@dimen/auxiliary_margin"/>
+
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/book_rating_label"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RatingBar
+                android:id="@+id/book_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:layout_gravity="center"
+                android:theme="@style/RatingBar"/>
+
+        </LinearLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -36,6 +71,18 @@
                 android:hint="@string/book_author_label"
                 android:inputType="textCapWords"
                 android:singleLine="true"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/book_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/book_category_label"
+                android:inputType="textCapWords"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -68,18 +115,6 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/book_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/book_category_label"
-                android:inputType="textCapWords"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
                 android:id="@+id/book_isbn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,39 +122,6 @@
                 android:inputType="textCapCharacters"/>
         </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/book_rating_label"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RatingBar
-                android:id="@+id/book_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:stepSize="0.5"
-                android:layout_gravity="center"
-                android:theme="@style/RatingBar"/>
-
-        </LinearLayout>
-
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/book_started_label"/>
-
-        <Button
-            android:id="@+id/book_started_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/auxiliary_margin"
-            android:layout_marginRight="@dimen/auxiliary_margin"/>
     </LinearLayout>
 </ScrollView>
