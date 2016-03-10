@@ -139,7 +139,7 @@ public class SearchActivity extends AppCompatActivity {
             HttpURLConnection urlConnection;
             String queryString = params[0];
             try {
-                url = new URL("https://www.googleapis.com/books/v1/volumes?q=" + URLEncoder.encode(queryString, "UTF-8") + "&filter=ebooks&maxResults=10&printType=books&showPreorders=true&key=" + getString(R.string.google_books_api_key));
+                url = new URL("https://www.googleapis.com/books/v1/volumes?q=" + URLEncoder.encode(queryString, "UTF-8") + "&filter=ebooks&maxResults=20&printType=books&showPreorders=true&key=" + getString(R.string.google_books_api_key));
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setReadTimeout(10000);
                 urlConnection.setConnectTimeout(15000);
