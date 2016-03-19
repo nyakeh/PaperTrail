@@ -147,6 +147,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
 
         private void readTextFromUri(Uri uri) {
             InputStream inputStream;
+            int bookImportCount = 0;
             try {
                 inputStream = getActivity().getContentResolver().openInputStream(uri);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -159,6 +160,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
                     if (tokens.length == 13) {
                         Book book = extractBook(tokens);
                         bookLab.addBook(book);
+                        bookImportCount++;
                     } else {
                         Log.d("Invalid line", String.valueOf(tokens.length) + " tokens");
                     }
@@ -169,7 +171,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
                 Snackbar.make(getView(), "Book CSV import failed.", Snackbar.LENGTH_LONG).show();
                 return;
             }
-            Snackbar.make(getView(), "Book CSV import successful.", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(getView(), bookImportCount + " books successfully imported.", Snackbar.LENGTH_LONG).show();
         }
 
         private Book extractBook(String[] tokens) {
