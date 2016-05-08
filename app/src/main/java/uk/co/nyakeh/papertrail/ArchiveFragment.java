@@ -54,9 +54,9 @@ public class ArchiveFragment extends Fragment {
         if (!archivedBooks.isEmpty()) {
             int position = 1;
             String currentMonth = DateFormat.format(Constants.MONTH_DATE_FORMAT, archivedBooks.get(0).getDateFinished()).toString();
-            Book book1 = new Book("");
-            book1.setTitle(currentMonth);
-            bookList.add(book1);
+            Book firstBookHeader = new Book(UUID.randomUUID());
+            firstBookHeader.setTitle(currentMonth);
+            bookList.add(firstBookHeader);
             headerPositionList.add(0);
             for (Iterator<Book> i = archivedBooks.iterator(); i.hasNext(); ) {
                 Book book = i.next();
