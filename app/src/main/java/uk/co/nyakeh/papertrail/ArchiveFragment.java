@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class ArchiveFragment extends Fragment {
@@ -23,6 +25,7 @@ public class ArchiveFragment extends Fragment {
     private ArchivedBookAdapter mArchivedBookAdapter;
     private TextView mBookListEmptyMessageView;
     private List<Integer> headerPositionList = new ArrayList<>();
+    private Map<String, Integer> pageReadSums = new HashMap<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,10 +61,12 @@ public class ArchiveFragment extends Fragment {
             firstBookHeader.setTitle(currentMonth);
             bookList.add(firstBookHeader);
             headerPositionList.add(0);
+            int monthlyPageSum = 0;
             for (Iterator<Book> i = archivedBooks.iterator(); i.hasNext(); ) {
                 Book book = i.next();
                 String bookMonth = DateFormat.format(Constants.MONTH_DATE_FORMAT, book.getDateFinished()).toString();
                 if (!bookMonth.equals(currentMonth)) {
+                    monthlyPageSum = 0;
                     currentMonth = bookMonth;
                     Book bookHeader = new Book(UUID.randomUUID());
                     bookHeader.setTitle(bookMonth);
@@ -71,6 +76,8 @@ public class ArchiveFragment extends Fragment {
                 }
                 bookList.add(book);
                 position++;
+                monthlyPageSum += book.getLength();
+                pageReadSums.put(currentMonth, monthlyPageSum);
             }
         }
 
@@ -157,7 +164,7 @@ public class ArchiveFragment extends Fragment {
             Book book = mBooks.get(position);
             if (holder instanceof VHHeader) {
                 VHHeader VHheader = (VHHeader) holder;
-                VHheader.mHeading.setText(book.getTitle());
+                VHheader.mHeading.setText(book.getTitle() + " " + pageReadSums.get(book.getTitle()) + " pages read");
             } else if (holder instanceof ArchivedBookHolder) {
                 ArchivedBookHolder archivedBookHolder = (ArchivedBookHolder) holder;
                 archivedBookHolder.bindBook(book);
