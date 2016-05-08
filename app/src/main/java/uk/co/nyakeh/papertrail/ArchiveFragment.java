@@ -164,7 +164,8 @@ public class ArchiveFragment extends Fragment {
             Book book = mBooks.get(position);
             if (holder instanceof VHHeader) {
                 VHHeader VHheader = (VHHeader) holder;
-                VHheader.mHeading.setText(book.getTitle() + " " + pageReadSums.get(book.getTitle()) + " pages read");
+                VHheader.mMonth.setText(book.getTitle());
+                VHheader.mPages.setText(pageReadSums.get(book.getTitle()) + " pages");
             } else if (holder instanceof ArchivedBookHolder) {
                 ArchivedBookHolder archivedBookHolder = (ArchivedBookHolder) holder;
                 archivedBookHolder.bindBook(book);
@@ -192,11 +193,13 @@ public class ArchiveFragment extends Fragment {
         }
 
         class VHHeader extends RecyclerView.ViewHolder {
-            TextView mHeading;
+            TextView mMonth;
+            TextView mPages;
 
             public VHHeader(View itemView) {
                 super(itemView);
-                this.mHeading = (TextView) itemView.findViewById(R.id.list_item_archive_heading);
+                this.mMonth = (TextView) itemView.findViewById(R.id.list_item_archive_heading_month);
+                this.mPages = (TextView) itemView.findViewById(R.id.list_item_archive_heading_pages);
             }
         }
     }

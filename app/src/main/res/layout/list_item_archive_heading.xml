@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:background="#E9E9E9">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#E9E9E9">
 
     <TextView
-        android:id="@+id/list_item_archive_heading"
-        android:layout_width="fill_parent"
+        android:id="@+id/list_item_archive_heading_month"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:padding="8dp"
-        android:textColor="#A69898"
-        tools:text="November"/>
+        android:textColor="#A69898"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/list_item_archive_heading_pages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="8dp"
+        android:textColor="#A69898"/>
+
+</RelativeLayout>
