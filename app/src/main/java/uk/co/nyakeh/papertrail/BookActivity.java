@@ -131,8 +131,7 @@ public class BookActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         PageAdapter adapter = new PageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ProgressFragment(), getString(R.string.Progress));
-        adapter.addFragment(new NoteFragment(), getString(R.string.notes));
+        adapter.addFragment(new ProgressFragment(), getString(R.string.progress));
         adapter.addFragment(new MetaDataFragment(), getString(R.string.meta));
         viewPager.setAdapter(adapter);
     }

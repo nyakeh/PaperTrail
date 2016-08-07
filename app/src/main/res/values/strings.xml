@@ -7,8 +7,6 @@
     <string name="delete_book">Delete book</string>
     <string name="book_list_empty_message">You haven\'t got any active books</string>
     <string name="archive_empty_message">The books you finish will appear here</string>
-    <string name="new_book">New Book</string>
-    <string name="book_blurb_label">Blurb</string>
     <string name="book_length_label">Page Count</string>
     <string name="book_isbn_label">ISBN</string>
     <string name="book_image_url_label">Image Url</string>
@@ -29,15 +27,8 @@
     <string name="book_category_label">Category</string>
     <string name="update_book">Update book</string>
     <string name="reading_list_empty_message">Queue up the books you want to read next</string>
-    <string name="note">Note</string>
-    <string name="Progress">Progress</string>
-    <string name="notes">Notes</string>
+    <string name="progress">Progress</string>
     <string name="meta">Meta</string>
-    <string name="create_note">Create Note</string>
-    <string name="update">Update</string>
-    <string name="delete">Delete</string>
-    <string name="note_title">note_title</string>
-    <string name="note_content">note_content</string>
     <string name="transition_book_cover">transition_book_cover</string>
     <string name="title_activity_settings">Settings</string>
     <string name="search_hint">Search by title or author</string>
@@ -52,8 +43,6 @@
     <string name="clear_search_title">Clear local search history</string>
     <string name="clear_search_summary">Remove book searches that you have performed from this device</string>
     <string name="goodreads">Goodreads</string>
-    <string name="delete_note">Delete note</string>
-    <string name="save_note">Save note</string>
     <string name="manual_create">Add new book manually</string>
     <string name="book_rating_label">Your Rating</string>
 </resources>

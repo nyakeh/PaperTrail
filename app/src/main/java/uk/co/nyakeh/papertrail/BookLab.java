@@ -13,10 +13,8 @@ import java.util.UUID;
 
 import uk.co.nyakeh.papertrail.database.BookBaseHelper;
 import uk.co.nyakeh.papertrail.database.BookCursorWrapper;
-import uk.co.nyakeh.papertrail.database.NoteCursorWrapper;
 
 import static uk.co.nyakeh.papertrail.database.BookDbSchema.BookTable;
-import static uk.co.nyakeh.papertrail.database.NoteDbSchema.NoteTable;
 
 public class BookLab {
     private static BookLab sBookLab;
@@ -43,11 +41,6 @@ public class BookLab {
         } else {
             updateBook(book);
         }
-    }
-
-    public void addNote(Note note) {
-        ContentValues values = getNoteContentValues(note);
-        mDatabase.insert(NoteTable.NAME, null, values);
     }
 
     public List<Book> getActiveBooks() {
@@ -141,12 +134,6 @@ public class BookLab {
         mDatabase.update(BookTable.NAME, values, BookTable.Cols.ID + " = ?", new String[]{uuidString});
     }
 
-    public void updateNote(Note note) {
-        String uuidString = note.getId().toString();
-        ContentValues values = getNoteContentValues(note);
-        mDatabase.update(NoteTable.NAME, values, NoteTable.Cols.ID + " = ?", new String[]{uuidString});
-    }
-
     private static ContentValues getBookContentValues(Book book) {
         ContentValues values = new ContentValues();
         values.put(BookTable.Cols.ID, book.getId().toString());
@@ -165,17 +152,6 @@ public class BookLab {
         return values;
     }
 
-    private static ContentValues getNoteContentValues(Note note) {
-        ContentValues values = new ContentValues();
-        values.put(NoteTable.Cols.ID, note.getId().toString());
-        values.put(NoteTable.Cols.BOOK_ID, note.getBookId().toString());
-        values.put(NoteTable.Cols.TITLE, note.getTitle());
-        values.put(NoteTable.Cols.CONTENT, note.getContent());
-        values.put(NoteTable.Cols.CREATED, note.getCreated().getTime());
-        values.put(NoteTable.Cols.UPDATED, note.getUpdated().getTime());
-        return values;
-    }
-
     private BookCursorWrapper queryBooks(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(BookTable.NAME,
                 null,  // Columns - null selects *
@@ -188,41 +164,8 @@ public class BookLab {
         return new BookCursorWrapper(cursor);
     }
 
-    private NoteCursorWrapper queryNotes(String whereClause, String[] whereArgs) {
-        Cursor cursor = mDatabase.query(NoteTable.NAME,
-                null,  // Columns - null selects *
-                whereClause,
-                whereArgs,
-                null,  // groupBy
-                null,  // having
-                null); // orderBy
-
-        return new NoteCursorWrapper(cursor);
-    }
-
     public void deleteBook(UUID id) {
         mDatabase.delete(BookTable.NAME, BookTable.Cols.ID + " = ?", new String[]{id.toString()});
-    }
-
-    public void deleteNote(UUID id) {
-        mDatabase.delete(NoteTable.NAME, BookTable.Cols.ID + " = ?", new String[]{id.toString()});
-    }
-
-    public List<Note> getNotes(UUID bookId) {
-        ArrayList<Note> notes = new ArrayList<>();
-        NoteCursorWrapper cursor = queryNotes(NoteTable.Cols.BOOK_ID + " = ?", new String[]{bookId.toString()});
-
-        try {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                Note note = cursor.getNote();
-                notes.add(note);
-                cursor.moveToNext();
-            }
-        } finally {
-            cursor.close();
-        }
-        return notes;
     }
 
     public String getBackupData() {

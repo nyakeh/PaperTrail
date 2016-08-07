@@ -44,10 +44,6 @@
             android:label="@string/reading_list">
         </activity>
         <activity
-            android:name=".CreateNoteActivity"
-            android:label="@string/create_note">
-        </activity>
-        <activity
             android:name=".SettingsActivity"
             android:label="@string/settings">
         </activity>
