@@ -5,17 +5,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.format.DateFormat;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -29,8 +30,6 @@ public class ProgressFragment extends Fragment {
     private NumberPicker mProgressNumberPickerField;
     private SeekBar mProgressSeekbarField;
     private Button mBookFinishedButton;
-    private ImageView mBookImage;
-    private TextView mBookDescription;
     private TextView mBookProgressPercentage;
 
     private Book mBook;
@@ -74,13 +73,13 @@ public class ProgressFragment extends Fragment {
             }
         });
 
-        mBookImage = (ImageView) view.findViewById(R.id.book_image);
+        ImageView bookImage = (ImageView) view.findViewById(R.id.book_image);
         String safePicassoImageUrl = (mBook.getImageUrl().isEmpty()) ? "fail_gracefully_pls" : mBook.getImageUrl();
         Picasso.with(getActivity())
                 .load(safePicassoImageUrl)
                 .placeholder(R.drawable.books)
                 .error(R.drawable.books)
-                .into(mBookImage);
+                .into(bookImage);
 
         mBookFinishedButton = (Button) view.findViewById(R.id.book_finished_date);
         mBookFinishedButton.setOnClickListener(new View.OnClickListener() {
@@ -98,9 +97,15 @@ public class ProgressFragment extends Fragment {
             }
         });
 
-        mBookDescription = (TextView) view.findViewById(R.id.book_description);
-        mBookDescription.setText(mBook.getDescription());
-        mBookDescription.setMovementMethod(ScrollingMovementMethod.getInstance());
+        if (mBook.getDescription().isEmpty()) {
+            LinearLayout bottomSheet = (LinearLayout) view.findViewById(R.id.bottom_sheet);
+            BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+            bottomSheetBehavior.setHideable(true);
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        } else {
+            TextView bookDescription = (TextView) view.findViewById(R.id.book_description);
+            bookDescription.setText(mBook.getDescription());
+        }
 
         mBookProgressPercentage = (TextView) view.findViewById(R.id.book_progress_percentage);
         float progressAsPercentage = (float) mBook.getProgress() / mBook.getLength();

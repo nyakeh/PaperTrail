@@ -1,90 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/progress_layout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/auxiliary_margin"
-        android:paddingRight="@dimen/auxiliary_margin"
-        android:paddingTop="@dimen/auxiliary_margin">
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/progress_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/auxiliary_margin">
 
-            <ImageView
-                android:id="@+id/book_image"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:layout_weight="4"
-                android:transitionName="@string/transition_book_cover"
-                tools:src="@drawable/books"/>
-
-            <NumberPicker
-                android:id="@+id/book_progress_number_picker"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/auxiliary_margin"
+                android:paddingRight="@dimen/auxiliary_margin"
+                android:weightSum="5">
+
+                <ImageView
+                    android:id="@+id/book_image"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="4"
+                    android:transitionName="@string/transition_book_cover"
+                    tools:src="@drawable/books"/>
+
+                <NumberPicker
+                    android:id="@+id/book_progress_number_picker"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/auxiliary_margin"
+                android:paddingRight="@dimen/auxiliary_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/book_progress_label"/>
+
+                <TextView
+                    android:id="@+id/book_progress_percentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    tools:text="53"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="%"/>
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/book_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/auxiliary_margin"
+                android:layout_marginRight="@dimen/auxiliary_margin"/>
+
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/auxiliary_margin"
+                android:paddingRight="@dimen/auxiliary_margin"
+                android:text="@string/book_finished_label"/>
+
+            <Button
+                android:id="@+id/book_finished_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:paddingLeft="@dimen/auxiliary_margin"
+                android:paddingRight="@dimen/auxiliary_margin"/>
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            style="?android:listSeparatorTextViewStyle">
+    <include layout="@layout/bottom_sheet"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/book_progress_label"/>
-
-            <TextView
-                android:id="@+id/book_progress_percentage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                tools:text="53"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="%"/>
-        </LinearLayout>
-
-        <SeekBar
-            android:id="@+id/book_progress_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"/>
-
-        <TextView
-            android:id="@+id/book_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="6"
-            android:paddingTop="@dimen/list_item_separation"
-            android:scrollbars="vertical"
-            tools:text="Go facts series 2: plants 4 book set and teacher's guide (plants, flowers, trees, plants as food)"/>
-
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/book_finished_label"/>
-
-        <Button
-            android:id="@+id/book_finished_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
-    </LinearLayout>
-</ScrollView>
+</android.support.design.widget.CoordinatorLayout>

@@ -45,4 +45,5 @@
     <string name="goodreads">Goodreads</string>
     <string name="manual_create">Add new book manually</string>
     <string name="book_rating_label">Your Rating</string>
+    <string name="bottom_sheet_peek">Description</string>
 </resources>
