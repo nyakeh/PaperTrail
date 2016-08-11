@@ -19,14 +19,20 @@
         android:text="@string/bottom_sheet_peek"
         android:textColor="@android:color/white"/>
 
-    <TextView
-        android:id="@+id/book_description"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/auxiliary_margin"
-        tools:text="Coaching is an essential skill for leaders. But for most busy, overworked managers, coaching employees is done badly, or not at all.  They’re just too busy, and it’s too hard to change.
+        android:scrollbarFadeDuration="0">
+
+        <TextView
+            android:id="@+id/book_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/auxiliary_margin"
+            tools:text="Coaching is an essential skill for leaders. But for most busy, overworked managers, coaching employees is done badly, or not at all.  They’re just too busy, and it’s too hard to change.
 
 But what if managers could coach their people in 10 minutes or less?
 
 In Michael Bungay Stanier’s The Coaching Habit, coaching becomes a regular, informal part of your day so managers and their teams can work less hard and have more impact."/>
+    </ScrollView>
 </LinearLayout>
