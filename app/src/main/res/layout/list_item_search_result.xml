@@ -34,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/list_item_book_title_label"
+        android:maxLines="1"
         android:padding="2dp"
         android:textStyle="bold"
         tools:text="The Lean Startup"/>
@@ -54,6 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_book_title"
         android:layout_toRightOf="@+id/list_item_book_author_label"
+        android:maxLines="1"
         android:padding="2dp"
         android:textStyle="bold"
         tools:text="Eric Ries"/>
@@ -64,6 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_book_author"
         android:layout_toRightOf="@+id/list_item_book_image"
+        android:maxLines="1"
         android:padding="2dp"
         android:text="ISBN:"
         android:textColor="@color/colorPrimaryDark"/>
