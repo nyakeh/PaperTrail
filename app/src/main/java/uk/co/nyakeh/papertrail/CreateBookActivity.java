@@ -11,9 +11,10 @@ import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RatingBar;
+import android.widget.Spinner;
 
 import com.google.gson.Gson;
 
@@ -26,7 +27,7 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
     private EditText mLengthField;
     private Button mDateStartedButton;
     private EditText mImageUrlField;
-    private EditText mCategoryField;
+    private Spinner mCategoryField;
     private EditText mISBNField;
 
     @Override
@@ -123,20 +124,18 @@ public class CreateBookActivity extends AppCompatActivity implements DateDialogC
             }
         });
 
-        mCategoryField = (EditText) findViewById(R.id.book_category);
-        mCategoryField.setText(mBook.getCategory());
-        mCategoryField.addTextChangedListener(new TextWatcher() {
+        mCategoryField = (Spinner) findViewById(R.id.book_category);
+        mCategoryField.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                Object selectedItem = mCategoryField.getSelectedItem();
+                String category = selectedItem.toString();
+                mBook.setCategory(category);
             }
 
             @Override
-            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-                mBook.setCategory(inputChar.toString());
-            }
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            @Override
-            public void afterTextChanged(Editable s) {
             }
         });
 

@@ -40,9 +40,9 @@
                 android:id="@+id/book_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:numStars="5"
                 android:stepSize="0.5"
-                android:layout_gravity="center"
                 android:theme="@style/RatingBar"/>
 
         </LinearLayout>
@@ -73,17 +73,24 @@
                 android:singleLine="true"/>
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/auxiliary_margin"
+            android:paddingTop="@dimen/auxiliary_margin">
 
-            <EditText
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_category_label"/>
+
+            <Spinner
                 android:id="@+id/book_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/book_category_label"
-                android:inputType="textCapWords"/>
-        </android.support.design.widget.TextInputLayout>
+                android:entries="@array/book_categories"/>
+        </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"

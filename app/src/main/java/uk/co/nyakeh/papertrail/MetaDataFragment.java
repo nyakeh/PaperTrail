@@ -12,10 +12,13 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class MetaDataFragment extends Fragment {
@@ -24,7 +27,7 @@ public class MetaDataFragment extends Fragment {
     private EditText mLengthField;
     private Button mDateStartedButton;
     private EditText mImageUrlField;
-    private EditText mCategoryField;
+    private Spinner mCategoryField;
     private EditText mISBNField;
     private RatingBar mRating;
     private Book mBook;
@@ -45,7 +48,7 @@ public class MetaDataFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
                 mBook.setTitle(inputChar.toString());
-                ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(inputChar.toString());
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(inputChar.toString());
             }
 
             @Override
@@ -118,23 +121,24 @@ public class MetaDataFragment extends Fragment {
             }
         });
 
-        mCategoryField = (EditText) view.findViewById(R.id.book_category);
-        mCategoryField.setText(mBook.getCategory());
-        mCategoryField.addTextChangedListener(new TextWatcher() {
+        mCategoryField = (Spinner) view.findViewById(R.id.book_category);
+
+        String[] categories = getResources().getStringArray(R.array.book_categories);
+        int selectedCategoryPosition = Arrays.asList(categories).indexOf(mBook.getCategory());
+        mCategoryField.setSelection(selectedCategoryPosition);
+        mCategoryField.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                Object selectedItem = mCategoryField.getSelectedItem();
+                String category = selectedItem.toString();
+                mBook.setCategory(category);
             }
 
             @Override
-            public void onTextChanged(CharSequence inputChar, int start, int before, int count) {
-                mBook.setCategory(inputChar.toString());
-            }
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            @Override
-            public void afterTextChanged(Editable s) {
             }
         });
-
         mISBNField = (EditText) view.findViewById(R.id.book_isbn);
         mISBNField.setText(mBook.getISBN());
         mISBNField.addTextChangedListener(new TextWatcher() {
