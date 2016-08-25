@@ -19,9 +19,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -188,6 +190,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private class SearchResultHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Book mSearchResult;
+        private ImageView mImageView;
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
         private TextView mIsbnTextView;
@@ -196,6 +199,7 @@ public class SearchActivity extends AppCompatActivity {
             super(itemView);
             itemView.setOnClickListener(this);
 
+            mImageView = (ImageView) itemView.findViewById(R.id.list_item_book_image);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title);
             mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author);
             mIsbnTextView = (TextView) itemView.findViewById(R.id.list_item_book_date_finished);
@@ -210,7 +214,6 @@ public class SearchActivity extends AppCompatActivity {
             String description = "";
             try {
                 JSONObject volumeObject = book.getJSONObject("volumeInfo");
-
                 try {
                     title = volumeObject.getString("title");
                 } catch (Exception e) {
@@ -240,6 +243,12 @@ public class SearchActivity extends AppCompatActivity {
 
                 try {
                     imageUrl = volumeObject.getJSONObject("imageLinks").getString("thumbnail");
+                    String safePicassoImageUrl = (imageUrl.isEmpty()) ? "fail_gracefully_pls" : imageUrl;
+                    Picasso.with(SearchActivity.this)
+                            .load(safePicassoImageUrl)
+                            .placeholder(R.drawable.books)
+                            .error(R.drawable.books)
+                            .into(mImageView);
                 } catch (Exception e) {
                 }
 

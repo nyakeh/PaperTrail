@@ -10,10 +10,21 @@
     android:paddingRight="@dimen/auxiliary_margin"
     android:paddingTop="@dimen/list_item_separation">
 
+    <ImageView
+        android:id="@+id/list_item_book_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/auxiliary_margin"
+        android:transitionName="@string/transition_book_cover"
+        tools:src="@drawable/books"/>
+
     <TextView
         android:id="@+id/list_item_book_title_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/list_item_book_image"
         android:padding="2dp"
         android:text="Title:"
         android:textColor="@color/colorPrimaryDark"/>
@@ -32,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_book_title"
+        android:layout_toRightOf="@+id/list_item_book_image"
         android:padding="2dp"
         android:text="Author:"
         android:textColor="@color/colorPrimaryDark"/>
@@ -51,6 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_book_author"
+        android:layout_toRightOf="@+id/list_item_book_image"
         android:padding="2dp"
         android:text="ISBN:"
         android:textColor="@color/colorPrimaryDark"/>
