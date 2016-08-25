@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,6 +56,9 @@ public class SearchActivity extends AppCompatActivity {
         mBookCreationStatus = extras.getString(Constants.ARG_BOOK_CREATION_STATUS);
         mSearchResultsRecyclerView = (RecyclerView) findViewById(R.id.search_results);
         mSearchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
+        mSearchResultsRecyclerView.addItemDecoration(itemDecoration);
 
         if (mSearchResultsAdapter == null) {
             mSearchResultsAdapter = new SearchResultsAdapter(new JSONArray());
