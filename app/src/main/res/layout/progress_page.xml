@@ -30,7 +30,6 @@
                     android:layout_height="200dp"
                     android:layout_gravity="center"
                     android:layout_weight="4"
-                    android:transitionName="@string/transition_book_cover"
                     tools:src="@drawable/books"/>
 
                 <NumberPicker

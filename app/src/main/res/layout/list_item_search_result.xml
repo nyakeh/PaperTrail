@@ -17,7 +17,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="@dimen/auxiliary_margin"
-        android:transitionName="@string/transition_book_cover"
         tools:src="@drawable/books"/>
 
     <TextView
