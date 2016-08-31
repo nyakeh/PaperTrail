@@ -30,22 +30,28 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/search_manual_add"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:id="@+id/search_manual_add"
-            android:text="@string/manual_create"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             android:background="@color/colorPrimaryLight"
+            android:text="@string/manual_create"
             android:textColor="@color/cardview_light_background"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/search_results"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/search_show_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/auxiliary_margin"
+        android:src="@drawable/ic_action_add"
+        android:visibility="invisible"/>
 
 </android.support.design.widget.CoordinatorLayout>

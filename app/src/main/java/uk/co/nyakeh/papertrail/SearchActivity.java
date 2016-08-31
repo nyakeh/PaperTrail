@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -36,12 +40,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Iterator;
 
 public class SearchActivity extends AppCompatActivity {
     private String mBookCreationStatus;
+    private String mSearchQuery;
     private RecyclerView mSearchResultsRecyclerView;
     private SearchResultsAdapter mSearchResultsAdapter;
     private SearchRecentSuggestions mRecentSuggestions = new SearchRecentSuggestions(this, SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
+    private FloatingActionButton mShowMoreResultsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +56,6 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         handleIntent(getIntent());
 
         Bundle extras = getIntent().getExtras();
@@ -65,14 +71,23 @@ public class SearchActivity extends AppCompatActivity {
             mSearchResultsRecyclerView.setAdapter(mSearchResultsAdapter);
         }
 
-        Button manualAddBookButton = (Button) findViewById(R.id.search_manual_add);
-        manualAddBookButton.setOnClickListener(new View.OnClickListener() {
+        Button mManualAddBookButton = (Button) findViewById(R.id.search_manual_add);
+        mManualAddBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Book book = new Book(mBookCreationStatus);
                 Intent intent = new Intent(SearchActivity.this, CreateBookActivity.class);
                 intent.putExtra(Constants.ARG_NEW_BOOK, new Gson().toJson(book));
                 startActivity(intent);
+            }
+        });
+
+        mShowMoreResultsButton = (FloatingActionButton) findViewById(R.id.search_show_more);
+        mShowMoreResultsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new BookSearch().execute(mSearchQuery, "20");
+                mShowMoreResultsButton.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -85,9 +100,11 @@ public class SearchActivity extends AppCompatActivity {
 
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            new BookSearch().execute(query);
-            mRecentSuggestions.saveRecentQuery(query, null);
+            mSearchQuery = intent.getStringExtra(SearchManager.QUERY);
+            mSearchResultsAdapter.setBooks(new JSONArray());
+            mSearchResultsAdapter.notifyDataSetChanged();
+            new BookSearch().execute(mSearchQuery, "0");
+            mRecentSuggestions.saveRecentQuery(mSearchQuery, null);
         }
     }
 
@@ -142,8 +159,9 @@ public class SearchActivity extends AppCompatActivity {
             URL url;
             HttpURLConnection urlConnection;
             String queryString = params[0];
+            String startIndex = params[1];
             try {
-                url = new URL("https://www.googleapis.com/books/v1/volumes?q=" + URLEncoder.encode(queryString, "UTF-8") + "&filter=ebooks&maxResults=20&printType=books&showPreorders=true&key=" + getString(R.string.google_books_api_key));
+                url = new URL("https://www.googleapis.com/books/v1/volumes?q=" + URLEncoder.encode(queryString, "UTF-8") + "&filter=ebooks&maxResults=20&printType=books&showPreorders=true&startIndex=" + startIndex + "&key=" + getString(R.string.google_books_api_key));
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setReadTimeout(10000);
                 urlConnection.setConnectTimeout(15000);
@@ -160,10 +178,8 @@ public class SearchActivity extends AppCompatActivity {
                 br.close();
 
                 xml = sb.toString();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
             return xml;
         }
@@ -172,19 +188,19 @@ public class SearchActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             //Log.d("Raw results: ", result);
             if (result.equals("")) {
-                getSupportActionBar().setSubtitle("Sorry, we failed to retrieve any results.");
+                //getSupportActionBar().setSubtitle("Sorry, we failed to retrieve any results.");
                 mSearchResultsAdapter.setBooks(new JSONArray());
                 mSearchResultsAdapter.notifyDataSetChanged();
             } else {
                 JSONObject resultObject;
                 try {
                     resultObject = new JSONObject(result);
-                    getSupportActionBar().setSubtitle("Books found: " + resultObject.getString("totalItems"));
                     JSONArray bookArray = resultObject.getJSONArray("items");
-                    mSearchResultsAdapter.setBooks(bookArray);
+                    mSearchResultsAdapter.addBooks(bookArray);
                     mSearchResultsAdapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    mShowMoreResultsButton.setVisibility(View.VISIBLE);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                 }
             }
         }
@@ -302,8 +318,8 @@ public class SearchActivity extends AppCompatActivity {
             JSONObject searchResult = null;
             try {
                 searchResult = (JSONObject) mSearchResults.get(position);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
             searchResultHolder.bindSearchResult(searchResult);
         }
@@ -315,6 +331,12 @@ public class SearchActivity extends AppCompatActivity {
 
         public void setBooks(JSONArray searchResults) {
             mSearchResults = searchResults;
+        }
+
+        public void addBooks(JSONArray searchResults) throws JSONException {
+            for (int i = 0; i < searchResults.length(); i++) {
+                mSearchResults.put(searchResults.getJSONObject(i)) ;
+            }
         }
     }
 }
