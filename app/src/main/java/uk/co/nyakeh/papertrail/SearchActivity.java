@@ -198,7 +198,6 @@ public class SearchActivity extends AppCompatActivity {
                     JSONArray bookArray = resultObject.getJSONArray("items");
                     mSearchResultsAdapter.addBooks(bookArray);
                     mSearchResultsAdapter.notifyDataSetChanged();
-                    mShowMoreResultsButton.setVisibility(View.VISIBLE);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -334,6 +333,9 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         public void addBooks(JSONArray searchResults) throws JSONException {
+            if (mSearchResults.length() == 0){
+                mShowMoreResultsButton.setVisibility(View.VISIBLE);
+            }
             for (int i = 0; i < searchResults.length(); i++) {
                 mSearchResults.put(searchResults.getJSONObject(i)) ;
             }
