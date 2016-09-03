@@ -9,6 +9,7 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -106,7 +107,7 @@ public class ArchiveFragment extends Fragment {
 
     private class ArchivedBookHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Book mBook;
-        private TextView mCategoryTextView;
+        private ImageView mCategoryTextView;
         private TextView mTitleTextView;
         private TextView mAuthorTextView;
         private TextView mRatingTextView;
@@ -115,7 +116,7 @@ public class ArchiveFragment extends Fragment {
             super(itemView);
             itemView.setOnClickListener(this);
 
-            mCategoryTextView = (TextView) itemView.findViewById(R.id.list_item_book_letter);
+            mCategoryTextView = (ImageView) itemView.findViewById(R.id.list_item_book_category);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_book_title);
             mAuthorTextView = (TextView) itemView.findViewById(R.id.list_item_book_author);
             mRatingTextView = (TextView) itemView.findViewById(R.id.list_item_book_rating);
@@ -123,12 +124,30 @@ public class ArchiveFragment extends Fragment {
 
         private void bindBook(Book book) {
             mBook = book;
-            String category = (book.getCategory().isEmpty()) ? "" : book.getCategory().substring(0, 1);
-            mCategoryTextView.setText(category);
             mTitleTextView.setText(book.getTitle());
             mAuthorTextView.setText(book.getAuthor());
             String rating = (book.getRating() <= 0) ? "" : String.valueOf(book.getRating());
             mRatingTextView.setText(rating);
+
+            int categoryIcon = 0;
+            switch (book.getCategory()){
+                case "Entertainment":
+                    categoryIcon = R.drawable.ic_local_activity;
+                    break;
+                case "Life":
+                    categoryIcon = R.drawable.ic_weekend;
+                    break;
+                case "Money":
+                    categoryIcon = R.drawable.ic_attach_money;
+                    break;
+                case "Psychology":
+                    categoryIcon = R.drawable.ic_face;
+                    break;
+                case "Work":
+                    categoryIcon = R.drawable.ic_work;
+                    break;
+            }
+            mCategoryTextView.setImageResource(categoryIcon);
         }
 
         @Override

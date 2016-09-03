@@ -7,26 +7,25 @@
     android:background="?android:attr/selectableItemBackground"
     android:padding="@dimen/auxiliary_margin">
 
-    <TextView
-        android:id="@+id/list_item_book_letter"
+    <ImageView
+        android:id="@+id/list_item_book_category"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/fab_margin"
         android:background="@drawable/circle_background"
         android:gravity="center_vertical|center_horizontal"
-        android:text="X"
-        android:textColor="#fff"
-        android:textSize="24sp"/>
+        android:padding="6dp"
+        tools:src="@drawable/ic_work"/>
 
     <TextView
         android:id="@+id/list_item_book_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/list_item_book_letter"
+        android:layout_toRightOf="@+id/list_item_book_category"
         android:padding="2dp"
-        android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
         tools:text="The Lean Startup"/>
 
     <TextView
@@ -34,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_item_book_title"
-        android:layout_toRightOf="@+id/list_item_book_letter"
+        android:layout_toRightOf="@+id/list_item_book_category"
         android:padding="2dp"
         tools:text="Eric Ries"/>
 
