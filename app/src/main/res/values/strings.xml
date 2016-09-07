@@ -34,11 +34,14 @@
     <string name="search_hint">Search by title or author</string>
     <string name="backup">Backup</string>
     <string name="restore">Restore</string>
+    <string name="manual_restore">Manual Restore</string>
     <string name="search">Search</string>
     <string name="settings_backup">settings_backup</string>
+    <string name="settings_manual_restore">settings_restore_paste_content</string>
     <string name="settings_clear_search_history">settings_clear_search_history</string>
     <string name="settings_restore">settings_restore</string>
     <string name="backup_summary">Backup your reading data to CSV file format</string>
+    <string name="manual_restore_summary">Text entry book import</string>
     <string name="restore_summary">Import book data from a CSV</string>
     <string name="clear_search_title">Clear local search history</string>
     <string name="clear_search_summary">Remove book searches that you have performed from this device</string>

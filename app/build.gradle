@@ -8,8 +8,8 @@ android {
         applicationId "uk.co.nyakeh.papertrail"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 23
-        versionName "1.7.1"
+        versionCode 24
+        versionName "1.7.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -130,7 +130,7 @@ public class ArchiveFragment extends Fragment {
             mRatingTextView.setText(rating);
 
             int categoryIcon = 0;
-            switch (book.getCategory()){
+            switch (book.getCategory()) {
                 case "Entertainment":
                     categoryIcon = R.drawable.ic_local_activity;
                     break;
@@ -159,9 +159,7 @@ public class ArchiveFragment extends Fragment {
     }
 
     private class ArchivedBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
         private List<Book> mBooks;
-
         public ArchivedBookAdapter(List<Book> books) {
             mBooks = books;
         }
@@ -184,7 +182,7 @@ public class ArchiveFragment extends Fragment {
             if (holder instanceof VHHeader) {
                 VHHeader VHheader = (VHHeader) holder;
                 VHheader.mMonth.setText(book.getTitle());
-                VHheader.mPages.setText(pageReadSums.get(book.getTitle()) + " pages");
+                VHheader.mPages.setText(String.format("%d pages", pageReadSums.get(book.getTitle())));
             } else if (holder instanceof ArchivedBookHolder) {
                 ArchivedBookHolder archivedBookHolder = (ArchivedBookHolder) holder;
                 archivedBookHolder.bindBook(book);
