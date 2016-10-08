@@ -45,15 +45,12 @@ public class BookLab {
 
     public List<Book> getActiveBooks() {
         ArrayList<Book> books = new ArrayList<>();
-        BookCursorWrapper cursor = queryBooks(null, null);
+        BookCursorWrapper cursor = queryBooks(BookTable.Cols.STATUS + " = ?", new String[]{Constants.READING});
 
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                Book book = cursor.getBook();
-                if (book.getStatus().equals(Constants.READING)) {
-                    books.add(book);
-                }
+                books.add(cursor.getBook());
                 cursor.moveToNext();
             }
         } finally {
@@ -64,15 +61,12 @@ public class BookLab {
 
     public List<Book> getArchivedBooks() {
         ArrayList<Book> books = new ArrayList<>();
-        BookCursorWrapper cursor = queryBooks(null, null);
+        BookCursorWrapper cursor = queryBooks(BookTable.Cols.STATUS + " = ?", new String[]{Constants.ARCHIVE});
 
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                Book book = cursor.getBook();
-                if (book.getStatus().equals(Constants.ARCHIVE)) {
-                    books.add(book);
-                }
+                books.add(cursor.getBook());
                 cursor.moveToNext();
             }
         } finally {
@@ -96,15 +90,12 @@ public class BookLab {
 
     public List<Book> getReadingList() {
         ArrayList<Book> books = new ArrayList<>();
-        BookCursorWrapper cursor = queryBooks(null, null);
+        BookCursorWrapper cursor = queryBooks(BookTable.Cols.STATUS + " = ?", new String[]{Constants.QUEUE});
 
         try {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                Book book = cursor.getBook();
-                if (book.getStatus().equals(Constants.QUEUE)) {
-                    books.add(book);
-                }
+                books.add(cursor.getBook());
                 cursor.moveToNext();
             }
         } finally {
