@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,8 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
+import java.util.Collections;
 import java.util.List;
 
 public class ReadingListFragment extends Fragment {
@@ -36,6 +36,24 @@ public class ReadingListFragment extends Fragment {
         mBookListEmptyMessageView = (TextView) view.findViewById(R.id.book_list_empty_message);
         mBookRecyclerView = (RecyclerView) view.findViewById(R.id.book_recycler_view);
         mBookRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                mReadingListBookAdapter.Swap(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                return true;
+            }
+
+            @Override
+            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                return makeMovementFlags(ItemTouchHelper.DOWN | ItemTouchHelper.UP, ItemTouchHelper.ACTION_STATE_SWIPE);
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            }
+        };
+
+        ItemTouchHelper ith = new ItemTouchHelper(_ithCallback);
+        ith.attachToRecyclerView(mBookRecyclerView);
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +129,7 @@ public class ReadingListFragment extends Fragment {
 
     private class ReadingListBookAdapter extends RecyclerView.Adapter<ReadingListBookHolder> {
         private List<Book> mBooks;
+
         public ReadingListBookAdapter(List<Book> books) {
             mBooks = books;
         }
@@ -135,6 +154,11 @@ public class ReadingListFragment extends Fragment {
 
         public void setBooks(List<Book> books) {
             mBooks = books;
+        }
+
+        public void Swap(int fromPosition, int toPosition) {
+            Collections.swap(mBooks, fromPosition, toPosition);
+            notifyItemMoved(fromPosition, toPosition);
         }
     }
 
