@@ -110,6 +110,14 @@ public class BookLab {
         } finally {
             cursor.close();
         }
+
+        Collections.sort(books, new Comparator<Book>() {
+            @Override
+            public int compare(Book book1, Book book2) {
+                return book1.getDateStarted().compareTo(book2.getDateStarted());
+            }
+        });
+
         return books;
     }
 
