@@ -187,4 +187,31 @@ public class BookLab {
 
         return header + csvData + "</table>";
     }
+
+    public Statistics getBookStatistics() {
+        int totalPagesRead = 0;
+        int averagePageCount = 0;
+        float averageRating = 0.0f;
+        String mostReadCategory = "";
+
+        Cursor cursor = mDatabase.rawQuery("SELECT SUM("+ BookTable.Cols.LENGTH +"), AVG(" + BookTable.Cols.LENGTH + "), AVG(" + BookTable.Cols.RATING + ") FROM " + BookTable.NAME + " WHERE " + BookTable.Cols.STATUS + " = ?", new String[] { Constants.ARCHIVE });
+        try {
+            cursor.moveToFirst();
+            totalPagesRead = cursor.getInt(0);
+            averagePageCount = cursor.getInt(1);
+            averageRating = cursor.getFloat(2);
+        } finally {
+            cursor.close();
+        }
+
+        Cursor modeCategoryCursor = mDatabase.rawQuery("SELECT " + BookTable.Cols.CATEGORY + ", COUNT(" + BookTable.Cols.CATEGORY + ") AS category_occurrence FROM " + BookTable.NAME + " GROUP BY " + BookTable.Cols.CATEGORY + " ORDER BY category_occurrence DESC LIMIT 1", null);
+        try {
+            modeCategoryCursor.moveToFirst();
+            mostReadCategory = modeCategoryCursor.getString(0);
+        } finally {
+            modeCategoryCursor.close();
+        }
+
+        return new Statistics(totalPagesRead, averagePageCount, averageRating, mostReadCategory);
+    }
 }
