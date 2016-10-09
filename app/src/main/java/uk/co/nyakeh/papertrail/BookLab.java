@@ -13,8 +13,10 @@ import java.util.UUID;
 
 import uk.co.nyakeh.papertrail.database.BookBaseHelper;
 import uk.co.nyakeh.papertrail.database.BookCursorWrapper;
+import uk.co.nyakeh.papertrail.database.ReadingListOrderCursorWrapper;
 
 import static uk.co.nyakeh.papertrail.database.BookDbSchema.BookTable;
+import static uk.co.nyakeh.papertrail.database.ReadingListOrderDbSchema.ReadingListOrderTable;
 
 public class BookLab {
     private static BookLab sBookLab;
@@ -45,37 +47,36 @@ public class BookLab {
 
     public List<Book> getActiveBooks() {
         ArrayList<Book> books = new ArrayList<>();
-        BookCursorWrapper cursor = queryBooks(BookTable.Cols.STATUS + " = ?", new String[]{Constants.READING});
-
+        BookCursorWrapper activeBooksCursor = queryBooks(BookTable.Cols.STATUS + " = ?", new String[]{Constants.READING});
         try {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                books.add(cursor.getBook());
-                cursor.moveToNext();
+            activeBooksCursor.moveToFirst();
+            while (!activeBooksCursor.isAfterLast()) {
+                books.add(activeBooksCursor.getBook());
+                activeBooksCursor.moveToNext();
             }
         } finally {
-            cursor.close();
+            activeBooksCursor.close();
         }
         return books;
     }
 
     public List<Book> getArchivedBooks() {
         ArrayList<Book> books = new ArrayList<>();
-        BookCursorWrapper cursor = queryBooks(BookTable.Cols.STATUS + " = ?", new String[]{Constants.ARCHIVE});
+        BookCursorWrapper archivedBooksCursor = queryBooks(BookTable.Cols.STATUS + " = ?", new String[]{Constants.ARCHIVE});
 
         try {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                books.add(cursor.getBook());
-                cursor.moveToNext();
+            archivedBooksCursor.moveToFirst();
+            while (!archivedBooksCursor.isAfterLast()) {
+                books.add(archivedBooksCursor.getBook());
+                archivedBooksCursor.moveToNext();
             }
         } finally {
-            cursor.close();
+            archivedBooksCursor.close();
         }
 
         Comparator<Book> comparator = new Comparator<Book>() {
             public int compare(Book book1, Book book2) {
-                if (book2.getDateFinished().before(book1.getDateFinished())){
+                if (book2.getDateFinished().before(book1.getDateFinished())) {
                     return -1;
                 } else if (book2.getDateFinished().equals(book1.getDateFinished())) {
                     return 0;
@@ -90,16 +91,15 @@ public class BookLab {
 
     public List<Book> getReadingList() {
         ArrayList<Book> books = new ArrayList<>();
-        BookCursorWrapper cursor = queryBooks(BookTable.Cols.STATUS + " = ?", new String[]{Constants.QUEUE});
-
+        BookCursorWrapper queuedBooksCursor = queryBooks(BookTable.Cols.STATUS + " = ?", new String[]{Constants.QUEUE});
         try {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                books.add(cursor.getBook());
-                cursor.moveToNext();
+            queuedBooksCursor.moveToFirst();
+            while (!queuedBooksCursor.isAfterLast()) {
+                books.add(queuedBooksCursor.getBook());
+                queuedBooksCursor.moveToNext();
             }
         } finally {
-            cursor.close();
+            queuedBooksCursor.close();
         }
 
         Collections.sort(books, new Comparator<Book>() {
@@ -108,18 +108,15 @@ public class BookLab {
                 return book1.getDateStarted().compareTo(book2.getDateStarted());
             }
         });
-
         return books;
     }
 
     public Book getBook(UUID id) {
         BookCursorWrapper cursor = queryBooks(BookTable.Cols.ID + " = ?", new String[]{id.toString()});
-
         try {
             if (cursor.getCount() == 0) {
                 return null;
             }
-
             cursor.moveToFirst();
             return cursor.getBook();
         } finally {
@@ -161,6 +158,10 @@ public class BookLab {
                 null); // orderBy
 
         return new BookCursorWrapper(cursor);
+    }
+
+    private ReadingListOrderCursorWrapper queryReadingListOrder() {
+        return new ReadingListOrderCursorWrapper(mDatabase.query(ReadingListOrderTable.NAME, null, null, null, null, null, null));
     }
 
     public void deleteBook(UUID id) {
