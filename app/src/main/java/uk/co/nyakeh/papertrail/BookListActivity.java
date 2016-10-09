@@ -187,6 +187,8 @@ public class BookListActivity extends AppCompatActivity implements NavigationVie
             intent = new Intent(this, ReadingListActivity.class);
         } else if (itemId == R.id.nav_settings) {
             intent = new Intent(this, SettingsActivity.class);
+        } else if (itemId == R.id.nav_statistics) {
+            intent = new Intent(this, StatisticsActivity.class);
         }
         drawer.closeDrawer(GravityCompat.START);
         startActivity(intent);

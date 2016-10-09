@@ -295,6 +295,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity implements Nav
             intent = new Intent(this, ReadingListActivity.class);
         } else if (itemId == R.id.nav_currently_reading) {
             intent = new Intent(this, BookListActivity.class);
+        } else if (itemId == R.id.nav_statistics) {
+            intent = new Intent(this, StatisticsActivity.class);
         }
         drawer.closeDrawer(GravityCompat.START);
         startActivity(intent);

@@ -134,6 +134,9 @@ public class ProgressFragment extends Fragment {
         if (mBook.getStatus().equals(Constants.ARCHIVE)) {
             BookActivity.updateStatusSwitch(false);
         }
+        if (mBook.getStatus().equals(Constants.READING)) {
+            BookActivity.updateStatusSwitch(true);
+        }
     }
 
     private void scheduleStartPostponedTransition(final View sharedElement) {

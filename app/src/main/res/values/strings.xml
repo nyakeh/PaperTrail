@@ -50,6 +50,11 @@
     <string name="book_rating_label">Your Rating</string>
     <string name="bottom_sheet_peek">Description</string>
     <string name="show_more">Show More</string>
+    <string name="statistics">Statistics</string>
+    <string name="total_pages_read">Total pages read</string>
+    <string name="average_page_count">Average page count</string>
+    <string name="average_rating">Average rating</string>
+    <string name="most_read_category">Most read category</string>
 
     <string-array name="book_categories">
         <item>Entertainment</item>

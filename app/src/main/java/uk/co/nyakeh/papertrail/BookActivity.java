@@ -23,8 +23,6 @@ import uk.co.nyakeh.papertrail.chrome.CustomTabActivityHelper;
 import uk.co.nyakeh.papertrail.chrome.WebviewFallback;
 
 public class BookActivity extends AppCompatActivity {
-    private static final String EXTRA_CUSTOM_TABS_SESSION = "android.support.customtabs.extra.SESSION";
-
     private ViewPager mViewPager;
     private Book mBook;
     private static Switch mSwitch_status;
