@@ -57,6 +57,22 @@ public class BookLab {
         } finally {
             activeBooksCursor.close();
         }
+
+        Comparator<Book> comparator = new Comparator<Book>() {
+            public int compare(Book book1, Book book2) {
+                float book1Progress = (float) book1.getProgress() / book1.getLength();
+                float book2Progress = (float) book2.getProgress() / book2.getLength();
+
+                if (book2Progress < book1Progress) {
+                    return -1;
+                } else if (book2Progress > book1Progress) {
+                    return 1;
+                }
+                return  0;
+            }
+        };
+        Collections.sort(books, comparator);
+
         return books;
     }
 

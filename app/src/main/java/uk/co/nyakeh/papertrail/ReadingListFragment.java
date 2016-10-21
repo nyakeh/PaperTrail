@@ -126,9 +126,9 @@ public class ReadingListFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(ReadingListBookHolder archivedBookHolder, int position) {
+        public void onBindViewHolder(ReadingListBookHolder bookHolder, int position) {
             Book book = mBooks.get(position);
-            archivedBookHolder.bindBook(book);
+            bookHolder.bindBook(book);
         }
 
         @Override
