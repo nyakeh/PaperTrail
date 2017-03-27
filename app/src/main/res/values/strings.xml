@@ -55,6 +55,7 @@
     <string name="average_page_count">Average page count</string>
     <string name="average_rating">Average rating</string>
     <string name="most_read_category">Most read category</string>
+    <string name="total_books_read">Total books read</string>
 
     <string-array name="book_categories">
         <item>Entertainment</item>

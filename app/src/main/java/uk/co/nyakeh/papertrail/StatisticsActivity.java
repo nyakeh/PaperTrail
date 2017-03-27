@@ -43,11 +43,13 @@ public class StatisticsActivity extends AppCompatActivity implements NavigationV
         BookLab bookLab = BookLab.get(this);
         Statistics statistics = bookLab.getBookStatistics();
 
+        TextView totalBooksRead = (TextView) findViewById(R.id.total_books_read);
         TextView totalPagesRead = (TextView) findViewById(R.id.total_pages_read);
         TextView averagePageCount = (TextView) findViewById(R.id.average_page_count);
         TextView averageRating = (TextView) findViewById(R.id.average_rating);
         TextView mostReadCategory = (TextView) findViewById(R.id.most_read_category);
 
+        totalBooksRead.setText(String.valueOf(statistics.TotalBooksRead));
         totalPagesRead.setText(String.valueOf(statistics.TotalPagesRead));
         averagePageCount.setText(String.valueOf(statistics.AveragePageCount));
         averageRating.setText(String.valueOf(statistics.AverageRating));

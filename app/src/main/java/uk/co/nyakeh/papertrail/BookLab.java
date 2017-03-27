@@ -209,13 +209,15 @@ public class BookLab {
         int averagePageCount = 0;
         float averageRating = 0.0f;
         String mostReadCategory = "";
+        int totalBooksRead = 0;
 
-        Cursor cursor = mDatabase.rawQuery("SELECT SUM("+ BookTable.Cols.LENGTH +"), AVG(" + BookTable.Cols.LENGTH + "), AVG(" + BookTable.Cols.RATING + ") FROM " + BookTable.NAME + " WHERE " + BookTable.Cols.STATUS + " = ?", new String[] { Constants.ARCHIVE });
+        Cursor cursor = mDatabase.rawQuery("SELECT SUM("+ BookTable.Cols.LENGTH +"), AVG(" + BookTable.Cols.LENGTH + "), AVG(" + BookTable.Cols.RATING + "), COUNT(1) FROM " + BookTable.NAME + " WHERE " + BookTable.Cols.STATUS + " = ?", new String[] { Constants.ARCHIVE });
         try {
             cursor.moveToFirst();
             totalPagesRead = cursor.getInt(0);
             averagePageCount = cursor.getInt(1);
             averageRating = cursor.getFloat(2);
+            totalBooksRead = cursor.getInt(3);
         } finally {
             cursor.close();
         }
@@ -228,6 +230,6 @@ public class BookLab {
             modeCategoryCursor.close();
         }
 
-        return new Statistics(totalPagesRead, averagePageCount, averageRating, mostReadCategory);
+        return new Statistics(totalPagesRead, averagePageCount, averageRating, mostReadCategory, totalBooksRead);
     }
 }
