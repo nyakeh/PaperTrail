@@ -57,7 +57,7 @@ public class ArchiveFragment extends Fragment {
         headerPositionList = new ArrayList<>();
         if (!archivedBooks.isEmpty()) {
             int position = 1;
-            String currentMonth = DateFormat.format(Constants.MONTH_DATE_FORMAT, archivedBooks.get(0).getDateFinished()).toString();
+            String currentMonth = DateFormat.format(Constants.DISTINCT_MONTH_DATE_FORMAT, archivedBooks.get(0).getDateFinished()).toString();
             Book firstBookHeader = new Book(UUID.randomUUID());
             firstBookHeader.setTitle(currentMonth);
             bookList.add(firstBookHeader);
@@ -65,7 +65,7 @@ public class ArchiveFragment extends Fragment {
             int monthlyPageSum = 0;
             for (Iterator<Book> i = archivedBooks.iterator(); i.hasNext(); ) {
                 Book book = i.next();
-                String bookMonth = DateFormat.format(Constants.MONTH_DATE_FORMAT, book.getDateFinished()).toString();
+                String bookMonth = DateFormat.format(Constants.DISTINCT_MONTH_DATE_FORMAT, book.getDateFinished()).toString();
                 if (!bookMonth.equals(currentMonth)) {
                     monthlyPageSum = 0;
                     currentMonth = bookMonth;
